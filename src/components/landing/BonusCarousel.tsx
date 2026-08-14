@@ -4,16 +4,16 @@ import { cn } from "@/lib/utils";
 
 const BONUSES = [
   { id: "capa", titulo: "10 BÔNUS EXCLUSIVOS", descricao: "Além das 80+ aulas em vídeo, você recebe um kit de materiais para acompanhar sua formação e consultar sempre que precisar.", icon: FileText, type: "intro" },
-  { id: "1", titulo: "Apostila Completa", descricao: "Material de apoio para acompanhar as aulas e revisar conceitos.", icon: FileText },
-  { id: "2", titulo: "Tabela de Torques", descricao: "Consulta rápida com informações técnicas essenciais.", icon: Table },
-  { id: "3", titulo: "Checklist de Revisão", descricao: "Organize os pontos principais da revisão preventiva.", icon: CheckSquare },
-  { id: "4", titulo: "Guia de Diagnóstico", descricao: "Ajuda a organizar o raciocínio no diagnóstico.", icon: Search },
-  { id: "5", titulo: "Manual de Ferramentas", descricao: "Principais ferramentas e suas funções.", icon: Wrench },
-  { id: "6", titulo: "Guia de Preços", descricao: "Entenda a precificação de serviços automotivos.", icon: DollarSign },
-  { id: "7", titulo: "Códigos de Erro OBD2", descricao: "Compreenda melhor os códigos de falha do sistema OBD2.", icon: Gauge },
-  { id: "8", titulo: "Guia de Injeção", descricao: "Aprofunde seus conhecimentos em injeção eletrônica.", icon: Cpu },
-  { id: "9", titulo: "Manual de Freios", descricao: "Conceitos sobre freios e suspensão.", icon: Settings },
-  { id: "10", titulo: "Primeiros Clientes", descricao: "Orientações práticas para buscar oportunidades.", icon: Users },
+  { id: "1", titulo: "Apostila Completa de Mecânica Automotiva", descricao: "Material de apoio para acompanhar as aulas, revisar os principais conceitos e consultar o conteúdo durante seus estudos.", icon: FileText },
+  { id: "2", titulo: "Tabela de Torques e Especificações", descricao: "Material de consulta rápida com informações técnicas para facilitar seus estudos e consultas durante os procedimentos.", icon: Table },
+  { id: "3", titulo: "Checklist de Revisão Preventiva", descricao: "Uma lista prática para organizar os principais pontos que devem ser observados em uma revisão preventiva.", icon: CheckSquare },
+  { id: "4", titulo: "Guia de Diagnóstico de Defeitos", descricao: "Material de consulta para ajudar a organizar o raciocínio durante a identificação de possíveis problemas automotivos.", icon: Search },
+  { id: "5", titulo: "Manual de Ferramentas do Mecânico", descricao: "Conheça as principais ferramentas utilizadas na mecânica automotiva e entenda a função de cada uma.", icon: Wrench },
+  { id: "6", titulo: "Guia de Preços de Serviços", descricao: "Material de referência para entender como organizar e estruturar a precificação de serviços automotivos.", icon: DollarSign },
+  { id: "7", titulo: "Manual de Códigos de Erro OBD2", descricao: "Material de consulta para compreender melhor os códigos de falha identificados através do sistema OBD2.", icon: Gauge },
+  { id: "8", titulo: "Guia de Injeção Eletrônica", descricao: "Material complementar para aprofundar seus conhecimentos sobre os principais conceitos da injeção eletrônica automotiva.", icon: Cpu },
+  { id: "9", titulo: "Manual de Freios e Suspensão", descricao: "Material de apoio com conceitos relacionados aos principais componentes dos sistemas de freios e suspensão.", icon: Settings },
+  { id: "10", titulo: "Guia para Conseguir os Primeiros Clientes", descricao: "Orientações práticas para quem deseja começar a buscar oportunidades e transformar o conhecimento adquirido em prestação de serviços.", icon: Users, destaque: true },
   { id: "fechamento", titulo: "10 bônus. Uma formação ainda mais completa.", descricao: "No Plano Profissional, você recebe as 80+ aulas da formação, certificado e os 10 materiais complementares.", type: "outro" },
 ];
 
@@ -108,7 +108,8 @@ export function BonusCarousel() {
                 "flex h-full flex-col overflow-hidden rounded-2xl border transition-all duration-300",
                 b.type === "intro" ? "bg-primary text-primary-foreground border-primary shadow-xl scale-[1.02] z-10" : 
                 b.type === "outro" ? "bg-surface-2 border-primary/30 shadow-lg" : 
-                "bg-card border-border hover:border-primary/40 hover:shadow-md"
+                b.destaque ? "bg-card border-primary/50 shadow-lg hover:-translate-y-1 hover:shadow-xl" :
+                "bg-card border-border hover:border-primary/40 hover:shadow-md hover:-translate-y-1"
               )}>
                 {/* Mockup Area */}
                 <div className={cn(
@@ -185,9 +186,9 @@ export function BonusCarousel() {
                         <ChevronRight className="h-4 w-4" />
                       </a>
                       <div className="mt-4 flex flex-wrap justify-center gap-x-3 gap-y-1 text-[10px] text-muted-foreground">
-                        <span className="flex items-center gap-1"><ShieldCheck className="h-3 w-3" /> 7 dias de garantia</span>
                         <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> Acesso imediato</span>
-                        <span className="flex items-center gap-1"><InfinityIcon className="h-3 w-3" /> Vitalício</span>
+                        <span className="flex items-center gap-1"><InfinityIcon className="h-3 w-3" /> Acesso vitalício</span>
+                        <span className="flex items-center gap-1"><ShieldCheck className="h-3 w-3" /> Garantia de 7 dias</span>
                       </div>
                     </div>
                   )}
