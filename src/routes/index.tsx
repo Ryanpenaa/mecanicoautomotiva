@@ -372,25 +372,32 @@ function Index() {
 
           <div className="surface-card p-6">
             <h3 className="text-2xl font-bold">{INSTRUTOR.titulo}</h3>
-            <div className="mt-4 flex items-start gap-4">
-              <div className="grid h-24 w-24 shrink-0 place-items-center rounded-xl border border-dashed border-border bg-surface-2 text-center text-[11px] text-muted-foreground">
-                {INSTRUTOR.foto ? (
-                  <img
-                    src={INSTRUTOR.foto}
-                    alt={INSTRUTOR.nome}
-                    loading="lazy"
-                    className="h-24 w-24 rounded-xl object-cover"
-                  />
-                ) : (
-                  "[ESPAÇO PARA FOTO]"
-                )}
-              </div>
+            <div className="mt-5 flex flex-col items-center gap-5 text-center sm:flex-row sm:items-start sm:text-left">
+              <img
+                src={INSTRUTOR.foto}
+                alt={`Foto de ${INSTRUTOR.nome}, instrutor da formação`}
+                loading="lazy"
+                decoding="async"
+                width={160}
+                height={160}
+                className="h-32 w-32 shrink-0 rounded-full border-2 border-primary/50 object-cover object-top shadow-lg sm:h-36 sm:w-36"
+              />
               <div className="min-w-0">
-                <p className="font-bold">{INSTRUTOR.nome}</p>
-                <p className="mt-1 text-sm text-muted-foreground">{INSTRUTOR.bio}</p>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="text-lg font-bold">{INSTRUTOR.nome}</p>
+                <p className="mt-2 text-sm text-muted-foreground">{INSTRUTOR.bio}</p>
+                <p className="mt-2 text-sm text-muted-foreground">
                   {INSTRUTOR.experiencia}
                 </p>
+                <ul className="mt-4 flex flex-wrap justify-center gap-2 sm:justify-start">
+                  {INSTRUTOR.selos.map((s) => (
+                    <li
+                      key={s}
+                      className="rounded-full border border-border bg-surface-2 px-3 py-1 text-xs font-semibold text-primary"
+                    >
+                      {s}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
