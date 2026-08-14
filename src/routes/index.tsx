@@ -122,14 +122,13 @@ function Index() {
           </div>
 
           <div className="relative hidden lg:block">
-            <div className="glow-primary overflow-hidden rounded-2xl border border-border shadow-2xl">
+            <div>
               <img
                 src={plataformaImg}
-                alt="Mockup da plataforma de ensino"
-                width={1280}
-                height={912}
-                fetchPriority="high"
-                className="h-full w-full object-cover"
+                alt="Kit completo da Formação Mecânico Automotivo: apostila, módulos e bônus"
+                width={1183}
+                height={1310}
+                className="h-auto w-full"
               />
             </div>
           </div>
