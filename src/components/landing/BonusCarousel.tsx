@@ -108,7 +108,8 @@ export function BonusCarousel() {
                 "flex h-full flex-col overflow-hidden rounded-2xl border transition-all duration-300",
                 b.type === "intro" ? "bg-primary text-primary-foreground border-primary shadow-xl scale-[1.02] z-10" : 
                 b.type === "outro" ? "bg-surface-2 border-primary/30 shadow-lg" : 
-                "bg-card border-border hover:border-primary/40 hover:shadow-md"
+                b.destaque ? "bg-card border-primary/50 shadow-lg hover:-translate-y-1 hover:shadow-xl" :
+                "bg-card border-border hover:border-primary/40 hover:shadow-md hover:-translate-y-1"
               )}>
                 {/* Mockup Area */}
                 <div className={cn(
