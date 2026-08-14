@@ -123,7 +123,11 @@ export function BonusCarousel() {
                 <img
                   src={IMGS[b.id]}
                   alt={b.titulo}
-                  loading="lazy"
+                  width={800}
+                  height={600}
+                  loading={i < 2 ? "eager" : "lazy"}
+                  decoding="async"
+                  fetchPriority={i === 0 ? "high" : "low"}
                   className="block w-full h-auto transition-transform duration-500 hover:scale-[1.02]"
                 />
 
