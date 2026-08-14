@@ -24,7 +24,9 @@ import {
   PRODUTO,
 } from "@/config/oferta";
 import heroImg from "@/assets/hero-mecanico.jpg";
-import plataformaImg from "@/assets/plataforma-mockup.jpg";
+import plataformaAsset from "@/assets/mockup.png.asset.json";
+
+const plataformaImg = plataformaAsset.url;
 import {
   BadgeCheck,
   Check,
