@@ -86,6 +86,15 @@ function Index() {
             <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
               {PRODUTO.subheadline}
             </p>
+            <div className="mt-8 overflow-hidden rounded-2xl border border-border shadow-2xl">
+              <img
+                src={plataformaImg}
+                alt="Mockup da plataforma de ensino"
+                width={1280}
+                height={912}
+                className="w-full object-cover"
+              />
+            </div>
 
 
             <ul className="mt-7 grid grid-cols-1 gap-2 sm:grid-cols-2">
