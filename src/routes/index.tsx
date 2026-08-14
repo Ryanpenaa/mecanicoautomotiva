@@ -117,7 +117,7 @@ function Index() {
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative hidden lg:block">
             <div className="glow-primary overflow-hidden rounded-2xl border border-border shadow-2xl">
               <img
                 src={plataformaImg}
