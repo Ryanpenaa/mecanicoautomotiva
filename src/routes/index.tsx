@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Section, CtaButton } from "@/components/landing/ui-bits";
+import { BonusCarousel } from "@/components/landing/BonusCarousel";
 import {
   BONUS,
   BENEFICIOS,
@@ -216,27 +217,6 @@ function Index() {
           ))}
         </div>
 
-        {BONUS.length > 0 && (
-          <div className="mt-8">
-            <h3 className="mb-4 flex items-center gap-2 text-lg font-bold uppercase">
-              <Sparkles className="h-5 w-5 text-accent" /> Bônus do Plano
-              Profissional
-            </h3>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {BONUS.map((b) => (
-                <div
-                  key={b.titulo}
-                  className="rounded-xl border border-dashed border-border bg-surface-2/60 p-4"
-                >
-                  <p className="text-sm font-bold">{b.titulo}</p>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    {b.descricao}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </Section>
 
       {/* 6 — EXPERIÊNCIA DA PLATAFORMA */}
@@ -277,6 +257,9 @@ function Index() {
           ))}
         </div>
       </Section>
+
+      {/* 5.1 — CARROSSEL DE BÔNUS */}
+      <BonusCarousel />
 
       {/* 8 — PLANOS */}
       <Section
