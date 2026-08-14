@@ -89,13 +89,14 @@ function Index() {
             <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
               {PRODUTO.subheadline}
             </p>
-            <div className="mt-8 overflow-hidden rounded-2xl border border-border shadow-2xl">
+            <div className="mt-8 lg:hidden">
               <img
                 src={plataformaImg}
-                alt="Mockup da plataforma de ensino"
-                width={1280}
-                height={912}
-                className="w-full object-cover"
+                alt="Kit completo da Formação Mecânico Automotivo: apostila, módulos e bônus"
+                width={1183}
+                height={1310}
+                fetchPriority="high"
+                className="h-auto w-full"
               />
             </div>
 
