@@ -1,6 +1,21 @@
 import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, FileText, Table, CheckSquare, Search, Wrench, DollarSign, Cpu, Gauge, Settings, Users, ArrowRight, ShieldCheck, Clock, Infinity as InfinityIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import b1 from "@/assets/bonus/b1.webp.asset.json";
+import b2 from "@/assets/bonus/b2.webp.asset.json";
+import b3 from "@/assets/bonus/b3.webp.asset.json";
+import b4 from "@/assets/bonus/b4.webp.asset.json";
+import b5 from "@/assets/bonus/b5.webp.asset.json";
+import b6 from "@/assets/bonus/b6.webp.asset.json";
+import b7 from "@/assets/bonus/b7.webp.asset.json";
+import b8 from "@/assets/bonus/b8.webp.asset.json";
+import b9 from "@/assets/bonus/b9.webp.asset.json";
+import b10 from "@/assets/bonus/b10.webp.asset.json";
+
+const IMGS: Record<string, string> = {
+  "1": b1.url, "2": b2.url, "3": b3.url, "4": b4.url, "5": b5.url,
+  "6": b6.url, "7": b7.url, "8": b8.url, "9": b9.url, "10": b10.url,
+};
 
 const BONUSES = [
   { id: "capa", titulo: "10 BÔNUS EXCLUSIVOS", descricao: "Além das 80+ aulas em vídeo, você recebe um kit de materiais para acompanhar sua formação e consultar sempre que precisar.", icon: FileText, type: "intro" },
@@ -113,7 +128,8 @@ export function BonusCarousel() {
               )}>
                 {/* Mockup Area */}
                 <div className={cn(
-                  "relative flex aspect-video w-full items-center justify-center overflow-hidden",
+                  "relative flex w-full items-center justify-center overflow-hidden",
+                  IMGS[b.id] ? "aspect-[4/3]" : "aspect-video",
                   b.type === "intro" ? "bg-primary-foreground/10" : "bg-surface-2"
                 )}>
                    {/* Background Grid Pattern */}
@@ -137,15 +153,12 @@ export function BonusCarousel() {
                          </div>
                       </div>
                    ) : (
-                      <div className="relative group">
-                         <div className="absolute inset-0 bg-primary/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                         <div className="relative h-32 w-24 rounded-lg border-2 border-border bg-card shadow-xl flex items-center justify-center overflow-hidden transition-transform group-hover:-translate-y-2">
-                            <div className="absolute top-0 left-0 right-0 h-4 bg-primary/10" />
-                            {b.icon && <b.icon className="h-10 w-10 text-primary" />}
-                            <div className="absolute bottom-2 left-2 right-2 h-1 rounded bg-muted" />
-                            <div className="absolute bottom-4 left-2 right-6 h-1 rounded bg-muted/60" />
-                         </div>
-                      </div>
+                      <img
+                        src={IMGS[b.id]}
+                        alt={b.titulo}
+                        loading="lazy"
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 hover:scale-[1.04]"
+                      />
                    )}
                 </div>
 
