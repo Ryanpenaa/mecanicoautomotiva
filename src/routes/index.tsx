@@ -118,12 +118,12 @@ function Index() {
           </div>
 
           <div className="relative">
-            <div className="glow-primary overflow-hidden rounded-2xl border border-border">
+            <div className="glow-primary overflow-hidden rounded-2xl border border-border shadow-2xl">
               <img
-                src={heroImg}
-                alt="Mecânico realizando diagnóstico em motor de veículo em oficina moderna"
+                src={plataformaImg}
+                alt="Mockup da plataforma de ensino"
                 width={1280}
-                height={960}
+                height={912}
                 fetchPriority="high"
                 className="h-full w-full object-cover"
               />
