@@ -160,23 +160,23 @@ export function BonusCarousel() {
                 )}
 
                 {/* Content Area */}
-                <div className="flex flex-1 flex-col p-6">
+                <div className="flex flex-1 flex-col p-4 sm:p-5">
                   {b.id !== "capa" && b.id !== "fechamento" && (
-                    <span className="text-[10px] font-black tracking-widest text-primary uppercase mb-2">BÔNUS {b.id.padStart(2, '0')}</span>
+                    <span className="text-[10px] font-black tracking-widest text-primary uppercase">BÔNUS {b.id.padStart(2, '0')}</span>
                   )}
                   {b.id === "capa" && (
-                    <span className="inline-flex w-fit items-center gap-1 rounded-md bg-primary-foreground px-2 py-0.5 text-[10px] font-bold text-primary uppercase mb-3">
+                    <span className="inline-flex w-fit items-center gap-1 rounded-md bg-primary-foreground px-2 py-0.5 text-[10px] font-bold text-primary uppercase mb-2">
                        INCLUSO NO PLANO PROFISSIONAL
                     </span>
                   )}
                   <h3 className={cn(
-                    "font-display text-xl font-extrabold uppercase leading-tight",
+                    "font-display text-lg font-extrabold uppercase leading-tight mt-1",
                     b.type === "intro" ? "text-primary-foreground" : "text-foreground"
                   )}>
                     {b.titulo}
                   </h3>
                   <p className={cn(
-                    "mt-2 text-sm leading-relaxed",
+                    "mt-1.5 text-sm leading-relaxed",
                     b.type === "intro" ? "text-primary-foreground/80" : "text-muted-foreground"
                   )}>
                     {b.descricao}
