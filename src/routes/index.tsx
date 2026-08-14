@@ -87,6 +87,16 @@ function Index() {
               {PRODUTO.subheadline}
             </p>
 
+            <div className="mt-8 overflow-hidden rounded-2xl border border-border shadow-2xl lg:hidden">
+              <img
+                src={plataformaImg}
+                alt="Mockup da plataforma de ensino"
+                width={1280}
+                height={912}
+                className="w-full object-cover"
+              />
+            </div>
+
             <ul className="mt-7 grid grid-cols-1 gap-2 sm:grid-cols-2">
               {DESTAQUES_HERO.map((d) => (
                 <li
@@ -108,12 +118,12 @@ function Index() {
           </div>
 
           <div className="relative">
-            <div className="glow-primary overflow-hidden rounded-2xl border border-border">
+            <div className="glow-primary overflow-hidden rounded-2xl border border-border shadow-2xl">
               <img
-                src={heroImg}
-                alt="Mecânico realizando diagnóstico em motor de veículo em oficina moderna"
+                src={plataformaImg}
+                alt="Mockup da plataforma de ensino"
                 width={1280}
-                height={960}
+                height={912}
                 fetchPriority="high"
                 className="h-full w-full object-cover"
               />
