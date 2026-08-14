@@ -153,15 +153,12 @@ export function BonusCarousel() {
                          </div>
                       </div>
                    ) : (
-                      <div className="relative group">
-                         <div className="absolute inset-0 bg-primary/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                         <div className="relative h-32 w-24 rounded-lg border-2 border-border bg-card shadow-xl flex items-center justify-center overflow-hidden transition-transform group-hover:-translate-y-2">
-                            <div className="absolute top-0 left-0 right-0 h-4 bg-primary/10" />
-                            {b.icon && <b.icon className="h-10 w-10 text-primary" />}
-                            <div className="absolute bottom-2 left-2 right-2 h-1 rounded bg-muted" />
-                            <div className="absolute bottom-4 left-2 right-6 h-1 rounded bg-muted/60" />
-                         </div>
-                      </div>
+                      <img
+                        src={IMGS[b.id]}
+                        alt={b.titulo}
+                        loading="lazy"
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 hover:scale-[1.04]"
+                      />
                    )}
                 </div>
 
