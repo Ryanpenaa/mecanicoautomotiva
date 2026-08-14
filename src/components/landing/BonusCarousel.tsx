@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, FileText, Table, CheckSquare, Search, Wrench, DollarSign, Cpu, Gauge, Settings, Users, ArrowRight, ShieldCheck, Clock, Infinity as InfinityIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -21,13 +21,33 @@ export function BonusCarousel() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
+  // Auto-scroll logic
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (scrollRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+        const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 10;
+        
+        if (isAtEnd) {
+          scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+          scrollRef.current.scrollBy({ left: clientWidth, behavior: "smooth" });
+        }
+      }
+    }, 5000); // 5 seconds interval
+
+    return () => clearInterval(interval);
+  }, []);
+
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
-      const { scrollLeft, clientWidth } = scrollRef.current;
-      const scrollTo = direction === "left" ? scrollLeft - clientWidth : scrollLeft + clientWidth;
-      scrollRef.current.scrollTo({ left: scrollTo, behavior: "smooth" });
+      const { clientWidth } = scrollRef.current;
+      const scrollAmount = window.innerWidth < 640 ? clientWidth : clientWidth / 3;
+      const scrollTo = direction === "left" ? -scrollAmount : scrollAmount;
+      scrollRef.current.scrollBy({ left: scrollTo, behavior: "smooth" });
     }
   };
+
 
   return (
     <div className="relative py-14 sm:py-20 overflow-hidden">
@@ -48,22 +68,23 @@ export function BonusCarousel() {
         </div>
       </div>
 
-      <div className="relative mx-auto max-w-7xl">
-        {/* Navigation Arrows (Desktop) */}
+      <div className="relative mx-auto max-w-7xl group">
+        {/* Navigation Arrows (Visible on Desktop and Tablet) */}
         <button 
           onClick={() => scroll("left")}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 hidden lg:flex h-12 w-12 items-center justify-center rounded-full bg-surface border border-border shadow-lg transition-transform hover:scale-110 active:scale-95 text-primary"
+          className="absolute -left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-surface border border-border shadow-lg transition-all hover:scale-110 active:scale-95 text-primary opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
           aria-label="Anterior"
         >
           <ChevronLeft className="h-6 w-6" />
         </button>
         <button 
           onClick={() => scroll("right")}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 hidden lg:flex h-12 w-12 items-center justify-center rounded-full bg-surface border border-border shadow-lg transition-transform hover:scale-110 active:scale-95 text-primary"
+          className="absolute -right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-surface border border-border shadow-lg transition-all hover:scale-110 active:scale-95 text-primary opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
           aria-label="Próximo"
         >
           <ChevronRight className="h-6 w-6" />
         </button>
+
 
         <div
           ref={scrollRef}
