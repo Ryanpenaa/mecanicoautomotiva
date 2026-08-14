@@ -140,8 +140,9 @@
 
 @utility tech-grid {
   background-image:
-    linear-gradient(to right, oklch(1 0 0 / 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(1 0 0 / 0.04) 1px, transparent 1px);
+    linear-gradient(to right, oklch(0.21 0.015 260 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.21 0.015 260 / 0.05) 1px, transparent 1px);
+
   background-size: 44px 44px;
 }
 
