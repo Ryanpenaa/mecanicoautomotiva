@@ -128,7 +128,8 @@ export function BonusCarousel() {
               )}>
                 {/* Mockup Area */}
                 <div className={cn(
-                  "relative flex aspect-video w-full items-center justify-center overflow-hidden",
+                  "relative flex w-full items-center justify-center overflow-hidden",
+                  IMGS[b.id] ? "aspect-[4/3]" : "aspect-video",
                   b.type === "intro" ? "bg-primary-foreground/10" : "bg-surface-2"
                 )}>
                    {/* Background Grid Pattern */}
