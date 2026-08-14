@@ -86,6 +86,15 @@ function Index() {
             <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
               {PRODUTO.subheadline}
             </p>
+            <div className="mt-8 overflow-hidden rounded-2xl border border-border shadow-2xl">
+              <img
+                src={plataformaImg}
+                alt="Mockup da plataforma de ensino"
+                width={1280}
+                height={912}
+                className="w-full object-cover"
+              />
+            </div>
 
 
             <ul className="mt-7 grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -108,7 +117,7 @@ function Index() {
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative hidden lg:block">
             <div className="glow-primary overflow-hidden rounded-2xl border border-border shadow-2xl">
               <img
                 src={plataformaImg}
@@ -232,18 +241,8 @@ function Index() {
 
       {/* 6 — EXPERIÊNCIA DA PLATAFORMA */}
       <Section eyebrow="Plataforma" title="Estude no seu ritmo, de onde estiver">
-        <div className="grid items-center gap-8 lg:grid-cols-2">
-          <div className="overflow-hidden rounded-2xl border border-border">
-            <img
-              src={plataformaImg}
-              alt="Área de membros da formação aberta em notebook e celular"
-              width={1280}
-              height={912}
-              loading="lazy"
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <ul className="grid gap-3">
+        <div className="flex flex-col gap-8">
+          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { icon: Monitor, t: "Acesso 100% online" },
               { icon: Clock, t: "Acesso imediato após a compra" },
