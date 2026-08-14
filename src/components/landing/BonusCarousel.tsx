@@ -127,59 +127,56 @@ export function BonusCarousel() {
                 "bg-card border-border hover:border-primary/40 hover:shadow-md hover:-translate-y-1"
               )}>
                 {/* Mockup Area */}
-                <div className={cn(
-                  "relative flex w-full items-center justify-center overflow-hidden",
-                  IMGS[b.id] ? "aspect-[4/3]" : "aspect-video",
-                  b.type === "intro" ? "bg-primary-foreground/10" : "bg-surface-2"
-                )}>
-                   {/* Background Grid Pattern */}
-                   <div className="tech-grid absolute inset-0 opacity-10" />
-                   
-                   {b.type === "intro" ? (
-                      <div className="relative flex items-center justify-center">
-                         <div className="absolute h-32 w-32 rounded-full bg-primary-foreground/20 blur-3xl" />
-                         <div className="relative flex -space-x-8">
-                            <div className="h-24 w-16 rotate-[-12deg] rounded-lg border-2 border-primary-foreground bg-primary-foreground/10 shadow-2xl backdrop-blur-sm" />
-                            <div className="z-10 h-28 w-20 rounded-lg border-2 border-primary-foreground bg-primary-foreground shadow-2xl flex items-center justify-center">
-                               <FileText className="h-10 w-10 text-primary" />
-                            </div>
-                            <div className="h-24 w-16 rotate-[12deg] rounded-lg border-2 border-primary-foreground bg-primary-foreground/10 shadow-2xl backdrop-blur-sm" />
-                         </div>
-                      </div>
-                   ) : b.type === "outro" ? (
-                      <div className="flex flex-col items-center gap-2">
-                         <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-glow">
-                            <ArrowRight className="h-8 w-8" />
-                         </div>
-                      </div>
-                   ) : (
-                      <img
-                        src={IMGS[b.id]}
-                        alt={b.titulo}
-                        loading="lazy"
-                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 hover:scale-[1.04]"
-                      />
-                   )}
-                </div>
+                {b.type === "intro" ? (
+                  <div className="relative flex w-full items-center justify-center overflow-hidden aspect-[4/3] bg-primary-foreground/10">
+                     <div className="tech-grid absolute inset-0 opacity-10" />
+                     <div className="relative flex items-center justify-center">
+                        <div className="absolute h-32 w-32 rounded-full bg-primary-foreground/20 blur-3xl" />
+                        <div className="relative flex -space-x-8">
+                           <div className="h-24 w-16 rotate-[-12deg] rounded-lg border-2 border-primary-foreground bg-primary-foreground/10 shadow-2xl backdrop-blur-sm" />
+                           <div className="z-10 h-28 w-20 rounded-lg border-2 border-primary-foreground bg-primary-foreground shadow-2xl flex items-center justify-center">
+                              <FileText className="h-10 w-10 text-primary" />
+                           </div>
+                           <div className="h-24 w-16 rotate-[12deg] rounded-lg border-2 border-primary-foreground bg-primary-foreground/10 shadow-2xl backdrop-blur-sm" />
+                        </div>
+                     </div>
+                  </div>
+                ) : b.type === "outro" ? (
+                  <div className="relative flex w-full items-center justify-center overflow-hidden aspect-[4/3] bg-surface-2">
+                     <div className="tech-grid absolute inset-0 opacity-10" />
+                     <div className="flex flex-col items-center gap-2">
+                        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-glow">
+                           <ArrowRight className="h-8 w-8" />
+                        </div>
+                     </div>
+                  </div>
+                ) : (
+                  <img
+                    src={IMGS[b.id]}
+                    alt={b.titulo}
+                    loading="lazy"
+                    className="block w-full h-auto transition-transform duration-500 hover:scale-[1.02]"
+                  />
+                )}
 
                 {/* Content Area */}
-                <div className="flex flex-1 flex-col p-6">
+                <div className="flex flex-1 flex-col p-4 sm:p-5">
                   {b.id !== "capa" && b.id !== "fechamento" && (
-                    <span className="text-[10px] font-black tracking-widest text-primary uppercase mb-2">BÔNUS {b.id.padStart(2, '0')}</span>
+                    <span className="text-[10px] font-black tracking-widest text-primary uppercase">BÔNUS {b.id.padStart(2, '0')}</span>
                   )}
                   {b.id === "capa" && (
-                    <span className="inline-flex w-fit items-center gap-1 rounded-md bg-primary-foreground px-2 py-0.5 text-[10px] font-bold text-primary uppercase mb-3">
+                    <span className="inline-flex w-fit items-center gap-1 rounded-md bg-primary-foreground px-2 py-0.5 text-[10px] font-bold text-primary uppercase mb-2">
                        INCLUSO NO PLANO PROFISSIONAL
                     </span>
                   )}
                   <h3 className={cn(
-                    "font-display text-xl font-extrabold uppercase leading-tight",
+                    "font-display text-lg font-extrabold uppercase leading-tight mt-1",
                     b.type === "intro" ? "text-primary-foreground" : "text-foreground"
                   )}>
                     {b.titulo}
                   </h3>
                   <p className={cn(
-                    "mt-2 text-sm leading-relaxed",
+                    "mt-1.5 text-sm leading-relaxed",
                     b.type === "intro" ? "text-primary-foreground/80" : "text-muted-foreground"
                   )}>
                     {b.descricao}
