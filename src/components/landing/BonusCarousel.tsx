@@ -186,9 +186,9 @@ export function BonusCarousel() {
                         <ChevronRight className="h-4 w-4" />
                       </a>
                       <div className="mt-4 flex flex-wrap justify-center gap-x-3 gap-y-1 text-[10px] text-muted-foreground">
-                        <span className="flex items-center gap-1"><ShieldCheck className="h-3 w-3" /> 7 dias de garantia</span>
                         <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> Acesso imediato</span>
-                        <span className="flex items-center gap-1"><InfinityIcon className="h-3 w-3" /> Vitalício</span>
+                        <span className="flex items-center gap-1"><InfinityIcon className="h-3 w-3" /> Acesso vitalício</span>
+                        <span className="flex items-center gap-1"><ShieldCheck className="h-3 w-3" /> Garantia de 7 dias</span>
                       </div>
                     </div>
                   )}
