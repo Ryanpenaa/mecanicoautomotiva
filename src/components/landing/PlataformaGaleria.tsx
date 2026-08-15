@@ -106,7 +106,7 @@ export function PlataformaGaleria() {
         type="button"
         onClick={() => scrollByCard(-1)}
         aria-label="Anterior"
-        className={`absolute top-1/2 left-0 hidden h-10 w-10 -translate-x-2 -translate-y-1/2 place-items-center rounded-full border border-border bg-white/90 shadow-md backdrop-blur transition-opacity sm:grid ${
+        className={`absolute top-1/2 left-0 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-border bg-white/90 shadow-md backdrop-blur transition-opacity ${
           atStart ? "pointer-events-none opacity-0" : "opacity-100"
         }`}
       >
@@ -116,7 +116,7 @@ export function PlataformaGaleria() {
         type="button"
         onClick={() => scrollByCard(1)}
         aria-label="Próximo"
-        className={`absolute top-1/2 right-0 hidden h-10 w-10 translate-x-2 -translate-y-1/2 place-items-center rounded-full border border-border bg-white/90 shadow-md backdrop-blur transition-opacity sm:grid ${
+        className={`absolute top-1/2 right-0 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-border bg-white/90 shadow-md backdrop-blur transition-opacity ${
           atEnd ? "pointer-events-none opacity-0" : "opacity-100"
         }`}
       >
