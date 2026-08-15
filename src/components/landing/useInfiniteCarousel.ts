@@ -36,18 +36,6 @@ export function useInfiniteCarousel({ itemCount, intervalMs, gap = 16 }: Opts) {
     setAtStart(track.scrollLeft <= 4);
   };
 
-  const scheduleAfterScroll = (track: HTMLElement, fn: () => void) => {
-    let done = false;
-    const run = () => {
-      if (done) return;
-      done = true;
-      track.removeEventListener("scrollend", run as EventListener);
-      fn();
-    };
-    track.addEventListener("scrollend", run as EventListener, { once: true });
-    window.setTimeout(run, 700);
-  };
-
   const next = () => {
     const track = trackRef.current;
     if (!track || wrappingRef.current) return;
@@ -56,19 +44,30 @@ export function useInfiniteCarousel({ itemCount, intervalMs, gap = 16 }: Opts) {
     const target = track.scrollLeft + step;
 
     if (target >= setWidth - 1) {
-      // chegou na região das cópias: rola suavemente e reinicia sem marcar
+      // chegou na região das cópias: rola suavemente até o clone do slide 0
+      // e, assim que o scroll ATINGE o destino, reposiciona instantaneamente
+      // para o slide 0 real (mesma imagem → movimento invisível, sem rewind).
       wrappingRef.current = true;
       track.scrollTo({ left: target, behavior: "smooth" });
-      scheduleAfterScroll(track, () => {
+
+      let frames = 0;
+      const poll = () => {
         const t = trackRef.current;
         if (!t) {
           wrappingRef.current = false;
           return;
         }
-        t.scrollLeft = t.scrollLeft - setWidth; // instantâneo, sem animação
-        wrappingRef.current = false;
-        updateStart();
-      });
+        frames += 1;
+        const cur = t.scrollLeft;
+        if (cur >= target - 2 || frames > 120) {
+          t.scrollLeft = 0; // snap instantâneo para o slide 0 real
+          wrappingRef.current = false;
+          updateStart();
+          return;
+        }
+        requestAnimationFrame(poll);
+      };
+      requestAnimationFrame(poll);
     } else {
       track.scrollBy({ left: step, behavior: "smooth" });
     }
