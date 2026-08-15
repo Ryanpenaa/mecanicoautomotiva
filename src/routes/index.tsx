@@ -175,31 +175,20 @@ function Index() {
         </div>
       </Section>
 
-      {/* 4 — CAMINHO DE APRENDIZADO */}
+      {/* 4 — MATERIAL DE APOIO */}
       <Section
-        eyebrow="Trilha"
-        title="O caminho de aprendizado"
-        subtitle="Uma sequência organizada, do primeiro conceito até a aplicação prática."
+        eyebrow="Material de apoio"
+        title="Material de apoio"
+        subtitle="Guias, manuais e checklists ilustrados para consultar sempre que precisar."
       >
-        <ol className="relative grid gap-4 md:grid-cols-5">
-          {JORNADA.map((j) => (
-            <li key={j.numero} className="surface-card p-5">
-              <span className="font-display text-3xl font-extrabold text-primary">
-                {j.numero}
-              </span>
-              <h3 className="mt-2 text-base font-bold tracking-wide uppercase">
-                {j.titulo}
-              </h3>
-              <p className="mt-1.5 text-sm text-muted-foreground">{j.texto}</p>
-            </li>
-          ))}
-        </ol>
+        <MaterialApoio />
         <div className="mt-8 text-center">
           <CtaButton href="#planos" variant="outline">
             Ver os planos <ChevronRight className="ml-1 h-4 w-4" />
           </CtaButton>
         </div>
       </Section>
+
 
       {/* 5 — CONTEÚDO + MATERIAIS */}
       <Section
