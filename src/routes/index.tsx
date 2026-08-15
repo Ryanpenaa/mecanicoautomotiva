@@ -17,8 +17,6 @@ import {
   FAQ,
   GARANTIA,
   INSTRUTOR,
-
-  MATERIAIS,
   MOTIVOS,
   PARA_QUEM,
   PLANOS,
@@ -33,7 +31,6 @@ import {
   Check,
   ChevronRight,
   Clock,
-  FileText,
   Gauge,
   Infinity as InfinityIcon,
   ListChecks,
@@ -185,26 +182,6 @@ function Index() {
         <MaterialApoio />
       </Section>
 
-
-      {/* 5 — CONTEÚDO + MATERIAIS */}
-      <Section
-        className="bg-surface/40"
-        eyebrow="Conteúdo e materiais"
-        title="Uma formação para consultar sempre que precisar"
-      >
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {MATERIAIS.map((m) => (
-            <div
-              key={m}
-              className="flex items-center gap-3 rounded-xl border border-border bg-card p-4"
-            >
-              <FileText className="h-5 w-5 shrink-0 text-accent" />
-              <span className="min-w-0 text-sm font-semibold">{m}</span>
-            </div>
-          ))}
-        </div>
-
-      </Section>
 
       {/* 6 — EXPERIÊNCIA DA PLATAFORMA */}
       <Section eyebrow="Plataforma" title="Estude no seu ritmo, de onde estiver">
