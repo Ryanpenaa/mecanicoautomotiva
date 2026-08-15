@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/accordion";
 import { Section, CtaButton } from "@/components/landing/ui-bits";
 import { BonusCarousel } from "@/components/landing/BonusCarousel";
+import { MaterialApoio } from "@/components/landing/MaterialApoio";
 import {
   BONUS,
   BENEFICIOS,
@@ -16,7 +17,7 @@ import {
   FAQ,
   GARANTIA,
   INSTRUTOR,
-  JORNADA,
+
   MATERIAIS,
   MOTIVOS,
   PARA_QUEM,
