@@ -95,6 +95,14 @@ export function useInfiniteCarousel({ itemCount, intervalMs, gap = 16 }: Opts) {
       setTimeout(() => (paused = false), 3500);
     });
 
+    const onScrollEnd = () => {
+      if (!wrappingRef.current) return;
+      wrappingRef.current = false;
+      doInstantReset();
+      updateStart();
+    };
+    track.addEventListener("scrollend", onScrollEnd);
+
     const id = window.setInterval(() => {
       if (paused || wrappingRef.current) return;
       next();
@@ -108,6 +116,7 @@ export function useInfiniteCarousel({ itemCount, intervalMs, gap = 16 }: Opts) {
       track.removeEventListener("mouseenter", onEnter);
       track.removeEventListener("mouseleave", onLeave);
       track.removeEventListener("scroll", updateStart);
+      track.removeEventListener("scrollend", onScrollEnd);
       window.removeEventListener("resize", updateStart);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
