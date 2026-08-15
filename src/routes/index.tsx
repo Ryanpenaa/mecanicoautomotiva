@@ -442,12 +442,6 @@ function Index() {
         © {new Date().getFullYear()} {PRODUTO.nome}. Todos os direitos reservados.
       </footer>
 
-      {/* CTA fixo mobile */}
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-surface/95 p-3 backdrop-blur sm:hidden">
-        <CtaButton href="#planos" className="w-full py-3.5 text-base">
-          {PRODUTO.ctaPrincipal}
-        </CtaButton>
-      </div>
     </main>
   );
 }
