@@ -27,7 +27,7 @@ export function PlataformaGaleria() {
     <div className="relative">
       <div
         ref={trackRef}
-        className="hide-scrollbar flex snap-x snap-mandatory snap-start gap-4 overflow-x-auto scroll-smooth pb-2"
+        className="hide-scrollbar flex snap-x snap-mandatory snap-start gap-4 overflow-x-auto pb-2"
       >
         {LOOP.map((t, i) => (
           <figure

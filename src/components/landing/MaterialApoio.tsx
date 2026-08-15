@@ -35,7 +35,7 @@ export function MaterialApoio() {
     <div className="relative">
       <div
         ref={trackRef}
-        className="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory snap-start hide-scrollbar pb-2"
+        className="flex gap-4 overflow-x-auto snap-x snap-mandatory snap-start hide-scrollbar pb-2"
       >
         {LOOP.map((m, i) => (
           <figure
