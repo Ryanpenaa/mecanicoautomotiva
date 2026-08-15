@@ -69,7 +69,7 @@ export function MaterialApoio() {
         const step = card ? card.offsetWidth + 16 : track.clientWidth * 0.8;
         track.scrollBy({ left: step, behavior: "smooth" });
       }
-    }, 4000);
+    }, 2500);
 
     track.addEventListener("scroll", updateArrows, { passive: true });
     window.addEventListener("resize", updateArrows);
