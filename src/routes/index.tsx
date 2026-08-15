@@ -183,11 +183,6 @@ function Index() {
         subtitle="Guias, manuais e checklists ilustrados para consultar sempre que precisar."
       >
         <MaterialApoio />
-        <div className="mt-8 text-center">
-          <CtaButton href="#planos" variant="outline">
-            Ver os planos <ChevronRight className="ml-1 h-4 w-4" />
-          </CtaButton>
-        </div>
       </Section>
 
 
