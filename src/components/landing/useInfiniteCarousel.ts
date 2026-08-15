@@ -110,7 +110,7 @@ export function useInfiniteCarousel({ itemCount, intervalMs, gap = 16 }: Opts) {
       clearInterval(id);
       track.removeEventListener("mouseenter", onEnter);
       track.removeEventListener("mouseleave", onLeave);
-      track.removeEventListener("scroll", updateArrowsSafe, ...);
+      track.removeEventListener("scroll", updateStart);
       window.removeEventListener("resize", updateStart);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
