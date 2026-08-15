@@ -60,7 +60,8 @@ export function useInfiniteCarousel({ itemCount, intervalMs, gap = 16 }: Opts) {
         frames += 1;
         const cur = t.scrollLeft;
         if (cur >= target - 2 || frames > 120) {
-          t.scrollLeft = 0; // snap instantâneo para o slide 0 real
+          // reset instantâneo (behavior instant ignora qualquer scroll-behavior CSS)
+          t.scrollTo({ left: 0, behavior: "instant" as ScrollBehavior });
           wrappingRef.current = false;
           updateStart();
           return;
