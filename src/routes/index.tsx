@@ -184,8 +184,13 @@ function Index() {
 
 
       {/* 6 — EXPERIÊNCIA DA PLATAFORMA */}
-      <Section eyebrow="Plataforma" title="Estude no seu ritmo, de onde estiver">
+      <Section
+        eyebrow="Plataforma"
+        title="Estude no seu ritmo, de onde estiver"
+        subtitle="Veja por dentro: aulas em vídeo organizadas por módulos, progresso salvo e materiais para baixar — tudo no celular, tablet ou computador."
+      >
         <div className="flex flex-col gap-8">
+          <PlataformaGaleria />
           <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { icon: Monitor, t: "Acesso 100% online" },
@@ -204,6 +209,7 @@ function Index() {
           </ul>
         </div>
       </Section>
+
 
       {/* 7 — POR QUE APRENDER MECÂNICA */}
       <Section
