@@ -17,8 +17,6 @@ import {
   FAQ,
   GARANTIA,
   INSTRUTOR,
-
-  MATERIAIS,
   MOTIVOS,
   PARA_QUEM,
   PLANOS,
@@ -33,7 +31,6 @@ import {
   Check,
   ChevronRight,
   Clock,
-  FileText,
   Gauge,
   Infinity as InfinityIcon,
   ListChecks,
