@@ -36,6 +36,14 @@ export function useInfiniteCarousel({ itemCount, intervalMs, gap = 16 }: Opts) {
     setAtStart(track.scrollLeft <= 4);
   };
 
+  const doInstantReset = () => {
+    const t = trackRef.current;
+    if (!t) return;
+    // Sem scroll suave em andamento aqui (chamado via scrollend), então o
+    // reposicionamento é verdadeiramente instantâneo — sem rewind visível.
+    t.scrollLeft = 0;
+  };
+
   const next = () => {
     const track = trackRef.current;
     if (!track || wrappingRef.current) return;
@@ -44,31 +52,20 @@ export function useInfiniteCarousel({ itemCount, intervalMs, gap = 16 }: Opts) {
     const target = track.scrollLeft + step;
 
     if (target >= setWidth - 1) {
-      // chegou na região das cópias: rola suavemente até o clone do slide 0
-      // e, assim que o scroll ATINGE o destino, reposiciona instantaneamente
-      // para o slide 0 real (mesma imagem → movimento invisível, sem rewind).
+      // chegou na região das cópias: rola suavemente até o clone do slide 0.
+      // O reset instantâneo para o slide 0 real acontece no evento "scrollend"
+      // (após o scroll suave terminar), evitando interromper um scroll em
+      // andamento — que era o que causava o efeito de "rebobinar" visível.
       wrappingRef.current = true;
       track.scrollTo({ left: target, behavior: "smooth" });
-
-      let frames = 0;
-      const poll = () => {
-        const t = trackRef.current;
-        if (!t) {
+      // fallback: se scrollend não disparar (alguns casos), força o reset
+      window.setTimeout(() => {
+        if (wrappingRef.current) {
           wrappingRef.current = false;
-          return;
-        }
-        frames += 1;
-        const cur = t.scrollLeft;
-        if (cur >= target - 2 || frames > 120) {
-          // reset instantâneo (behavior instant ignora qualquer scroll-behavior CSS)
-          t.scrollTo({ left: 0, behavior: "instant" as ScrollBehavior });
-          wrappingRef.current = false;
+          doInstantReset();
           updateStart();
-          return;
         }
-        requestAnimationFrame(poll);
-      };
-      requestAnimationFrame(poll);
+      }, 1200);
     } else {
       track.scrollBy({ left: step, behavior: "smooth" });
     }
