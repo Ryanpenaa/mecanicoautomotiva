@@ -117,9 +117,9 @@ export function MaterialApoio() {
         type="button"
         onClick={() => scrollByCard(-1)}
         aria-label="Anterior"
-        className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 grid place-items-center h-10 w-10 rounded-full bg-white/90 border border-border shadow-md backdrop-blur transition-opacity ${
+        className={`absolute left-0 top-1/2 -translate-y-1/2 grid place-items-center h-10 w-10 rounded-full bg-white/90 border border-border shadow-md backdrop-blur transition-opacity ${
           atStart ? "opacity-0 pointer-events-none" : "opacity-100"
-        } hidden sm:grid`}
+        }`}
       >
         <ChevronLeft className="h-5 w-5" />
       </button>
@@ -127,9 +127,9 @@ export function MaterialApoio() {
         type="button"
         onClick={() => scrollByCard(1)}
         aria-label="Próximo"
-        className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 grid place-items-center h-10 w-10 rounded-full bg-white/90 border border-border shadow-md backdrop-blur transition-opacity ${
+        className={`absolute right-0 top-1/2 -translate-y-1/2 grid place-items-center h-10 w-10 rounded-full bg-white/90 border border-border shadow-md backdrop-blur transition-opacity ${
           atEnd ? "opacity-0 pointer-events-none" : "opacity-100"
-        } hidden sm:grid`}
+        }`}
       >
         <ChevronRight className="h-5 w-5" />
       </button>
