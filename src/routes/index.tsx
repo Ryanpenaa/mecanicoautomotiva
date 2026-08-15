@@ -8,6 +8,8 @@ import {
 import { Section, CtaButton } from "@/components/landing/ui-bits";
 import { BonusCarousel } from "@/components/landing/BonusCarousel";
 import { MaterialApoio } from "@/components/landing/MaterialApoio";
+import { PlataformaGaleria } from "@/components/landing/PlataformaGaleria";
+
 import {
   BONUS,
   BENEFICIOS,
