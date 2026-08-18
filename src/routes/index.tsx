@@ -83,10 +83,10 @@ function Index() {
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-2 px-3 py-1 text-xs font-semibold tracking-[0.16em] text-primary uppercase">
               <Gauge className="h-3.5 w-3.5" /> Formação profissionalizante online
             </span>
-            <h1 className="mt-5 text-4xl leading-[1.05] font-extrabold text-balance uppercase sm:text-5xl lg:text-6xl">
+            <h1 className="mt-5 text-center text-4xl leading-[1.05] font-extrabold text-balance uppercase sm:text-5xl lg:text-6xl">
               {PRODUTO.headline}
             </h1>
-            <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
+            <p className="mx-auto mt-5 max-w-xl text-center text-base text-muted-foreground sm:text-lg">
               {PRODUTO.subheadline}
             </p>
             <div className="mt-8 lg:hidden">
