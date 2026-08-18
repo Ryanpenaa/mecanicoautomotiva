@@ -125,9 +125,9 @@ export function BonusCarousel() {
                   alt={b.titulo}
                   width={800}
                   height={600}
-                  loading={i < 2 ? "eager" : "lazy"}
+                  loading="lazy"
                   decoding="async"
-                  fetchPriority={i === 0 ? "high" : "low"}
+                  fetchPriority="low"
                   className="block w-full h-auto transition-transform duration-500 hover:scale-[1.02]"
                 />
 

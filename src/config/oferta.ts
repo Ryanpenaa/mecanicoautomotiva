@@ -183,12 +183,12 @@ export const GARANTIA = {
     "Você pode avaliar o conteúdo dentro do período de garantia e solicitar reembolso conforme as condições da compra.",
 };
 
-import instrutorFoto from "@/assets/instrutor.png.asset.json";
+import instrutorFoto from "@/assets/opt/instrutor.webp";
 
 export const INSTRUTOR = {
   titulo: "Conheça seu Instrutor",
   nome: "João Emanuel",
-  foto: instrutorFoto.url,
+  foto: instrutorFoto,
   bio: "Profissional da área automotiva com 16 anos de experiência no mercado, João Emanuel reúne conhecimento prático em mecânica, manutenção e diagnóstico de veículos.",
   experiencia:
     "Nesta formação, ele compartilha esse conhecimento de forma simples, direta e passo a passo, pensando especialmente em quem está começando do zero.",
