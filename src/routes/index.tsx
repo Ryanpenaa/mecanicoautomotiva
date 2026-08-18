@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/accordion";
 import { Section, CtaButton } from "@/components/landing/ui-bits";
 import { BonusCarousel } from "@/components/landing/BonusCarousel";
+import { UpsellModal, useUpsell } from "@/components/landing/UpsellModal";
 import { MaterialApoio } from "@/components/landing/MaterialApoio";
 import { PlataformaGaleria } from "@/components/landing/PlataformaGaleria";
 
@@ -73,6 +74,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const upsell = useUpsell();
   return (
     <main className="min-h-screen bg-background pb-24 sm:pb-0">
       {/* 1 — HERO */}
@@ -275,6 +277,7 @@ function Index() {
                 href={PLANOS.basico.url}
                 variant="outline"
                 className="w-full sm:w-full"
+                onClick={upsell.trigger}
               >
                 {PLANOS.basico.cta}
               </CtaButton>
@@ -421,6 +424,14 @@ function Index() {
       <footer className="border-t border-border px-4 py-8 text-center text-xs text-muted-foreground">
         © {new Date().getFullYear()} {PRODUTO.nome}. Todos os direitos reservados.
       </footer>
+
+      {/* UPSELL — exibido ao clicar no Plano Básico */}
+      <UpsellModal
+        open={upsell.open}
+        onAccept={upsell.accept}
+        onDecline={upsell.decline}
+        onClose={upsell.close}
+      />
 
     </main>
   );
