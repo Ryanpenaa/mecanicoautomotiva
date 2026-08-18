@@ -79,7 +79,6 @@ function Index() {
     <main className="min-h-screen bg-background pb-24 sm:pb-0">
       {/* 1 — HERO */}
       <header className="hero-bg relative overflow-hidden">
-        <div className="tech-grid absolute inset-0 opacity-60" aria-hidden />
         <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:py-20 lg:grid-cols-2 lg:items-center">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-2 px-3 py-1 text-xs font-semibold tracking-[0.16em] text-primary uppercase">
