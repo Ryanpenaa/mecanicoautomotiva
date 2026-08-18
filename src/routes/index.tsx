@@ -425,6 +425,14 @@ function Index() {
         © {new Date().getFullYear()} {PRODUTO.nome}. Todos os direitos reservados.
       </footer>
 
+      {/* UPSELL — exibido ao clicar no Plano Básico */}
+      <UpsellModal
+        open={upsell.open}
+        onAccept={upsell.accept}
+        onDecline={upsell.decline}
+        onClose={upsell.close}
+      />
+
     </main>
   );
 }
