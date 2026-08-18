@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/accordion";
 import { Section, CtaButton } from "@/components/landing/ui-bits";
 import { BonusCarousel } from "@/components/landing/BonusCarousel";
+import { UpsellModal, useUpsell } from "@/components/landing/UpsellModal";
 import { MaterialApoio } from "@/components/landing/MaterialApoio";
 import { PlataformaGaleria } from "@/components/landing/PlataformaGaleria";
 
