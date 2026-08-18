@@ -47,15 +47,18 @@ export function CtaButton({
   children,
   variant = "primary",
   className,
+  onClick,
 }: {
   href: string;
   children: ReactNode;
   variant?: "primary" | "accent" | "outline";
   className?: string;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }) {
   return (
     <a
       href={href}
+      onClick={onClick}
       className={cn(
         "inline-flex w-full items-center justify-center rounded-xl px-6 py-4 text-center text-base font-bold tracking-wide uppercase transition-transform duration-200 active:scale-[0.98] sm:w-auto sm:text-lg",
         variant === "primary" &&
