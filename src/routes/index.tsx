@@ -92,9 +92,11 @@ function Index() {
               <img
                 src={plataformaImg}
                 alt="Kit completo da Formação Mecânico Automotivo: apostila, módulos e bônus"
-                width={1183}
-                height={1310}
+                width={1100}
+                height={1204}
                 fetchPriority="high"
+                decoding="async"
+                sizes="(min-width: 1024px) 550px, 92vw"
                 className="h-auto w-full"
               />
             </div>
