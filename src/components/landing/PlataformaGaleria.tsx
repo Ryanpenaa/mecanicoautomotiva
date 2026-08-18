@@ -1,17 +1,17 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import p1 from "@/assets/plataforma/p1.png.asset.json";
-import p2 from "@/assets/plataforma/p2.png.asset.json";
-import p3 from "@/assets/plataforma/p3.png.asset.json";
-import p4 from "@/assets/plataforma/p4.png.asset.json";
-import p5 from "@/assets/plataforma/p5.png.asset.json";
+import p1 from "@/assets/opt/p1.webp";
+import p2 from "@/assets/opt/p2.webp";
+import p3 from "@/assets/opt/p3.webp";
+import p4 from "@/assets/opt/p4.webp";
+import p5 from "@/assets/opt/p5.webp";
 import { useInfiniteCarousel } from "./useInfiniteCarousel";
 
 const TELAS = [
-  { url: p1.url, titulo: "Área de membros com seus módulos e progresso" },
-  { url: p2.url, titulo: "Aula 12 — Troca de óleo e filtro" },
-  { url: p3.url, titulo: "Aula 21 — Sistema de arrefecimento" },
-  { url: p4.url, titulo: "Aula 18 — Inspeção do sistema de freios" },
-  { url: p5.url, titulo: "Aula 34 — Teste de bateria com multímetro" },
+  { url: p1, titulo: "Área de membros com seus módulos e progresso" },
+  { url: p2, titulo: "Aula 12 — Troca de óleo e filtro" },
+  { url: p3, titulo: "Aula 21 — Sistema de arrefecimento" },
+  { url: p4, titulo: "Aula 18 — Inspeção do sistema de freios" },
+  { url: p5, titulo: "Aula 34 — Teste de bateria com multímetro" },
 ];
 
 // duplica para permitir o loop infinito sem costura
