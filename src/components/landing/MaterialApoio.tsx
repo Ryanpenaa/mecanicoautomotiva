@@ -47,10 +47,10 @@ export function MaterialApoio() {
               src={m.url}
               alt={`Material de apoio: ${m.titulo}`}
               width={1024}
-              height={1500}
-              loading={i < 3 ? "eager" : "lazy"}
+              height={1536}
+              loading="lazy"
               decoding="async"
-              fetchPriority={i === 0 ? "high" : "low"}
+              fetchPriority="low"
               className="w-full rounded-xl border border-border"
             />
             <figcaption className="px-2 py-3 text-sm font-bold tracking-wide uppercase">

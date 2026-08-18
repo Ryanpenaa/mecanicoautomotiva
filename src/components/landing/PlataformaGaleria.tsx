@@ -38,11 +38,11 @@ export function PlataformaGaleria() {
             <img
               src={t.url}
               alt={`Plataforma da Formação Mecânico Automotivo — ${t.titulo}`}
-              width={1672}
-              height={941}
-              loading={i < 2 ? "eager" : "lazy"}
+              width={1200}
+              height={675}
+              loading="lazy"
               decoding="async"
-              fetchPriority={i === 0 ? "high" : "low"}
+              fetchPriority="low"
               className="w-full rounded-xl border border-border"
             />
             <figcaption className="px-2 py-3 text-sm font-semibold text-muted-foreground">
