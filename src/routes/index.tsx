@@ -25,10 +25,8 @@ import {
   PLANOS,
   PRODUTO,
 } from "@/config/oferta";
-import heroImg from "@/assets/hero-mecanico.jpg";
-import plataformaAsset from "@/assets/mockup.png.asset.json";
+import plataformaImg from "@/assets/opt/mockup.webp";
 
-const plataformaImg = plataformaAsset.url;
 import {
   BadgeCheck,
   Check,
