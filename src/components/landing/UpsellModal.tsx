@@ -19,7 +19,7 @@ export function UpsellModal({
 }: {
   open: boolean;
   onAccept: () => void;
-  onDecline: () => void;
+  onDecline: (e: React.MouseEvent) => void;
   onClose: () => void;
 }) {
   useEffect(() => {
