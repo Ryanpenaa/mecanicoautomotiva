@@ -74,6 +74,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const upsell = useUpsell();
   return (
     <main className="min-h-screen bg-background pb-24 sm:pb-0">
       {/* 1 — HERO */}
