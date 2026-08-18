@@ -277,6 +277,7 @@ function Index() {
                 href={PLANOS.basico.url}
                 variant="outline"
                 className="w-full sm:w-full"
+                onClick={upsell.trigger}
               >
                 {PLANOS.basico.cta}
               </CtaButton>
