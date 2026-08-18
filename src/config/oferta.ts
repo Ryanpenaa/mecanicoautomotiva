@@ -6,6 +6,22 @@
 export const CHECKOUT = {
   BASIC_CHECKOUT_URL: "#checkout-basico",
   PRO_CHECKOUT_URL: "#checkout-profissional",
+  // Upsell exibido ao clicar no Plano Básico: Profissional com desconto.
+  UPSELL_PRO_CHECKOUT_URL: "#checkout-profissional",
+};
+
+export const UPSELL = {
+  ativo: true,
+  badge: "OFERTA ESPECIAL",
+  headline: "Espere! Só mais 1 minuto",
+  subheadline:
+    "Antes de finalizar pelo Plano Básico, que tal levar a formação completa com desconto?",
+  precoOriginal: "R$27,90",
+  precoOferta: "R$18,90",
+  economia: "R$9,00",
+  vantagem: "Por apenas R$8,90 a mais que o Básico, você leva certificado, materiais de apoio, guias e os 10 bônus.",
+  ctaAceitar: "QUERO O PROFISSIONAL POR R$18,90",
+  ctaRecusar: "Não, quero só o Básico por R$10,00",
 };
 
 export const PRODUTO = {
