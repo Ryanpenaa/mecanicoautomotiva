@@ -18,6 +18,9 @@ const MaterialApoio = lazy(() =>
 const PlataformaGaleria = lazy(() =>
   import("@/components/landing/PlataformaGaleria").then((m) => ({ default: m.PlataformaGaleria })),
 );
+const ProvaSocial = lazy(() =>
+  import("@/components/landing/ProvaSocial").then((m) => ({ default: m.ProvaSocial })),
+);
 
 import {
   BONUS,
@@ -314,6 +317,17 @@ function Index() {
             </div>
           </article>
         </div>
+      </Section>
+
+      {/* 8.1 — PROVA SOCIAL */}
+      <Section
+        eyebrow="Prova social"
+        title="O que nossos alunos estão dizendo"
+        subtitle="Mensagens reais de quem já está transformando a vida com o nosso curso Formação Profissional de Mecânico Automotivo."
+      >
+        <Suspense fallback={<div className="h-96" />}>
+          <ProvaSocial />
+        </Suspense>
       </Section>
 
       {/* 9 — GARANTIA + AUTORIDADE */}
