@@ -170,7 +170,9 @@ function Index() {
         title="Material de apoio"
         subtitle="Guias, manuais e checklists ilustrados para consultar sempre que precisar."
       >
-        <MaterialApoio />
+        <Suspense fallback={<div className="h-72" />}>
+          <MaterialApoio />
+        </Suspense>
       </Section>
 
 
@@ -181,7 +183,9 @@ function Index() {
         subtitle="Veja por dentro: aulas em vídeo organizadas por módulos, progresso salvo e materiais para baixar — tudo no celular, tablet ou computador."
       >
         <div className="flex flex-col gap-8">
-          <PlataformaGaleria />
+          <Suspense fallback={<div className="h-72" />}>
+            <PlataformaGaleria />
+          </Suspense>
           <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { icon: Monitor, t: "Acesso 100% online" },
@@ -203,7 +207,9 @@ function Index() {
 
 
       {/* 5.1 — CARROSSEL DE BÔNUS */}
-      <BonusCarousel />
+      <Suspense fallback={<div className="h-96" />}>
+        <BonusCarousel />
+      </Suspense>
 
       {/* 8 — PLANOS */}
       <Section
