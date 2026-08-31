@@ -316,6 +316,17 @@ function Index() {
         </div>
       </Section>
 
+      {/* 8.1 — PROVA SOCIAL */}
+      <Section
+        eyebrow="Prova social"
+        title="O que nossos alunos estão dizendo"
+        subtitle="Mensagens reais de quem já está transformando a vida com o nosso curso Formação Profissional de Mecânico Automotivo."
+      >
+        <Suspense fallback={<div className="h-96" />}>
+          <ProvaSocial />
+        </Suspense>
+      </Section>
+
       {/* 9 — GARANTIA + AUTORIDADE */}
       <Section className="bg-surface/40" eyebrow="Confiança" title="Garantia e instrutor">
         <div className="grid gap-5 lg:grid-cols-2">
