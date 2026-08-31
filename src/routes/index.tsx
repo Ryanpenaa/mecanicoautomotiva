@@ -18,6 +18,9 @@ const MaterialApoio = lazy(() =>
 const PlataformaGaleria = lazy(() =>
   import("@/components/landing/PlataformaGaleria").then((m) => ({ default: m.PlataformaGaleria })),
 );
+const ProvaSocial = lazy(() =>
+  import("@/components/landing/ProvaSocial").then((m) => ({ default: m.ProvaSocial })),
+);
 
 import {
   BONUS,
