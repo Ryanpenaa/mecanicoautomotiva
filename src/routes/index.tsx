@@ -20,8 +20,6 @@ import {
   FAQ,
   GARANTIA,
   INSTRUTOR,
-  MOTIVOS,
-  PARA_QUEM,
   PLANOS,
   PRODUTO,
 } from "@/config/oferta";
@@ -158,25 +156,6 @@ function Index() {
         </div>
       </Section>
 
-      {/* 3 — PARA QUEM É */}
-      <Section
-        className="bg-surface/40"
-        eyebrow="Para quem é"
-        title="Essa formação foi feita para quem quer começar"
-      >
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {PARA_QUEM.map((p) => (
-            <div
-              key={p}
-              className="flex items-start gap-3 rounded-xl border border-border bg-card p-4"
-            >
-              <Check className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-              <span className="min-w-0 text-sm font-medium">{p}</span>
-            </div>
-          ))}
-        </div>
-      </Section>
-
       {/* 4 — MATERIAL DE APOIO */}
       <Section
         eyebrow="Material de apoio"
@@ -214,23 +193,6 @@ function Index() {
         </div>
       </Section>
 
-
-      {/* 7 — POR QUE APRENDER MECÂNICA */}
-      <Section
-        className="bg-surface/40"
-        eyebrow="Por que aprender"
-        title="Uma habilidade prática pode abrir novos caminhos"
-        subtitle="Entender mecânica é útil em muitas situações do dia a dia — e pode se tornar uma habilidade profissional conforme sua dedicação e prática."
-      >
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {MOTIVOS.map((m) => (
-            <div key={m} className="surface-card flex items-start gap-3 p-5">
-              <Wrench className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
-              <span className="min-w-0 text-sm">{m}</span>
-            </div>
-          ))}
-        </div>
-      </Section>
 
       {/* 5.1 — CARROSSEL DE BÔNUS */}
       <BonusCarousel />
