@@ -196,23 +196,6 @@ function Index() {
       </Section>
 
 
-      {/* 7 — POR QUE APRENDER MECÂNICA */}
-      <Section
-        className="bg-surface/40"
-        eyebrow="Por que aprender"
-        title="Uma habilidade prática pode abrir novos caminhos"
-        subtitle="Entender mecânica é útil em muitas situações do dia a dia — e pode se tornar uma habilidade profissional conforme sua dedicação e prática."
-      >
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {MOTIVOS.map((m) => (
-            <div key={m} className="surface-card flex items-start gap-3 p-5">
-              <Wrench className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
-              <span className="min-w-0 text-sm">{m}</span>
-            </div>
-          ))}
-        </div>
-      </Section>
-
       {/* 5.1 — CARROSSEL DE BÔNUS */}
       <BonusCarousel />
 
