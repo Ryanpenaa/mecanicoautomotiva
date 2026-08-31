@@ -20,8 +20,6 @@ import {
   FAQ,
   GARANTIA,
   INSTRUTOR,
-  MOTIVOS,
-  PARA_QUEM,
   PLANOS,
   PRODUTO,
 } from "@/config/oferta";
