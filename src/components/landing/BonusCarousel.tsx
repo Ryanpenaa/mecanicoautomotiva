@@ -63,8 +63,8 @@ export function BonusCarousel() {
 
 
   return (
-    <div className="relative py-14 sm:py-20 overflow-hidden">
-      <div className="mb-8 text-center px-4 relative z-10">
+<div className="relative py-8 sm:py-12 overflow-hidden">
+      <div className="mb-6 text-center px-4 relative z-10">
         <span className="inline-block rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[10px] sm:text-xs font-bold tracking-[0.2em] text-primary uppercase mb-4">
           EXCLUSIVO DO PLANO PROFISSIONAL
         </span>

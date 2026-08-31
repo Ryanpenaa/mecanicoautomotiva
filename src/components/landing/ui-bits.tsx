@@ -17,10 +17,10 @@ export function Section({
   subtitle?: string;
 }) {
   return (
-    <section id={id} className={cn("px-4 py-14 sm:py-20", className)}>
+    <section id={id} className={cn("px-4 py-8 sm:py-12", className)}>
       <div className="mx-auto w-full max-w-6xl">
         {(eyebrow || title || subtitle) && (
-          <header className="mx-auto mb-8 max-w-3xl text-center sm:mb-12">
+          <header className="mx-auto mb-6 max-w-3xl text-center sm:mb-8">
             {eyebrow && (
               <span className="inline-block rounded-full border border-border bg-surface-2 px-3 py-1 text-xs font-semibold tracking-[0.18em] text-primary uppercase">
                 {eyebrow}

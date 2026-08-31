@@ -5,11 +5,19 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { lazy, Suspense } from "react";
 import { Section, CtaButton } from "@/components/landing/ui-bits";
-import { BonusCarousel } from "@/components/landing/BonusCarousel";
 import { UpsellModal, useUpsell } from "@/components/landing/UpsellModal";
-import { MaterialApoio } from "@/components/landing/MaterialApoio";
-import { PlataformaGaleria } from "@/components/landing/PlataformaGaleria";
+
+const BonusCarousel = lazy(() =>
+  import("@/components/landing/BonusCarousel").then((m) => ({ default: m.BonusCarousel })),
+);
+const MaterialApoio = lazy(() =>
+  import("@/components/landing/MaterialApoio").then((m) => ({ default: m.MaterialApoio })),
+);
+const PlataformaGaleria = lazy(() =>
+  import("@/components/landing/PlataformaGaleria").then((m) => ({ default: m.PlataformaGaleria })),
+);
 
 import {
   BONUS,
@@ -72,10 +80,10 @@ export const Route = createFileRoute("/")({
 function Index() {
   const upsell = useUpsell();
   return (
-    <main className="min-h-screen bg-background pb-24 sm:pb-0">
+    <main className="min-h-screen bg-background">
       {/* 1 — HERO */}
       <header className="hero-bg relative overflow-hidden">
-        <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:py-20 lg:grid-cols-2 lg:items-center">
+        <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-10 sm:py-14 lg:grid-cols-2 lg:items-center">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-2 px-3 py-1 text-xs font-semibold tracking-[0.16em] text-primary uppercase">
               <Gauge className="h-3.5 w-3.5" /> Formação profissionalizante online
@@ -162,7 +170,9 @@ function Index() {
         title="Material de apoio"
         subtitle="Guias, manuais e checklists ilustrados para consultar sempre que precisar."
       >
-        <MaterialApoio />
+        <Suspense fallback={<div className="h-72" />}>
+          <MaterialApoio />
+        </Suspense>
       </Section>
 
 
@@ -173,7 +183,9 @@ function Index() {
         subtitle="Veja por dentro: aulas em vídeo organizadas por módulos, progresso salvo e materiais para baixar — tudo no celular, tablet ou computador."
       >
         <div className="flex flex-col gap-8">
-          <PlataformaGaleria />
+          <Suspense fallback={<div className="h-72" />}>
+            <PlataformaGaleria />
+          </Suspense>
           <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { icon: Monitor, t: "Acesso 100% online" },
@@ -195,7 +207,9 @@ function Index() {
 
 
       {/* 5.1 — CARROSSEL DE BÔNUS */}
-      <BonusCarousel />
+      <Suspense fallback={<div className="h-96" />}>
+        <BonusCarousel />
+      </Suspense>
 
       {/* 8 — PLANOS */}
       <Section
