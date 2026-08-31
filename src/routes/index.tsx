@@ -158,25 +158,6 @@ function Index() {
         </div>
       </Section>
 
-      {/* 3 — PARA QUEM É */}
-      <Section
-        className="bg-surface/40"
-        eyebrow="Para quem é"
-        title="Essa formação foi feita para quem quer começar"
-      >
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {PARA_QUEM.map((p) => (
-            <div
-              key={p}
-              className="flex items-start gap-3 rounded-xl border border-border bg-card p-4"
-            >
-              <Check className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-              <span className="min-w-0 text-sm font-medium">{p}</span>
-            </div>
-          ))}
-        </div>
-      </Section>
-
       {/* 4 — MATERIAL DE APOIO */}
       <Section
         eyebrow="Material de apoio"
