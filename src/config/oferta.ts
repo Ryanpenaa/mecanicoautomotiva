@@ -147,10 +147,9 @@ export const PLANOS = {
     itens: [
       "80+ aulas em vídeo",
       "Conteúdo 100% online",
-      "Acesso imediato",
       "Acesso vitalício",
     ],
-    naoInclui: ["Certificado", "Materiais complementares", "Bônus"],
+    naoInclui: [],
     cta: "COMEÇAR PELO BÁSICO",
     url: CHECKOUT.BASIC_CHECKOUT_URL,
   },
