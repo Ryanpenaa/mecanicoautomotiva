@@ -280,7 +280,14 @@ function Index() {
             </p>
             <ul className="mt-6 grid gap-2.5">
               {PLANOS.profissional.itens.map((i) => (
-                <li key={i} className="flex items-center gap-2 text-sm font-medium">
+                <li
+                  key={i}
+                  className={`flex items-center gap-2 ${
+                    i.toLowerCase().includes("bônus")
+                      ? "text-xs text-muted-foreground"
+                      : "text-sm font-medium"
+                  }`}
+                >
                   <Check className="h-4 w-4 shrink-0 text-primary" /> {i}
                 </li>
               ))}
