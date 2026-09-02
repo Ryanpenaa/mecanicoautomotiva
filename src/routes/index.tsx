@@ -8,6 +8,7 @@ import {
 import { lazy, Suspense } from "react";
 import { Section, CtaButton } from "@/components/landing/ui-bits";
 import { UpsellModal, useUpsell } from "@/components/landing/UpsellModal";
+import { ComoAdquirirVideo } from "@/components/landing/ComoAdquirirVideo";
 
 const BonusCarousel = lazy(() =>
   import("@/components/landing/BonusCarousel").then((m) => ({ default: m.BonusCarousel })),
