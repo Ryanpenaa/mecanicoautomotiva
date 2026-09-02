@@ -8,6 +8,7 @@ import {
 import { lazy, Suspense } from "react";
 import { Section, CtaButton } from "@/components/landing/ui-bits";
 import { UpsellModal, useUpsell } from "@/components/landing/UpsellModal";
+import { ComoAdquirirVideo } from "@/components/landing/ComoAdquirirVideo";
 
 const BonusCarousel = lazy(() =>
   import("@/components/landing/BonusCarousel").then((m) => ({ default: m.BonusCarousel })),
@@ -320,30 +321,7 @@ function Index() {
       </Section>
 
       {/* 8.2 — COMO ADQUIRIR */}
-      <Section
-        eyebrow={VIDEO_DEMO.titulo}
-        title={VIDEO_DEMO.subheadline}
-        subtitle={VIDEO_DEMO.descricao}
-      >
-        <div className="mx-auto max-w-4xl">
-          <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-border bg-black shadow-2xl">
-            <iframe
-              src={`https://drive.google.com/file/d/${VIDEO_DEMO.driveId}/preview`}
-              title="Vídeo demonstrativo do curso"
-              allow="autoplay; encrypted-media; picture-in-picture"
-              allowFullScreen
-              loading="lazy"
-              className="absolute inset-0 h-full w-full"
-            />
-          </div>
-          <div className="mt-8 text-center">
-            <CtaButton href="#planos">{PRODUTO.ctaPrincipal}</CtaButton>
-            <p className="mt-3 text-sm text-muted-foreground">
-              {PRODUTO.microtexto}
-            </p>
-          </div>
-        </div>
-      </Section>
+      <ComoAdquirirVideo />
 
       {/* 9 — GARANTIA + AUTORIDADE */}
       <Section className="bg-surface/40" eyebrow="Confiança" title="Garantia e instrutor">
