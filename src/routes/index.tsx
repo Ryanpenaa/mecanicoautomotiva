@@ -27,7 +27,6 @@ import {
   BENEFICIOS,
   CTA_FINAL,
   DEPOIMENTOS,
-  DESTAQUES_HERO,
   FAQ,
   GARANTIA,
   INSTRUTOR,
@@ -111,17 +110,6 @@ function Index() {
             </div>
 
 
-            <ul className="mt-7 grid grid-cols-1 gap-2 sm:grid-cols-2">
-              {DESTAQUES_HERO.map((d) => (
-                <li
-                  key={d}
-                  className="flex items-center gap-2 rounded-lg border border-border bg-surface/70 px-3 py-2.5 text-sm font-semibold tracking-wide"
-                >
-                  <Check className="h-4 w-4 shrink-0 text-primary" />
-                  <span className="min-w-0">{d}</span>
-                </li>
-              ))}
-            </ul>
 
             <div className="mt-8">
               <CtaButton href="#planos">{PRODUTO.ctaPrincipal}</CtaButton>
