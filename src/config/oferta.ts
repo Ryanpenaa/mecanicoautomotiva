@@ -236,3 +236,11 @@ export const CTA_FINAL = {
   cta: "QUERO COMEÇAR AGORA",
   microtexto: "Acesso imediato • Acesso vitalício • Garantia de 7 dias",
 };
+
+export const VIDEO_DEMO = {
+  driveId: "1kSXal8z-oqUNp_nJumUQBsx0JmnXvDdb",
+  titulo: "Como adquirir",
+  subheadline: "Veja como ter acesso ao Curso",
+  descricao:
+    "Assista ao vídeo rápido e veja o passo a passo para acessar a plataforma e começar a estudar.",
+};
