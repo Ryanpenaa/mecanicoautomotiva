@@ -6,10 +6,10 @@ import pv4Asset from "@/assets/prova4.webp.asset.json";
 import { useInfiniteCarousel } from "./useInfiniteCarousel";
 
 const PROVAS = [
-  { url: pv1, alt: "Mensagem de aluno elogiando o conteúdo direto do curso" },
-  { url: pv2, alt: "Mensagem de aluno que já trabalha na área e se organizou melhor" },
-  { url: pv3, alt: "Mensagem de aluno elogiando certificado, bônus e apostila" },
-  { url: pv4, alt: "Mensagem de aluno que passou a economizar na manutenção do carro" },
+  { url: pv1Asset.url, alt: "Mensagem de aluno elogiando o conteúdo direto do curso" },
+  { url: pv2Asset.url, alt: "Mensagem de aluno que já trabalha na área e se organizou melhor" },
+  { url: pv3Asset.url, alt: "Mensagem de aluno elogiando certificado, bônus e apostila" },
+  { url: pv4Asset.url, alt: "Mensagem de aluno que passou a economizar na manutenção do carro" },
 ];
 
 const LOOP = [...PROVAS, ...PROVAS];
