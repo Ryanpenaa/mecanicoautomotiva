@@ -9,6 +9,7 @@ import { lazy, Suspense } from "react";
 import { Section, CtaButton } from "@/components/landing/ui-bits";
 import { UpsellModal, useUpsell } from "@/components/landing/UpsellModal";
 import { SecaoProfissional } from "@/components/landing/SecaoProfissional";
+import { trackInitiateCheckout, trackSelectPlan, trackViewPlans } from "@/lib/meta-pixel";
 
 const BonusCarousel = lazy(() =>
   import("@/components/landing/BonusCarousel").then((m) => ({ default: m.BonusCarousel })),
@@ -114,7 +115,7 @@ function Index() {
 
 
             <div className="mt-8">
-              <CtaButton href="#planos">{PRODUTO.ctaPrincipal}</CtaButton>
+              <CtaButton href="#planos" onClick={() => trackViewPlans("hero")}>{PRODUTO.ctaPrincipal}</CtaButton>
               <p className="mt-3 text-sm text-muted-foreground">
                 {PRODUTO.microtexto}
               </p>
@@ -249,7 +250,10 @@ function Index() {
                 href={PLANOS.basico.url}
                 variant="outline"
                 className="w-full sm:w-full"
-                onClick={upsell.trigger}
+                onClick={(event) => {
+                  trackSelectPlan("basico", 10, "cards_planos");
+                  upsell.trigger(event);
+                }}
               >
                 {PLANOS.basico.cta}
               </CtaButton>
@@ -305,6 +309,10 @@ function Index() {
               <CtaButton
                 href={PLANOS.profissional.url}
                 className="w-full sm:w-full"
+                onClick={() => {
+                  trackSelectPlan("profissional", 27.9, "cards_planos");
+                  trackInitiateCheckout("profissional", 27.9);
+                }}
               >
                 {PLANOS.profissional.cta}
               </CtaButton>
@@ -409,7 +417,7 @@ function Index() {
             {CTA_FINAL.subheadline}
           </p>
           <div className="mt-7">
-            <CtaButton href="#planos">{CTA_FINAL.cta}</CtaButton>
+            <CtaButton href="#planos" onClick={() => trackViewPlans("cta_final")}>{CTA_FINAL.cta}</CtaButton>
             <p className="mt-3 text-sm text-muted-foreground">
               {CTA_FINAL.microtexto}
             </p>
