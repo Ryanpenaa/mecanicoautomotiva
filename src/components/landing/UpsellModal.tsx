@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { X, Check, Sparkles, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { UPSELL, CHECKOUT, PLANOS } from "@/config/oferta";
+import { trackInitiateCheckout, trackSelectPlan, trackUpsellView } from "@/lib/meta-pixel";
 
 const VANTAGENS = [
   "80+ aulas em vídeo",
@@ -18,12 +19,13 @@ export function UpsellModal({
   onClose,
 }: {
   open: boolean;
-  onAccept: () => void;
+  onAccept: (e: React.MouseEvent<HTMLAnchorElement>) => void;
   onDecline: (e: React.MouseEvent) => void;
   onClose: () => void;
 }) {
   useEffect(() => {
     if (!open) return;
+    trackUpsellView();
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
@@ -138,11 +140,23 @@ export function useUpsell() {
       setOpen(true);
     },
     close: () => setOpen(false),
-    accept: () => setOpen(false),
+    accept: (e: React.MouseEvent<HTMLAnchorElement>) => {
+      e.preventDefault();
+      trackSelectPlan("upsell_profissional", 18.9, "oferta_intermediaria");
+      trackInitiateCheckout("upsell_profissional", 18.9);
+      setOpen(false);
+      window.setTimeout(() => {
+        window.location.href = CHECKOUT.UPSELL_PRO_CHECKOUT_URL;
+      }, 150);
+    },
     decline: (e: React.MouseEvent) => {
       e.preventDefault();
       // Fecha o modal e segue para o checkout básico
-      window.location.href = CHECKOUT.BASIC_CHECKOUT_URL;
+      trackInitiateCheckout("basico", 10);
+      setOpen(false);
+      window.setTimeout(() => {
+        window.location.href = CHECKOUT.BASIC_CHECKOUT_URL;
+      }, 150);
     },
   };
 }
