@@ -1,15 +1,15 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import pv1 from "@/assets/opt/prova1.webp";
-import pv2 from "@/assets/opt/prova2.webp";
-import pv3 from "@/assets/opt/prova3.webp";
-import pv4 from "@/assets/opt/prova4.webp";
+import pv1Asset from "@/assets/prova1.webp.asset.json";
+import pv2Asset from "@/assets/prova2.webp.asset.json";
+import pv3Asset from "@/assets/prova3.webp.asset.json";
+import pv4Asset from "@/assets/prova4.webp.asset.json";
 import { useInfiniteCarousel } from "./useInfiniteCarousel";
 
 const PROVAS = [
-  { url: pv1, alt: "Mensagem de aluno elogiando o conteúdo direto do curso" },
-  { url: pv2, alt: "Mensagem de aluno que já trabalha na área e se organizou melhor" },
-  { url: pv3, alt: "Mensagem de aluno elogiando certificado, bônus e apostila" },
-  { url: pv4, alt: "Mensagem de aluno que passou a economizar na manutenção do carro" },
+  { url: pv1Asset.url, alt: "Mensagem de aluno elogiando o conteúdo direto do curso" },
+  { url: pv2Asset.url, alt: "Mensagem de aluno que já trabalha na área e se organizou melhor" },
+  { url: pv3Asset.url, alt: "Mensagem de aluno elogiando certificado, bônus e apostila" },
+  { url: pv4Asset.url, alt: "Mensagem de aluno que passou a economizar na manutenção do carro" },
 ];
 
 const LOOP = [...PROVAS, ...PROVAS];
@@ -35,8 +35,8 @@ export function ProvaSocial() {
             <img
               src={p.url}
               alt={p.alt}
-              width={720}
-              height={1497}
+              width={423}
+              height={807}
               loading="lazy"
               decoding="async"
               fetchPriority="low"
