@@ -8,7 +8,7 @@ import {
 import { lazy, Suspense } from "react";
 import { Section, CtaButton } from "@/components/landing/ui-bits";
 import { UpsellModal, useUpsell } from "@/components/landing/UpsellModal";
-import { ComoAdquirirVideo } from "@/components/landing/ComoAdquirirVideo";
+import { SecaoProfissional } from "@/components/landing/SecaoProfissional";
 
 const BonusCarousel = lazy(() =>
   import("@/components/landing/BonusCarousel").then((m) => ({ default: m.BonusCarousel })),
@@ -33,7 +33,7 @@ import {
   INSTRUTOR,
   PLANOS,
   PRODUTO,
-  VIDEO_DEMO,
+  PROFISSIONAL,
 } from "@/config/oferta";
 import plataformaImg from "@/assets/opt/mockup.webp";
 
@@ -327,8 +327,8 @@ function Index() {
         </Suspense>
       </Section>
 
-      {/* 8.2 — COMO ADQUIRIR */}
-      <ComoAdquirirVideo />
+      {/* 8.2 — PROFISSIONAL */}
+      <SecaoProfissional />
 
       {/* 9 — GARANTIA + AUTORIDADE */}
       <Section className="bg-surface/40" eyebrow="Confiança" title="Garantia e instrutor">

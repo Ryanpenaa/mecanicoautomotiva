@@ -4,10 +4,10 @@
 // ============================================================
 
 export const CHECKOUT = {
-  BASIC_CHECKOUT_URL: "https://pay.cakto.com.br/339576x_1048069",
-  PRO_CHECKOUT_URL: "https://pay.cakto.com.br/n4bjvfn",
+  BASIC_CHECKOUT_URL: "https://checkout.kitpro.store/VCCL1O8SD8R0",
+  PRO_CHECKOUT_URL: "https://checkout.kitpro.store/VCCL1O8SD8QW",
   // Upsell exibido ao clicar no Plano Básico: Profissional com desconto.
-  UPSELL_PRO_CHECKOUT_URL: "https://pay.cakto.com.br/r92su3a",
+  UPSELL_PRO_CHECKOUT_URL: "https://checkout.kitpro.store/VCCL1O8SD8QX",
 };
 
 export const UPSELL = {
@@ -182,6 +182,8 @@ export const GARANTIA = {
 };
 
 import instrutorFoto from "@/assets/opt/instrutor.webp";
+import certificadoProfissional from "@/assets/certificado-profissional.png.asset.json";
+
 
 export const INSTRUTOR = {
   titulo: "Conheça seu Instrutor",
@@ -235,10 +237,11 @@ export const CTA_FINAL = {
   microtexto: "Acesso imediato • Acesso vitalício • Garantia de 7 dias",
 };
 
-export const VIDEO_DEMO = {
-  driveId: "1kSXal8z-oqUNp_nJumUQBsx0JmnXvDdb",
-  titulo: "Como adquirir",
-  subheadline: "Veja como ter acesso ao Curso",
+export const PROFISSIONAL = {
+  titulo: "Profissional",
+  subheadline: "Aprenda uma profissão que está presente em todas as cidades",
   descricao:
-    "Assista ao vídeo rápido e veja o passo a passo para acessar a plataforma e começar a estudar.",
+    "Com a Formação Mecânico Automotivo, você sai preparado para atuar com conhecimento prático e um certificado profissionalizante reconhecido.",
+  imagem: certificadoProfissional.url,
+  alt: "Certificado profissionalizante da Formação Mecânico Automotivo",
 };
