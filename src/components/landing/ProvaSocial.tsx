@@ -35,8 +35,8 @@ export function ProvaSocial() {
             <img
               src={p.url}
               alt={p.alt}
-              width={720}
-              height={1497}
+              width={423}
+              height={807}
               loading="lazy"
               decoding="async"
               fetchPriority="low"
