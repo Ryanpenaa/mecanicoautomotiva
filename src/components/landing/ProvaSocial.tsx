@@ -1,8 +1,8 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import pv1 from "@/assets/opt/prova1.webp";
-import pv2 from "@/assets/opt/prova2.webp";
-import pv3 from "@/assets/opt/prova3.webp";
-import pv4 from "@/assets/opt/prova4.webp";
+import pv1Asset from "@/assets/prova1.webp.asset.json";
+import pv2Asset from "@/assets/prova2.webp.asset.json";
+import pv3Asset from "@/assets/prova3.webp.asset.json";
+import pv4Asset from "@/assets/prova4.webp.asset.json";
 import { useInfiniteCarousel } from "./useInfiniteCarousel";
 
 const PROVAS = [
