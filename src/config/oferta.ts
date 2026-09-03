@@ -182,7 +182,7 @@ export const GARANTIA = {
 };
 
 import instrutorFoto from "@/assets/opt/instrutor.webp";
-import certificadoProfissional from "@/assets/certificado-profissional.webp.asset.json";
+import certificadoProfissional from "@/assets/certificado-profissional.png.asset.json";
 
 
 export const INSTRUTOR = {
