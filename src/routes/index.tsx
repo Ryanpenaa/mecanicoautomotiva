@@ -245,9 +245,6 @@ function Index() {
             <p className="mt-3 font-display text-5xl font-extrabold">
               {PLANOS.basico.preco}
             </p>
-            <p className="mt-1 text-xs font-semibold text-red-600">
-              Taxas já inclusas
-            </p>
             <ul className="mt-6 grid gap-2.5">
               {PLANOS.basico.itens.map((i) => (
                 <li key={i} className="flex items-center gap-2 text-sm">
@@ -296,9 +293,6 @@ function Index() {
             )}
             <p className="mt-3 font-display text-5xl font-extrabold text-primary">
               {PLANOS.profissional.preco}
-            </p>
-            <p className="mt-1 text-xs font-semibold text-red-600">
-              Taxas já inclusas
             </p>
             <ul className="mt-6 grid gap-2.5">
               {PLANOS.profissional.itens.map((i) =>
