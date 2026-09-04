@@ -47,6 +47,7 @@ import {
   Infinity as InfinityIcon,
   ListChecks,
   Monitor,
+  MessageCircle,
   PlayCircle,
   ShieldCheck,
   Smartphone,
@@ -63,6 +64,10 @@ const ICONS: Record<string, typeof Wrench> = {
   devices: Monitor,
   badge: BadgeCheck,
 };
+
+const WHATSAPP_URL = `https://wa.me/5521971718501?text=${encodeURIComponent(
+  "Olá! Tenho interesse na Formação Mecânico Automotivo e gostaria de mais informações.",
+)}`;
 
 const TITLE = "Formação Mecânico Automotivo — Curso Online do Zero";
 const DESC =
@@ -428,6 +433,24 @@ function Index() {
       <footer className="border-t border-border px-4 py-8 text-center text-xs text-muted-foreground">
         © {new Date().getFullYear()} {PRODUTO.nome}. Todos os direitos reservados.
       </footer>
+
+      {!upsell.open && (
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Tirar dúvidas pelo WhatsApp (abre em nova aba)"
+          title="Tirar dúvidas pelo WhatsApp"
+          className="fixed z-40 inline-flex h-14 items-center justify-center gap-2 rounded-full bg-[#128C45] px-4 text-white shadow-lg transition-colors hover:bg-[#0f753a] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#128C45]"
+          style={{
+            right: "max(1rem, env(safe-area-inset-right))",
+            bottom: "max(1rem, env(safe-area-inset-bottom))",
+          }}
+        >
+          <MessageCircle className="h-7 w-7" aria-hidden="true" />
+          <span className="hidden text-sm font-semibold sm:inline">WhatsApp</span>
+        </a>
+      )}
 
       {/* UPSELL — exibido ao clicar no Plano Básico */}
       <UpsellModal
