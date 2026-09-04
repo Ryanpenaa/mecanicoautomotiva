@@ -69,6 +69,19 @@ const WHATSAPP_URL = `https://wa.me/5521971718501?text=${encodeURIComponent(
   "Olá! Tenho interesse na Formação Mecânico Automotivo e gostaria de mais informações.",
 )}`;
 
+const BONUS_DO_PLANO = [
+  "Apostila Completa de Mecânica Automotiva",
+  "Tabela de Torques e Especificações",
+  "Checklist de Revisão Preventiva",
+  "Guia de Diagnóstico de Defeitos",
+  "Manual de Ferramentas do Mecânico",
+  "Guia de Preços de Serviços",
+  "Manual de Códigos de Erro OBD2",
+  "Guia de Injeção Eletrônica",
+  "Manual de Freios e Suspensão",
+  "Guia para Conseguir os Primeiros Clientes"
+];
+
 const TITLE = "Formação Mecânico Automotivo — Curso Online do Zero";
 const DESC =
   "Aprenda mecânica automotiva do zero com mais de 80 aulas em vídeo, acesso vitalício e certificado no Plano Profissional. A partir de R$10,00.";
@@ -288,18 +301,28 @@ function Index() {
               Taxas já inclusas
             </p>
             <ul className="mt-6 grid gap-2.5">
-              {PLANOS.profissional.itens.map((i) => (
-                <li
-                  key={i}
-                  className={`flex items-center gap-2 ${
-                    i.toLowerCase().includes("bônus")
-                      ? "text-xs text-muted-foreground"
-                      : "text-sm font-medium"
-                  }`}
-                >
-                  <Check className="h-4 w-4 shrink-0 text-primary" /> {i}
-                </li>
-              ))}
+              {PLANOS.profissional.itens.map((i) =>
+                i === "Bônus" ? (
+                  <li key={i} className="my-2 rounded-xl border border-primary/40 bg-primary/5 p-4">
+                    <h4 className="flex items-center gap-2 text-base font-extrabold uppercase text-primary">
+                      <Sparkles className="h-5 w-5 shrink-0" aria-hidden="true" />
+                      Bônus — {BONUS_DO_PLANO.length} inclusos
+                    </h4>
+                    <ul className="mt-4 grid gap-3">
+                      {BONUS_DO_PLANO.map((titulo) => (
+                        <li key={titulo} className="flex items-start gap-2 text-sm leading-relaxed">
+                          <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                          <span>{titulo}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ) : (
+                  <li key={i} className="flex items-center gap-2 text-sm font-semibold">
+                    <Check className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" /> {i}
+                  </li>
+                ),
+              )}
             </ul>
             <div className="mt-6 rounded-xl border border-primary/40 bg-surface-2 p-4 text-sm">
               <p className="font-semibold">
