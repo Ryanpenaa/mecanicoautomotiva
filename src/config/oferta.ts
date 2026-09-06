@@ -4,10 +4,10 @@
 // ============================================================
 
 export const CHECKOUT = {
-  BASIC_CHECKOUT_URL: "https://checkout.kitpro.store/VCCL1O8SD8R0",
-  PRO_CHECKOUT_URL: "https://checkout.kitpro.store/VCCL1O8SD8QW",
+  BASIC_CHECKOUT_URL: "https://pay.cakto.com.br/339576x_1048069",
+  PRO_CHECKOUT_URL: "https://pay.cakto.com.br/n4bjvfn",
   // Upsell exibido ao clicar no Plano Básico: Profissional com desconto.
-  UPSELL_PRO_CHECKOUT_URL: "https://checkout.kitpro.store/VCCL1O8SD8QX",
+  UPSELL_PRO_CHECKOUT_URL: "https://pay.cakto.com.br/r92su3a",
 };
 
 export const UPSELL = {
