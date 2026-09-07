@@ -28,9 +28,9 @@ export const PRODUTO = {
   nome: "Formação Mecânico Automotivo",
   totalAulas: "80+",
   headline:
-    "Aprenda Mecânica Automotiva do Zero e Desenvolva uma Habilidade Para a Vida",
+    "Aprenda Mecânica Automotiva do Zero, Mesmo Sem Experiência",
   subheadline:
-    "Mais de 80 aulas em vídeo, organizadas passo a passo, para você começar mesmo sem nenhuma experiência anterior.",
+    "Curso 100% online com mais de 80 videoaulas práticas para você aprender motor, freios, suspensão, injeção eletrônica e diagnóstico de defeitos.",
   ctaPrincipal: "QUERO COMEÇAR AGORA",
   microtexto: "Acesso imediato • Compra segura • Garantia de 7 dias",
 };
@@ -39,39 +39,29 @@ export const DESTAQUES_HERO = [
   "80+ AULAS EM VÍDEO",
   "ACESSO VITALÍCIO",
   "ACESSO IMEDIATO",
-  "CERTIFICADO NO PLANO PROFISSIONAL",
+  "CERTIFICADO DE CONCLUSÃO NO PLANO PROFISSIONAL",
 ];
 
 export const BENEFICIOS = [
   {
     icone: "video",
-    titulo: "80+ aulas em vídeo",
-    texto: "Um acervo completo de aulas para assistir na ordem que preferir.",
-  },
-  {
-    icone: "list",
-    titulo: "Conteúdo organizado",
-    texto: "Trilha estruturada do básico ao avançado, sem aulas soltas.",
+    titulo: "80+ videoaulas práticas",
+    texto: "Aprenda os principais conteúdos da mecânica automotiva.",
   },
   {
     icone: "wrench",
-    titulo: "Aulas práticas",
-    texto: "Foco em demonstrações e procedimentos aplicados ao dia a dia.",
+    titulo: "Do zero ao avançado",
+    texto: "Comece mesmo sem experiência anterior na área.",
+  },
+  {
+    icone: "list",
+    titulo: "Materiais de apoio",
+    texto: "Apostila, guias e checklists para acompanhar seus estudos.",
   },
   {
     icone: "infinity",
     titulo: "Acesso vitalício",
-    texto: "Estude no seu tempo e volte às aulas sempre que precisar.",
-  },
-  {
-    icone: "devices",
-    titulo: "Celular ou computador",
-    texto: "Plataforma online: estude do celular, tablet ou notebook.",
-  },
-  {
-    icone: "badge",
-    titulo: "Certificado no Plano Profissional",
-    texto: "Certificado profissionalizante disponível no plano completo.",
+    texto: "Estude pelo celular ou computador e reveja as aulas quando quiser.",
   },
 ];
 
@@ -161,7 +151,7 @@ export const PLANOS = {
     preco: "R$27,90",
     itens: [
       "80+ aulas em vídeo",
-      "Certificado profissionalizante",
+      "Certificado de conclusão",
       "Acesso vitalício",
       "Materiais de apoio",
       "Bônus",
@@ -217,11 +207,11 @@ export const FAQ = [
   },
   {
     p: "O curso possui certificado?",
-    r: "O certificado profissionalizante está incluído no Plano Profissional.",
+    r: "O certificado de conclusão está incluído no Plano Profissional.",
   },
   {
     p: "Qual a diferença entre o Básico e o Profissional?",
-    r: "O Básico dá acesso às 80+ aulas em vídeo, com acesso imediato e vitalício. O Profissional inclui tudo isso e ainda certificado profissionalizante, materiais de apoio, guias complementares e bônus exclusivos.",
+    r: "O Básico dá acesso às 80+ aulas em vídeo, com acesso imediato e vitalício. O Profissional inclui tudo isso e ainda certificado de conclusão, materiais de apoio, guias complementares e bônus exclusivos.",
   },
   {
     p: "Como funciona a garantia de 7 dias?",
@@ -241,7 +231,7 @@ export const PROFISSIONAL = {
   titulo: "Profissional",
   subheadline: "Aprenda uma profissão que está presente em todas as cidades",
   descricao:
-    "Com a Formação Mecânico Automotivo, você sai preparado para atuar com conhecimento prático e um certificado profissionalizante reconhecido.",
+    "Com a Formação Mecânico Automotivo, você desenvolve uma base prática para cuidar melhor do seu veículo e começar a buscar oportunidades na área.",
   imagem: certificadoProfissional.url,
   alt: "Certificado profissionalizante da Formação Mecânico Automotivo",
 };
