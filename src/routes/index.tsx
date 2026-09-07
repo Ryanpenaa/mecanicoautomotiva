@@ -114,10 +114,10 @@ function Index() {
             <h1 className="mt-5 text-center text-4xl leading-[1.05] font-extrabold text-balance uppercase sm:text-5xl lg:text-6xl">
               {PRODUTO.headline}
             </h1>
-            <p className="mx-auto mt-5 max-w-xl text-center text-base text-muted-foreground sm:text-lg">
-              {PRODUTO.subheadline}
-            </p>
-            <div className="mt-8 lg:hidden">
+          </div>
+
+          <div className="relative">
+            <div>
               <img
                 src={plataformaImg}
                 alt="Kit completo da Formação Mecânico Automotivo: apostila, módulos e bônus"
@@ -129,27 +129,19 @@ function Index() {
                 className="h-auto w-full"
               />
             </div>
+          </div>
 
-
-
+          <div className="text-center lg:col-span-2">
+            <p className="mx-auto max-w-3xl text-base text-muted-foreground sm:text-lg">
+              {PRODUTO.subheadline}
+            </p>
             <div className="mt-8">
-              <CtaButton href="#planos" onClick={() => trackViewPlans("hero")}>{PRODUTO.ctaPrincipal}</CtaButton>
+              <CtaButton href="#planos" onClick={() => trackViewPlans("hero")}>
+                {PRODUTO.ctaPrincipal}
+              </CtaButton>
               <p className="mt-3 text-sm text-muted-foreground">
                 {PRODUTO.microtexto}
               </p>
-            </div>
-          </div>
-
-          <div className="relative hidden lg:block">
-            <div>
-              <img
-                src={plataformaImg}
-                alt="Kit completo da Formação Mecânico Automotivo: apostila, módulos e bônus"
-                width={1100}
-                height={1204}
-                decoding="async"
-                className="h-auto w-full"
-              />
             </div>
           </div>
         </div>
@@ -174,6 +166,34 @@ function Index() {
             );
           })}
         </div>
+      </Section>
+
+      <Section
+        eyebrow="Conteúdo da formação"
+        title="O que você vai aprender"
+        subtitle="Uma base prática para entender os principais sistemas do veículo."
+      >
+        <div className="mx-auto flex max-w-4xl flex-wrap justify-center gap-3">
+          {[
+            "Motor",
+            "Freios",
+            "Suspensão",
+            "Arrefecimento",
+            "Injeção eletrônica",
+            "Scanner automotivo",
+            "Revisão preventiva",
+          ].map((item) => (
+            <span
+              key={item}
+              className="rounded-full border border-primary/25 bg-primary/5 px-4 py-2 text-sm font-semibold text-primary"
+            >
+              {item}
+            </span>
+          ))}
+        </div>
+        <p className="mt-5 text-center text-sm text-muted-foreground">
+          Tudo explicado em videoaulas organizadas, com linguagem simples e passo a passo.
+        </p>
       </Section>
 
       {/* 4 — MATERIAL DE APOIO */}
