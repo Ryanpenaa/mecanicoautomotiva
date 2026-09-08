@@ -28,7 +28,7 @@ export const PRODUTO = {
   nome: "Formação Mecânico Automotivo",
   totalAulas: "80+",
   headline:
-    "Aprenda Mecânica Automotiva do Zero, Mesmo Sem Experiência",
+    "Torne-se um Mecânico de Automóveis: do zero ao avançado",
   subheadline:
     "Curso 100% online com mais de 80 videoaulas práticas para você aprender motor, freios, suspensão, injeção eletrônica e diagnóstico de defeitos.",
   ctaPrincipal: "QUERO COMEÇAR AGORA",
