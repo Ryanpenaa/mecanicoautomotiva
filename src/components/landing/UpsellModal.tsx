@@ -143,7 +143,6 @@ export function useUpsell() {
     accept: (e: React.MouseEvent<HTMLAnchorElement>) => {
       e.preventDefault();
       trackSelectPlan("upsell_profissional", 18.9, "oferta_intermediaria");
-      trackInitiateCheckout("upsell_profissional", 18.9);
       setOpen(false);
       window.setTimeout(() => {
         window.location.href = CHECKOUT.UPSELL_PRO_CHECKOUT_URL;
@@ -152,7 +151,6 @@ export function useUpsell() {
     decline: (e: React.MouseEvent) => {
       e.preventDefault();
       // Fecha o modal e segue para o checkout básico
-      trackInitiateCheckout("basico", 10);
       setOpen(false);
       window.setTimeout(() => {
         window.location.href = CHECKOUT.BASIC_CHECKOUT_URL;
