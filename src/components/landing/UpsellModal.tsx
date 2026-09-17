@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { X, Check, Sparkles, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { UPSELL, CHECKOUT, PLANOS } from "@/config/oferta";
-import { trackInitiateCheckout, trackSelectPlan, trackUpsellView } from "@/lib/meta-pixel";
+import { trackSelectPlan, trackUpsellView } from "@/lib/meta-pixel";
 
 const VANTAGENS = [
   "80+ aulas em vídeo",
