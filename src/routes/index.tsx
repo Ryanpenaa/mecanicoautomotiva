@@ -86,10 +86,10 @@ head: () => ({
 meta: [
 { title: TITLE },
 { name: "description", content: DESC },
-{ property: "og", content: TITLE },
-{ property: "og", content: DESC },
-{ property: "og", content: "website" },
-{ name: "twitter", content: "summary_large_image" },
+{ property: "og:title", content: TITLE },
+{ property: "og:description", content: DESC },
+{ property: "og:type", content: "website" },
+{ name: "twitter:card", content: "summary_large_image" },
 ],
 }),
 component: Index,
@@ -475,3 +475,5 @@ return (
   />
 
 </main>
+  );
+}
