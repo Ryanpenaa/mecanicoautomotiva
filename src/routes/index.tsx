@@ -9,7 +9,7 @@ import { lazy, Suspense } from "react";
 import { Section, CtaButton } from "@/components/landing/ui-bits";
 import { UpsellModal, useUpsell } from "@/components/landing/UpsellModal";
 import { SecaoProfissional } from "@/components/landing/SecaoProfissional";
-import { trackSelectPlan, trackViewPlans } from "@/lib/meta-pixel";
+import { trackInitiateCheckout, trackSelectPlan, trackViewPlans } from "@/lib/meta-pixel";
 
 const BonusCarousel = lazy(() =>
   import("@/components/landing/BonusCarousel").then((m) => ({ default: m.BonusCarousel })),
@@ -348,6 +348,7 @@ function Index() {
                 className="w-full sm:w-full"
                 onClick={() => {
                   trackSelectPlan("profissional", 27.9, "cards_planos");
+                  TrackInitiateCheckout("profissional", 27.9);
                                   }}
               >
                 {PLANOS.profissional.cta}
