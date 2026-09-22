@@ -15,7 +15,7 @@ export type TrackingSession = {
 };
 
 const STORAGE_KEY = "mm_tracking_session";
-const TRACKING_ENDPOINT = "/api/tracking";
+const TRACKING_ENDPOINT = "https://xahydzcmpikbioeyvwst.supabase.co/functions/v1/tracking-start";
 
 function readCookie(name: string): string | null {
   if (typeof document === "undefined") return null;
