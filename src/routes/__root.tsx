@@ -11,7 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { initializeTracking, refreshTrackingSession } from "../lib/tracking";
+import { captureAndPersistTracking } from "../lib/tracking";
 
 function NotFoundComponent() {
   return (
@@ -140,12 +140,13 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   useEffect(() => {
-    initializeTracking();
+    // Fire-and-forget: page rendering never waits for tracking storage.
+    captureAndPersistTracking();
 
     // The Meta Pixel may create/update _fbp/_fbc shortly after initialization.
-    // Refresh once more without blocking rendering or navigation.
+    // Refresh and upsert the same tracking_id once more.
     const refreshTimer = window.setTimeout(() => {
-      refreshTrackingSession();
+      captureAndPersistTracking();
     }, 2500);
 
     return () => window.clearTimeout(refreshTimer);
