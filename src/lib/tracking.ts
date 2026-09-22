@@ -105,7 +105,7 @@ export function initializeTracking(): TrackingSession | null {
     utm_term: getQueryValue(params, "utm_term") ?? base?.utm_term ?? null,
     user_agent: window.navigator.userAgent,
     landing_url: base?.landing_url ?? window.location.href,
-    referrer: base?.referrer ?? document.referrer || null,
+    referrer: base?.referrer ?? (document.referrer || null),
   };
 
   writeStoredSession(session);
