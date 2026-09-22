@@ -83,7 +83,6 @@ export function initializeTracking(): TrackingSession | null {
   // A new Meta click in the same tab starts a new attribution session.
   const isNewAdClick =
     Boolean(incomingFbclid) &&
-    Boolean(previous?.fbclid) &&
     incomingFbclid !== previous?.fbclid;
 
   const base = isNewAdClick ? null : previous;
