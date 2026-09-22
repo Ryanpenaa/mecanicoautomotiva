@@ -10,6 +10,7 @@ import { Section, CtaButton } from "@/components/landing/ui-bits";
 import { UpsellModal, useUpsell } from "@/components/landing/UpsellModal";
 import { SecaoProfissional } from "@/components/landing/SecaoProfissional";
 import { trackInitiateCheckout, trackSelectPlan, trackViewPlans } from "@/lib/meta-pixel";
+import { buildVegaCheckoutUrl } from "@/lib/tracking";
 
 const BonusCarousel = lazy(() =>
 import("@/components/landing/BonusCarousel").then((m) => ({ default: m.BonusCarousel })),
@@ -346,9 +347,13 @@ return (
           <CtaButton
             href={PLANOS.profissional.url}
             className="w-full sm:w-full"
-            onClick={() => {
+            onClick={(event) => {
+              event.preventDefault();
               trackSelectPlan("profissional", 27.9, "cards_planos");
               trackInitiateCheckout("profissional", 27.9);
+              window.setTimeout(() => {
+                window.location.href = buildVegaCheckoutUrl(PLANOS.profissional.url);
+              }, 150);
             }}
           >
             {PLANOS.profissional.cta}
