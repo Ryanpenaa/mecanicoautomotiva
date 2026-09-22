@@ -6,6 +6,7 @@ import {
   trackSelectPlan,
   trackUpsellView,
 } from "@/lib/meta-pixel";
+import { buildVegaCheckoutUrl } from "@/lib/tracking";
 
 const VANTAGENS = [
   "80+ aulas em vídeo",
@@ -137,7 +138,14 @@ export function useUpsell() {
   return {
     open,
     trigger: (event: React.MouseEvent) => {
-      if (!UPSELL.ativo) return;
+      if (!UPSELL.ativo) {
+        event.preventDefault();
+        trackInitiateCheckout("basico", 10);
+        window.setTimeout(() => {
+          window.location.href = buildVegaCheckoutUrl(CHECKOUT.BASIC_CHECKOUT_URL);
+        }, 150);
+        return;
+      }
       event.preventDefault();
       setOpen(true);
     },
@@ -148,7 +156,7 @@ export function useUpsell() {
       trackInitiateCheckout("upsell_profissional", 18.9);
       setOpen(false);
       window.setTimeout(() => {
-        window.location.href = CHECKOUT.UPSELL_PRO_CHECKOUT_URL;
+        window.location.href = buildVegaCheckoutUrl(CHECKOUT.UPSELL_PRO_CHECKOUT_URL);
       }, 150);
     },
     decline: (event: React.MouseEvent) => {
@@ -156,7 +164,7 @@ export function useUpsell() {
       trackInitiateCheckout("basico", 10);
       setOpen(false);
       window.setTimeout(() => {
-        window.location.href = CHECKOUT.BASIC_CHECKOUT_URL;
+        window.location.href = buildVegaCheckoutUrl(CHECKOUT.BASIC_CHECKOUT_URL);
       }, 150);
     },
   };

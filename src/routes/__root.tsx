@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { captureAndPersistTracking } from "../lib/tracking";
 
 function NotFoundComponent() {
   return (
@@ -137,6 +138,19 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  useEffect(() => {
+    // Fire-and-forget: page rendering never waits for tracking storage.
+    captureAndPersistTracking();
+
+    // The Meta Pixel may create/update _fbp/_fbc shortly after initialization.
+    // Refresh and upsert the same tracking_id once more.
+    const refreshTimer = window.setTimeout(() => {
+      captureAndPersistTracking();
+    }, 2500);
+
+    return () => window.clearTimeout(refreshTimer);
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
