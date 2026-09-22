@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { initializeTracking, refreshTrackingSession } from "../lib/tracking";
 
 function NotFoundComponent() {
   return (
@@ -137,6 +138,18 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  useEffect(() => {
+    initializeTracking();
+
+    // The Meta Pixel may create/update _fbp/_fbc shortly after initialization.
+    // Refresh once more without blocking rendering or navigation.
+    const refreshTimer = window.setTimeout(() => {
+      refreshTrackingSession();
+    }, 2500);
+
+    return () => window.clearTimeout(refreshTimer);
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
