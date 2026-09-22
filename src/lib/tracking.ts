@@ -15,6 +15,7 @@ export type TrackingSession = {
 };
 
 const STORAGE_KEY = "mm_tracking_session";
+const TRACKING_ENDPOINT = "/api/tracking";
 
 function readCookie(name: string): string | null {
   if (typeof document === "undefined") return null;
@@ -112,6 +113,46 @@ export function initializeTracking(): TrackingSession | null {
   return session;
 }
 
+export function persistTrackingSession(
+  session: TrackingSession,
+  options: { keepalive?: boolean } = {},
+) {
+  if (typeof window === "undefined") return;
+
+  const body = JSON.stringify(session);
+
+  // On checkout navigation, Beacon is the most reliable non-blocking delivery.
+  if (
+    options.keepalive &&
+    typeof navigator.sendBeacon === "function"
+  ) {
+    try {
+      const blob = new Blob([body], { type: "application/json" });
+      if (navigator.sendBeacon(TRACKING_ENDPOINT, blob)) return;
+    } catch {
+      // Fall through to fetch.
+    }
+  }
+
+  void fetch(TRACKING_ENDPOINT, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body,
+    credentials: "same-origin",
+    keepalive: options.keepalive ?? false,
+  }).catch(() => {
+    // A tracking failure must never affect page rendering or checkout.
+  });
+}
+
+export function captureAndPersistTracking(
+  options: { keepalive?: boolean } = {},
+): TrackingSession | null {
+  const session = initializeTracking();
+  if (session) persistTrackingSession(session, options);
+  return session;
+}
+
 export function refreshTrackingSession(): TrackingSession | null {
   return initializeTracking();
 }
@@ -126,6 +167,9 @@ export function buildVegaCheckoutUrl(baseUrl: string): string {
 
   const session = getTrackingSession();
   if (!session) return baseUrl;
+
+  // Persist the freshest Meta cookies before leaving the landing page.
+  persistTrackingSession(session, { keepalive: true });
 
   const checkoutUrl = new URL(baseUrl);
 
