@@ -1,5 +1,3 @@
-import bonusExclusivos from "@/assets/bonus-exclusivos.webp";
-
 export function BonusCarousel() {
   return (
     <section className="relative py-8 sm:py-12 overflow-hidden">
@@ -21,7 +19,7 @@ export function BonusCarousel() {
 
         <div className="mt-7 sm:mt-10">
           <img
-            src={bonusExclusivos}
+            src="/bonus-exclusivos.png"
             alt="Bônus exclusivos da Formação em Mecânica Automotiva"
             width={1122}
             height={1402}
