@@ -1,3 +1,5 @@
+import { trackFunnelEvent } from "@/lib/tracking";
+
 type MetaEventParams = Record<string, string | number | boolean | undefined>;
 
 declare global {
@@ -35,6 +37,7 @@ export function trackViewPlans(position: "hero" | "cta_final") {
     content_name: PRODUCT_NAME,
     cta_position: position,
   });
+  trackFunnelEvent("view_plans", position, { position });
 }
 
 export function trackSelectPlan(plan: PlanId, value: number, position: string) {
@@ -46,6 +49,7 @@ export function trackSelectPlan(plan: PlanId, value: number, position: string) {
     currency: CURRENCY,
     cta_position: position,
   });
+  trackFunnelEvent("select_plan", plan, { plan, value, position });
 }
 
 export function trackUpsellView() {
@@ -67,4 +71,5 @@ export function trackInitiateCheckout(plan: PlanId, value: number) {
     value,
     currency: CURRENCY,
   });
+  trackFunnelEvent("checkout_click", plan, { plan, value }, { keepalive: true });
 }
