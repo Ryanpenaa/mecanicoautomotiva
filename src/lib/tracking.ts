@@ -16,6 +16,7 @@ export type TrackingSession = {
 
 const STORAGE_KEY = "mm_tracking_session";
 const TRACKING_ENDPOINT = "https://xahydzcmpikbioeyvwst.supabase.co/functions/v1/tracking-start";
+const TRACKING_EVENT_ENDPOINT = "https://xahydzcmpikbioeyvwst.supabase.co/functions/v1/tracking-event";
 
 function readCookie(name: string): string | null {
   if (typeof document === "undefined") return null;
@@ -191,4 +192,106 @@ export function buildVegaCheckoutUrl(baseUrl: string): string {
   });
 
   return checkoutUrl.toString();
+}
+
+
+export type FunnelEventName =
+  | "engaged_15s"
+  | "scroll_50"
+  | "scroll_75"
+  | "view_plans"
+  | "select_plan"
+  | "checkout_click";
+
+export function trackFunnelEvent(
+  eventName: FunnelEventName,
+  eventKey = "",
+  metadata: Record<string, string | number | boolean | null> = {},
+  options: { keepalive?: boolean } = {},
+) {
+  if (typeof window === "undefined") return;
+
+  const session = getTrackingSession();
+  if (!session) return;
+
+  const body = JSON.stringify({
+    tracking_id: session.tracking_id,
+    event_name: eventName,
+    event_key: eventKey,
+    metadata,
+  });
+
+  void fetch(TRACKING_EVENT_ENDPOINT, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body,
+    keepalive: options.keepalive ?? false,
+  }).catch(() => {
+    // Behavioral analytics must never interfere with the storefront.
+  });
+}
+
+export function startBehaviorTracking() {
+  if (typeof window === "undefined") return () => {};
+
+  let activeSeconds = 0;
+  let plansObserver: IntersectionObserver | null = null;
+  let plansRetryTimer: number | null = null;
+
+  const activeTimer = window.setInterval(() => {
+    if (document.visibilityState !== "visible") return;
+    activeSeconds += 1;
+    if (activeSeconds === 15) {
+      trackFunnelEvent("engaged_15s");
+    }
+  }, 1000);
+
+  const sentScroll = new Set<number>();
+  const onScroll = () => {
+    const maxScroll =
+      document.documentElement.scrollHeight - window.innerHeight;
+    if (maxScroll <= 0) return;
+
+    const percent = Math.round((window.scrollY / maxScroll) * 100);
+    for (const depth of [50, 75]) {
+      if (percent >= depth && !sentScroll.has(depth)) {
+        sentScroll.add(depth);
+        trackFunnelEvent(depth === 50 ? "scroll_50" : "scroll_75");
+      }
+    }
+  };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  const observePlans = () => {
+    const plans = document.getElementById("planos");
+    if (!plans) {
+      plansRetryTimer = window.setTimeout(observePlans, 1000);
+      return;
+    }
+
+    if (!("IntersectionObserver" in window)) return;
+
+    plansObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          trackFunnelEvent("view_plans", "section");
+          plansObserver?.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+
+    plansObserver.observe(plans);
+  };
+
+  observePlans();
+
+  return () => {
+    window.clearInterval(activeTimer);
+    window.removeEventListener("scroll", onScroll);
+    plansObserver?.disconnect();
+    if (plansRetryTimer !== null) window.clearTimeout(plansRetryTimer);
+  };
 }
