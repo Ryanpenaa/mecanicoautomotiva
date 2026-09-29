@@ -195,7 +195,7 @@ export const FAQ = [
   },
   {
     p: "Como recebo o acesso?",
-    r: "O acesso é liberado imediatamente após a confirmação da compra, de forma 100% online.",
+    r: "O acesso é liberado imediatamente após a confirmação da compra, chega diretamente no email cadastrado o acesso ao curso.",
   },
   {
     p: "Posso assistir pelo celular?",
