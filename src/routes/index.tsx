@@ -161,18 +161,6 @@ return (
     </div>
   </Section>
 
-  {/* 4 — MATERIAL DE APOIO */}
-  <Section
-    eyebrow="Material de apoio"
-    title="Material de apoio"
-    subtitle="Guias, manuais e checklists ilustrados para consultar sempre que precisar."
-  >
-    <Suspense fallback={<div className="h-72" />}>
-      <MaterialApoio />
-    </Suspense>
-  </Section>
-
-
   {/* 6 — EXPERIÊNCIA DA PLATAFORMA */}
   <Section
     eyebrow="Plataforma"
@@ -211,6 +199,18 @@ return (
         ))}
       </ul>
     </div>
+  </Section>
+
+
+  {/* 4 — MATERIAL DE APOIO */}
+  <Section
+    eyebrow="Material de apoio"
+    title="Material de apoio"
+    subtitle="Guias, manuais e checklists ilustrados para consultar sempre que precisar."
+  >
+    <Suspense fallback={<div className="h-72" />}>
+      <MaterialApoio />
+    </Suspense>
   </Section>
 
 
