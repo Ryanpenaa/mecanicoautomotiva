@@ -5,12 +5,12 @@ AccordionContent,
 AccordionItem,
 AccordionTrigger,
 } from "@/components/ui/accordion";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useRef } from "react";
 import { Section, CtaButton } from "@/components/landing/ui-bits";
 import { UpsellModal, useUpsell } from "@/components/landing/UpsellModal";
 import { SecaoProfissional } from "@/components/landing/SecaoProfissional";
 import { trackInitiateCheckout, trackSelectPlan, trackViewPlans } from "@/lib/meta-pixel";
-import { buildVegaCheckoutUrl } from "@/lib/tracking";
+import { buildVegaCheckoutUrl, trackFunnelEvent } from "@/lib/tracking";
 
 const BonusCarousel = lazy(() =>
 import("@/components/landing/BonusCarousel").then((m) => ({ default: m.BonusCarousel })),
@@ -95,6 +95,21 @@ component: Index,
 
 function Index() {
 const upsell = useUpsell();
+const videoEventsRef = useRef(new Set<string>());
+
+const trackVideoEvent = (
+  eventName: "video_start" | "video_25" | "video_50" | "video_75" | "video_complete",
+  currentTime: number,
+  duration: number,
+) => {
+  if (videoEventsRef.current.has(eventName)) return;
+  videoEventsRef.current.add(eventName);
+  trackFunnelEvent(eventName, "platform_demo", {
+    current_time: Math.round(currentTime * 10) / 10,
+    duration: Number.isFinite(duration) ? Math.round(duration * 10) / 10 : null,
+  });
+};
+
 return (
 <main className="min-h-screen bg-background">
 {/* 1 — HERO */}
@@ -176,6 +191,23 @@ return (
             playsInline
             preload="metadata"
             title="Veja por dentro da plataforma da Formação Mecânico Automotivo"
+            onPlay={(event) => {
+              const video = event.currentTarget;
+              trackVideoEvent("video_start", video.currentTime, video.duration);
+            }}
+            onTimeUpdate={(event) => {
+              const video = event.currentTarget;
+              if (!Number.isFinite(video.duration) || video.duration <= 0) return;
+              const progress = video.currentTime / video.duration;
+              if (progress >= 0.25) trackVideoEvent("video_25", video.currentTime, video.duration);
+              if (progress >= 0.5) trackVideoEvent("video_50", video.currentTime, video.duration);
+              if (progress >= 0.75) trackVideoEvent("video_75", video.currentTime, video.duration);
+              if (progress >= 0.98) trackVideoEvent("video_complete", video.currentTime, video.duration);
+            }}
+            onEnded={(event) => {
+              const video = event.currentTarget;
+              trackVideoEvent("video_complete", video.currentTime, video.duration);
+            }}
           >
             <source src="/acesso-720.mp4" type="video/mp4" />
             Seu navegador não suporta a reprodução deste vídeo.
