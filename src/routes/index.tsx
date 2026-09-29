@@ -161,34 +161,6 @@ return (
     </div>
   </Section>
 
-  <Section
-    eyebrow="Conteúdo da formação"
-    title="O que você vai aprender"
-    subtitle="Uma base prática para entender os principais sistemas do veículo."
-  >
-    <div className="mx-auto flex max-w-4xl flex-wrap justify-center gap-3">
-      {[
-        "Motor",
-        "Freios",
-        "Suspensão",
-        "Arrefecimento",
-        "Injeção eletrônica",
-        "Scanner automotivo",
-        "Revisão preventiva",
-      ].map((item) => (
-        <span
-          key={item}
-          className="rounded-full border border-primary/25 bg-primary/5 px-4 py-2 text-sm font-semibold text-primary"
-        >
-          {item}
-        </span>
-      ))}
-    </div>
-    <p className="mt-5 text-center text-sm text-muted-foreground">
-      Tudo explicado em videoaulas organizadas, com linguagem simples e passo a passo.
-    </p>
-  </Section>
-
   {/* 4 — MATERIAL DE APOIO */}
   <Section
     eyebrow="Material de apoio"
