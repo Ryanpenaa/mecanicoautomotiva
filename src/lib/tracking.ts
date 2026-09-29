@@ -201,7 +201,12 @@ export type FunnelEventName =
   | "scroll_75"
   | "view_plans"
   | "select_plan"
-  | "checkout_click";
+  | "checkout_click"
+  | "video_start"
+  | "video_25"
+  | "video_50"
+  | "video_75"
+  | "video_complete";
 
 export function trackFunnelEvent(
   eventName: FunnelEventName,
