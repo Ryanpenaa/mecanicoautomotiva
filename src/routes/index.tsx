@@ -210,14 +210,16 @@ return (
     <div className="flex flex-col gap-8">
       <div className="mx-auto w-full max-w-[390px]">
         <div className="relative aspect-[9/16] overflow-hidden rounded-2xl border border-border bg-black shadow-xl">
-          <iframe
-            className="absolute inset-0 h-full w-full"
-            src="https://www.youtube.com/embed/nexxRDiDqjM?rel=0&playsinline=1"
+          <video
+            className="h-full w-full object-cover"
+            controls
+            playsInline
+            preload="metadata"
             title="Veja por dentro da plataforma da Formação Mecânico Automotivo"
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          />
+          >
+            <source src="/acesso-720.mp4" type="video/mp4" />
+            Seu navegador não suporta a reprodução deste vídeo.
+          </video>
         </div>
       </div>
       <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
