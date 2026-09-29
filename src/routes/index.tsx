@@ -5,7 +5,7 @@ AccordionContent,
 AccordionItem,
 AccordionTrigger,
 } from "@/components/ui/accordion";
-import { lazy, Suspense, useRef } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Section, CtaButton } from "@/components/landing/ui-bits";
 import { UpsellModal, useUpsell } from "@/components/landing/UpsellModal";
 import { SecaoProfissional } from "@/components/landing/SecaoProfissional";
@@ -93,6 +93,47 @@ meta: [
 component: Index,
 });
 
+const URGENCY_STORAGE_KEY = "mecanico_offer_deadline";
+const FIFTEEN_MINUTES_MS = 15 * 60 * 1000;
+
+function UrgencyBanner() {
+  const [remainingSeconds, setRemainingSeconds] = useState(15 * 60);
+
+  useEffect(() => {
+    const now = Date.now();
+    let deadline = Number(window.sessionStorage.getItem(URGENCY_STORAGE_KEY));
+
+    if (!Number.isFinite(deadline) || deadline <= 0) {
+      deadline = now + FIFTEEN_MINUTES_MS;
+      window.sessionStorage.setItem(URGENCY_STORAGE_KEY, String(deadline));
+    }
+
+    const update = () => {
+      const remaining = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
+      setRemainingSeconds(remaining);
+    };
+
+    update();
+    const timer = window.setInterval(update, 1000);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const minutes = Math.floor(remainingSeconds / 60);
+  const seconds = remainingSeconds % 60;
+
+  return (
+    <div className="border-b border-primary/30 bg-primary px-3 py-2.5 text-center text-primary-foreground">
+      <div className="mx-auto flex max-w-6xl items-center justify-center gap-2 text-sm font-extrabold sm:text-base">
+        <Clock className="h-4 w-4 shrink-0" aria-hidden="true" />
+        <span>SÓ HOJE • CONDIÇÃO ESPECIAL</span>
+        <span className="rounded-md bg-black/20 px-2 py-0.5 font-mono tabular-nums">
+          {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
+        </span>
+      </div>
+    </div>
+  );
+}
+
 function Index() {
 const upsell = useUpsell();
 const videoEventsRef = useRef(new Set<string>());
@@ -112,6 +153,7 @@ const trackVideoEvent = (
 
 return (
 <main className="min-h-screen bg-background">
+<UrgencyBanner />
 {/* 1 — HERO */}
 <header className="hero-bg relative overflow-hidden">
 <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-10 sm:py-14 lg:grid-cols-2 lg:items-center">
@@ -213,6 +255,20 @@ return (
             Seu navegador não suporta a reprodução deste vídeo.
           </video>
         </div>
+      </div>
+      <div className="text-center">
+        <CtaButton
+          href="#planos"
+          onClick={() => {
+            trackViewPlans("video");
+            trackFunnelEvent("view_plans", "video_cta");
+          }}
+        >
+          QUERO COMEÇAR AGORA
+        </CtaButton>
+        <p className="mt-2 text-xs text-muted-foreground">
+          Acesso imediato • Compra segura • Garantia de 7 dias
+        </p>
       </div>
       <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {[
