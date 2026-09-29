@@ -18,9 +18,6 @@ import("@/components/landing/BonusCarousel").then((m) => ({ default: m.BonusCaro
 const MaterialApoio = lazy(() =>
 import("@/components/landing/MaterialApoio").then((m) => ({ default: m.MaterialApoio })),
 );
-const PlataformaGaleria = lazy(() =>
-import("@/components/landing/PlataformaGaleria").then((m) => ({ default: m.PlataformaGaleria })),
-);
 const ProvaSocial = lazy(() =>
 import("@/components/landing/ProvaSocial").then((m) => ({ default: m.ProvaSocial })),
 );
@@ -211,9 +208,18 @@ return (
     subtitle="Veja por dentro: aulas em vídeo organizadas por módulos, progresso salvo e materiais para baixar — tudo no celular, tablet ou computador."
   >
     <div className="flex flex-col gap-8">
-      <Suspense fallback={<div className="h-72" />}>
-        <PlataformaGaleria />
-      </Suspense>
+      <div className="mx-auto w-full max-w-[390px]">
+        <div className="relative aspect-[9/16] overflow-hidden rounded-2xl border border-border bg-black shadow-xl">
+          <iframe
+            className="absolute inset-0 h-full w-full"
+            src="https://www.youtube.com/embed/nexxRDiDqjM?rel=0&playsinline=1"
+            title="Veja por dentro da plataforma da Formação Mecânico Automotivo"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        </div>
+      </div>
       <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {[
           { icon: Monitor, t: "Acesso 100% online" },
