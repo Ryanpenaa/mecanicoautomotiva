@@ -32,7 +32,7 @@ function sendMetaEvent(
   window.fbq(action, eventName, params);
 }
 
-export function trackViewPlans(position: "hero" | "cta_final") {
+export function trackViewPlans(position: "hero" | "cta_final" | "video") {
   sendMetaEvent("trackCustom", "view_plans", {
     content_name: PRODUCT_NAME,
     cta_position: position,
