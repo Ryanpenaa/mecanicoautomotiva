@@ -18,7 +18,7 @@ export function PurchaseNotifications() {
     let previousName = "";
     const showNext = () => {
       const names = SAMPLE_NAMES.filter((name) => name !== previousName);
-      const name = names[Math.floor(Math.random() * names.length)];
+      const name = names[Math.floor(Math.random() * names.length)] ?? "Lucas M.";
       previousName = name;
       setNotice({
         name,
