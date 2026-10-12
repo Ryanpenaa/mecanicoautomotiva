@@ -122,11 +122,11 @@ function UrgencyBanner() {
   const seconds = remainingSeconds % 60;
 
   return (
-    <div className="border-b border-primary/30 bg-primary px-3 py-2.5 text-center text-primary-foreground">
+    <div className="border-b border-yellow-500 bg-yellow-300 px-3 py-2.5 text-center text-red-700">
       <div className="mx-auto flex max-w-6xl items-center justify-center gap-2 text-sm font-extrabold sm:text-base">
         <Clock className="h-4 w-4 shrink-0" aria-hidden="true" />
         <span>SÓ HOJE • CONDIÇÃO ESPECIAL</span>
-        <span className="rounded-md bg-black/20 px-2 py-0.5 font-mono tabular-nums">
+        <span className="rounded-md bg-yellow-200 px-2 py-0.5 font-mono font-extrabold tabular-nums text-red-700">
           {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
         </span>
       </div>
