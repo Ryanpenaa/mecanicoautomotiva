@@ -47,7 +47,7 @@ export function PurchaseNotifications() {
       <div className="min-w-0 flex-1 text-xs leading-relaxed">
         <p className="font-semibold">{notice.name} adquiriu</p>
         <p className="font-semibold text-primary">{notice.plan}</p>
-        <p className="text-muted-foreground">Há {notice.minutes} {notice.minutes === 1 ? "minuto" : "minutos"} · Ilustrativo</p>
+        <p className="text-muted-foreground">Há {notice.minutes} {notice.minutes === 1 ? "minuto" : "minutos"} <span className="align-super text-[9px] text-muted-foreground/70">· exemplo</span></p>
       </div>
       <Button
         variant="ghost"
