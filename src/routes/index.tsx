@@ -9,7 +9,6 @@ import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Section, CtaButton } from "@/components/landing/ui-bits";
 import { UpsellModal, useUpsell } from "@/components/landing/UpsellModal";
 import { SecaoProfissional } from "@/components/landing/SecaoProfissional";
-import { PurchaseNotifications } from "@/components/landing/PurchaseNotifications";
 import { trackInitiateCheckout, trackSelectPlan, trackViewPlans } from "@/lib/meta-pixel";
 import { buildVegaCheckoutUrl, trackFunnelEvent } from "@/lib/tracking";
 
@@ -155,7 +154,6 @@ const trackVideoEvent = (
 return (
 <main className="min-h-screen bg-background">
 <UrgencyBanner />
-<PurchaseNotifications />
 {/* 1 — HERO */}
 <header className="hero-bg relative overflow-hidden">
 <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-10 sm:py-14 lg:grid-cols-2 lg:items-center">
