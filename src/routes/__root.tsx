@@ -147,12 +147,23 @@ function RootComponent() {
 
     // The Meta Pixel may create/update _fbp/_fbc shortly after initialization.
     // Refresh and upsert the same tracking_id once more.
-    const refreshTimer = window.setTimeout(() => {
-      captureAndPersistTracking();
-    }, 2500);
+    // Pixel loading can be delayed on mobile. Reconcile genuine Meta cookies
+    // without generating identifiers or creating additional conversion events.
+    const refreshTimers = [2500, 7500, 15000].map((delay) =>
+      window.setTimeout(() => {
+        captureAndPersistTracking();
+      }, delay),
+    );
+    const refreshOnVisible = () => {
+      if (document.visibilityState === "visible") {
+        captureAndPersistTracking();
+      }
+    };
+    document.addEventListener("visibilitychange", refreshOnVisible);
 
     return () => {
-      window.clearTimeout(refreshTimer);
+      refreshTimers.forEach((timer) => window.clearTimeout(timer));
+      document.removeEventListener("visibilitychange", refreshOnVisible);
       stopBehaviorTracking();
     };
   }, []);
