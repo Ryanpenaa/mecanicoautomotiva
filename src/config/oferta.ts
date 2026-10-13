@@ -28,7 +28,7 @@ export const PRODUTO = {
   nome: "Formação Mecânico Automotivo",
   totalAulas: "80+",
   headline:
-    "Torne-se um Mecânico de Automóveis: do zero ao avançado",
+    "Torne-se um Mecânico de carros: do zero ao avançado",
   subheadline:
     "Curso 100% online com mais de 80 videoaulas práticas para você aprender COM TEORIA E PRATICA JUNTOS",
   ctaPrincipal: "QUERO COMEÇAR AGORA",
