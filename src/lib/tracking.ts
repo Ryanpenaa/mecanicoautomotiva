@@ -89,12 +89,23 @@ export function initializeTracking(): TrackingSession | null {
   const base = isNewAdClick ? null : previous;
   const now = Date.now();
 
+  const fbclid = incomingFbclid ?? base?.fbclid ?? null;
+  const pixelFbc = readCookie("_fbc");
+  // A fresh ad click must not inherit _fbc from an earlier Meta ad.
+  // A real fbclid from the current URL may be formatted into _fbc
+  // if the Pixel has not set/updated its cookie yet.
+  const fbcForClick = pixelFbc && (!fbclid || pixelFbc.endsWith("." + fbclid))
+    ? pixelFbc
+    : fbclid && /^[A-Za-z0-9._-]{8,2048}$/.test(fbclid)
+      ? `fb.1.${base?.landing_ts ?? now}.${fbclid}`
+      : base?.fbc ?? null;
+
   const session: TrackingSession = {
     tracking_id: base?.tracking_id ?? createTrackingId(),
     landing_ts: base?.landing_ts ?? now,
-    fbclid: incomingFbclid ?? base?.fbclid ?? null,
+    fbclid,
     fbp: readCookie("_fbp") ?? base?.fbp ?? null,
-    fbc: readCookie("_fbc") ?? base?.fbc ?? null,
+    fbc: fbcForClick,
     utm_source:
       getQueryValue(params, "utm_source") ?? base?.utm_source ?? null,
     utm_medium:
