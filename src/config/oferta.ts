@@ -132,7 +132,7 @@ export const PLANOS = {
   basico: {
     titulo: "Plano Básico",
     subtitulo: "Para quem quer começar",
-    precoAncora: "De R$99,00 por"
+    precoAncora: "De R$99,00 por",
     preco: "R$10,00",
     itens: [
       "80+ aulas em vídeo",
@@ -147,7 +147,7 @@ export const PLANOS = {
     badge: "MAIS VENDIDO",
     titulo: "Plano Profissional",
     subtitulo: "Formação completa + materiais",
-    precoAncora: "De R$147,00 por"
+    precoAncora: "De R$147,00 por",
     preco: "R$27,90",
     itens: [
       "80+ aulas em vídeo",
