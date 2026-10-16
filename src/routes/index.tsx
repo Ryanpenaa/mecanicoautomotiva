@@ -8,7 +8,6 @@ AccordionTrigger,
 import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
 import { Section, CtaButton } from "@/components/landing/ui-bits";
 import { UpsellModal, useUpsell } from "@/components/landing/UpsellModal";
-import { SecaoProfissional } from "@/components/landing/SecaoProfissional";
 import { trackInitiateCheckout, trackSelectPlan, trackViewPlans } from "@/lib/meta-pixel";
 import { buildVegaCheckoutUrl, trackFunnelEvent } from "@/lib/tracking";
 
