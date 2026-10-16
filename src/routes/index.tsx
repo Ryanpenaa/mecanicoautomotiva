@@ -8,7 +8,6 @@ AccordionTrigger,
 import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
 import { Section, CtaButton } from "@/components/landing/ui-bits";
 import { UpsellModal, useUpsell } from "@/components/landing/UpsellModal";
-import { SecaoProfissional } from "@/components/landing/SecaoProfissional";
 import { trackInitiateCheckout, trackSelectPlan, trackViewPlans } from "@/lib/meta-pixel";
 import { buildVegaCheckoutUrl, trackFunnelEvent } from "@/lib/tracking";
 
@@ -20,6 +19,9 @@ import("@/components/landing/MaterialApoio").then((m) => ({ default: m.MaterialA
 );
 const ProvaSocial = lazy(() =>
 import("@/components/landing/ProvaSocial").then((m) => ({ default: m.ProvaSocial })),
+);
+const SecaoProfissional = lazy(() =>
+import("@/components/landing/SecaoProfissional").then((m) => ({ default: m.SecaoProfissional })),
 );
 
 import {
@@ -447,7 +449,11 @@ return (
   </Section>
 
   {/* 8.2 — PROFISSIONAL */}
-  <SecaoProfissional />
+  <DeferredContent placeholderHeight={420}>
+    <Suspense fallback={<div className="h-96" />}>
+      <SecaoProfissional />
+    </Suspense>
+  </DeferredContent>
 
   {/* 9 — GARANTIA + AUTORIDADE */}
   <Section className="bg-surface/40" eyebrow="Confiança" title="Garantia e instrutor">
