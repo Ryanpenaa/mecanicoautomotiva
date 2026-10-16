@@ -20,6 +20,9 @@ import("@/components/landing/MaterialApoio").then((m) => ({ default: m.MaterialA
 const ProvaSocial = lazy(() =>
 import("@/components/landing/ProvaSocial").then((m) => ({ default: m.ProvaSocial })),
 );
+const SecaoProfissional = lazy(() =>
+import("@/components/landing/SecaoProfissional").then((m) => ({ default: m.SecaoProfissional })),
+);
 
 import {
 BONUS,
@@ -446,7 +449,11 @@ return (
   </Section>
 
   {/* 8.2 — PROFISSIONAL */}
-  <SecaoProfissional />
+  <DeferredContent placeholderHeight={420}>
+    <Suspense fallback={<div className="h-96" />}>
+      <SecaoProfissional />
+    </Suspense>
+  </DeferredContent>
 
   {/* 9 — GARANTIA + AUTORIDADE */}
   <Section className="bg-surface/40" eyebrow="Confiança" title="Garantia e instrutor">
