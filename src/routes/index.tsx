@@ -88,6 +88,9 @@ meta: [
 { property: "og:type", content: "website" },
 { name: "twitter:card", content: "summary_large_image" },
 ],
+links: [
+{ rel: "preload", as: "image", href: "/acesso-poster.webp", fetchPriority: "high" },
+],
 }),
 component: Index,
 });
@@ -160,10 +163,24 @@ const upsell = useUpsell();
 const videoEventsRef = useRef(new Set<string>());
 const [videoReady, setVideoReady] = useState(false);
 
-// Prioritize first paint before downloading the autoplay hero video.
+// Prioritize first paint: the hero video only starts downloading after the
+// page has fully loaded (or 2.5s, whichever comes first). A lightweight
+// poster frame keeps the player visually complete meanwhile.
 useEffect(() => {
-  const timer = window.setTimeout(() => setVideoReady(true), 1200);
-  return () => window.clearTimeout(timer);
+  let timer: number | undefined;
+  const enable = () => {
+    timer = window.setTimeout(() => setVideoReady(true), 1500);
+  };
+  if (document.readyState === "complete") {
+    enable();
+  } else {
+    window.addEventListener("load", enable, { once: true });
+    timer = window.setTimeout(() => setVideoReady(true), 2500);
+  }
+  return () => {
+    window.removeEventListener("load", enable);
+    if (timer) window.clearTimeout(timer);
+  };
 }, []);
 
 const trackVideoEvent = (
@@ -204,6 +221,7 @@ return (
             loop
             playsInline
             preload="none"
+            poster="/acesso-poster.webp"
             title="Veja por dentro da Formação Mecânico Automotivo"
             onPlay={(event) => {
               const video = event.currentTarget;
