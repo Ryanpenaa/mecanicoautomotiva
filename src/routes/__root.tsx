@@ -91,12 +91,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      // Non-render-blocking font load: applies as soon as it arrives, without holding first paint.
+      // Non-render-blocking font load: starts as print-only and flips to "all"
+      // via the inline script below as soon as it arrives, without holding first paint.
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700;800&display=swap",
         media: "print",
-        onLoad: "this.media='all'",
+        "data-font-swap": "true",
       },
       {
         rel: "stylesheet",
@@ -105,6 +106,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
     ],
     scripts: [
+      {
+        type: "text/javascript",
+        children: `window.addEventListener('load',function(){var l=document.querySelector('link[data-font-swap]');if(l){l.media='all';}});`,
+      },
       {
         type: "text/javascript",
         // Meta Pixel stub queues events immediately; the heavy fbevents.js only

@@ -146,8 +146,9 @@ function DeferredContent({ children, placeholderHeight = 280 }: { children: Reac
       setVisible(true);
       return;
     }
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      if (entry?.isIntersecting) {
         setVisible(true);
         observer.disconnect();
       }
