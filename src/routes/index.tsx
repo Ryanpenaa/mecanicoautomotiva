@@ -5,7 +5,7 @@ AccordionContent,
 AccordionItem,
 AccordionTrigger,
 } from "@/components/ui/accordion";
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
 import { Section, CtaButton } from "@/components/landing/ui-bits";
 import { UpsellModal, useUpsell } from "@/components/landing/UpsellModal";
 import { SecaoProfissional } from "@/components/landing/SecaoProfissional";
@@ -133,7 +133,7 @@ function UrgencyBanner() {
   );
 }
 
-function DeferredContent({ children, placeholderHeight = 280 }: { children: React.ReactNode; placeholderHeight?: number }) {
+function DeferredContent({ children, placeholderHeight = 280 }: { children: ReactNode; placeholderHeight?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
