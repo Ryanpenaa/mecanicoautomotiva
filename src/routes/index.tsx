@@ -34,7 +34,6 @@ PLANOS,
 PRODUTO,
 PROFISSIONAL,
 } from "@/config/oferta";
-import plataformaImg from "@/assets/opt/mockup.webp";
 
 import {
 BadgeCheck,
@@ -166,18 +165,38 @@ return (
 </h1>
 </div>
 
-      <div className="relative">
-        <div>
-          <img
-            src={plataformaImg}
-            alt="Kit completo da Formação Mecânico Automotivo: apostila, módulos e bônus"
-            width={1100}
-            height={1204}
-            fetchPriority="high"
-            decoding="async"
-            sizes="(min-width: 1024px) 550px, 92vw"
-            className="h-auto w-full"
-          />
+      <div className="relative flex justify-center">
+        <div className="relative aspect-[9/16] w-full max-w-[340px] overflow-hidden rounded-2xl border border-border bg-black shadow-xl sm:max-w-[390px]">
+          <video
+            className="h-full w-full object-contain"
+            controls
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            title="Veja por dentro da Formação Mecânico Automotivo"
+            onPlay={(event) => {
+              const video = event.currentTarget;
+              trackVideoEvent("video_start", video.currentTime, video.duration);
+            }}
+            onTimeUpdate={(event) => {
+              const video = event.currentTarget;
+              if (!Number.isFinite(video.duration) || video.duration <= 0) return;
+              const progress = video.currentTime / video.duration;
+              if (progress >= 0.25) trackVideoEvent("video_25", video.currentTime, video.duration);
+              if (progress >= 0.5) trackVideoEvent("video_50", video.currentTime, video.duration);
+              if (progress >= 0.75) trackVideoEvent("video_75", video.currentTime, video.duration);
+              if (progress >= 0.98) trackVideoEvent("video_complete", video.currentTime, video.duration);
+            }}
+            onEnded={(event) => {
+              const video = event.currentTarget;
+              trackVideoEvent("video_complete", video.currentTime, video.duration);
+            }}
+          >
+            <source src="/acesso-720.mp4" type="video/mp4" />
+            Seu navegador não suporta a reprodução deste vídeo.
+          </video>
         </div>
       </div>
 
@@ -217,78 +236,6 @@ return (
       })}
     </div>
   </Section>
-
-  {/* 6 — EXPERIÊNCIA DA PLATAFORMA */}
-  <Section
-    eyebrow="Plataforma"
-    title="Estude no seu ritmo, de onde estiver"
-    subtitle="Veja por dentro: aulas em vídeo organizadas por módulos, progresso salvo e materiais para baixar — tudo no celular, tablet ou computador."
-  >
-    <div className="flex flex-col gap-8">
-      <div className="mx-auto w-full max-w-[390px]">
-        <div className="relative aspect-[9/16] overflow-hidden rounded-2xl border border-border bg-black shadow-xl">
-          <video
-            className="h-full w-full object-cover"
-            controls
-            playsInline
-            preload="metadata"
-            title="Veja por dentro da plataforma da Formação Mecânico Automotivo"
-            onPlay={(event) => {
-              const video = event.currentTarget;
-              trackVideoEvent("video_start", video.currentTime, video.duration);
-            }}
-            onTimeUpdate={(event) => {
-              const video = event.currentTarget;
-              if (!Number.isFinite(video.duration) || video.duration <= 0) return;
-              const progress = video.currentTime / video.duration;
-              if (progress >= 0.25) trackVideoEvent("video_25", video.currentTime, video.duration);
-              if (progress >= 0.5) trackVideoEvent("video_50", video.currentTime, video.duration);
-              if (progress >= 0.75) trackVideoEvent("video_75", video.currentTime, video.duration);
-              if (progress >= 0.98) trackVideoEvent("video_complete", video.currentTime, video.duration);
-            }}
-            onEnded={(event) => {
-              const video = event.currentTarget;
-              trackVideoEvent("video_complete", video.currentTime, video.duration);
-            }}
-          >
-            <source src="/acesso-720.mp4" type="video/mp4" />
-            Seu navegador não suporta a reprodução deste vídeo.
-          </video>
-        </div>
-      </div>
-      <div className="text-center">
-        <CtaButton
-          href="#planos"
-          onClick={() => {
-            trackViewPlans("video");
-            trackFunnelEvent("view_plans", "video_cta");
-          }}
-        >
-          QUERO COMEÇAR AGORA
-        </CtaButton>
-        <p className="mt-2 text-xs text-muted-foreground">
-          Acesso imediato • Compra segura • Garantia de 7 dias
-        </p>
-      </div>
-      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {[
-          { icon: Monitor, t: "Acesso 100% online" },
-          { icon: Clock, t: "Acesso imediato após a compra" },
-          { icon: InfinityIcon, t: "Acesso vitalício às aulas" },
-          { icon: Smartphone, t: "Celular, tablet ou computador" },
-        ].map(({ icon: Icon, t }) => (
-          <li
-            key={t}
-            className="flex items-center gap-3 rounded-xl border border-border bg-card p-4"
-          >
-            <Icon className="h-5 w-5 shrink-0 text-primary" />
-            <span className="min-w-0 text-sm font-semibold">{t}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </Section>
-
 
   {/* 4 — MATERIAL DE APOIO */}
   <Section
