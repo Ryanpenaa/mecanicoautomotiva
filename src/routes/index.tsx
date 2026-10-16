@@ -133,6 +133,28 @@ function UrgencyBanner() {
   );
 }
 
+function DeferredContent({ children, placeholderHeight = 280 }: { children: React.ReactNode; placeholderHeight?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setVisible(true);
+      return;
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setVisible(true);
+        observer.disconnect();
+      }
+    }, { rootMargin: "300px 0px" });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+  return <div ref={ref} style={!visible ? { minHeight: placeholderHeight } : undefined}>{visible ? children : null}</div>;
+}
+
 function Index() {
 const upsell = useUpsell();
 const videoEventsRef = useRef(new Set<string>());
@@ -174,7 +196,7 @@ return (
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
             title="Veja por dentro da Formação Mecânico Automotivo"
             onPlay={(event) => {
               const video = event.currentTarget;
@@ -243,16 +265,20 @@ return (
     title="Material de apoio"
     subtitle="Guias, manuais e checklists ilustrados para consultar sempre que precisar."
   >
-    <Suspense fallback={<div className="h-72" />}>
-      <MaterialApoio />
-    </Suspense>
+    <DeferredContent>
+      <Suspense fallback={<div className="h-72" />}>
+        <MaterialApoio />
+      </Suspense>
+    </DeferredContent>
   </Section>
 
 
   {/* 5.1 — CARROSSEL DE BÔNUS */}
-  <Suspense fallback={<div className="h-96" />}>
-    <BonusCarousel />
-  </Suspense>
+  <DeferredContent>
+      <Suspense fallback={<div className="h-72" />}>
+        <BonusCarousel />
+      </Suspense>
+    </DeferredContent>
 
   {/* 8 — PLANOS */}
   <Section
@@ -387,9 +413,11 @@ return (
     title="O que nossos alunos estão dizendo"
     subtitle="Mensagens reais de quem já está transformando a vida com o nosso curso Formação Profissional de Mecânico Automotivo."
   >
-    <Suspense fallback={<div className="h-96" />}>
-      <ProvaSocial />
-    </Suspense>
+    <DeferredContent>
+      <Suspense fallback={<div className="h-72" />}>
+        <ProvaSocial />
+      </Suspense>
+    </DeferredContent>
   </Section>
 
   {/* 8.2 — PROFISSIONAL */}
