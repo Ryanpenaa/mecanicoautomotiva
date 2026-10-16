@@ -158,6 +158,13 @@ function DeferredContent({ children, placeholderHeight = 280 }: { children: Reac
 function Index() {
 const upsell = useUpsell();
 const videoEventsRef = useRef(new Set<string>());
+const [videoReady, setVideoReady] = useState(false);
+
+// Prioritize first paint before downloading the autoplay hero video.
+useEffect(() => {
+  const timer = window.setTimeout(() => setVideoReady(true), 1200);
+  return () => window.clearTimeout(timer);
+}, []);
 
 const trackVideoEvent = (
   eventName: "video_start" | "video_25" | "video_50" | "video_75" | "video_complete",
@@ -196,7 +203,7 @@ return (
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="none"
             title="Veja por dentro da Formação Mecânico Automotivo"
             onPlay={(event) => {
               const video = event.currentTarget;
@@ -216,7 +223,7 @@ return (
               trackVideoEvent("video_complete", video.currentTime, video.duration);
             }}
           >
-            <source src="/acesso-720.mp4" type="video/mp4" />
+            {videoReady && <source src="/acesso-720.mp4" type="video/mp4" />}
             Seu navegador não suporta a reprodução deste vídeo.
           </video>
         </div>
