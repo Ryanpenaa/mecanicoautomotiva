@@ -172,12 +172,13 @@ export const GARANTIA = {
 };
 
 import certificadoProfissional from "@/assets/certificado-profissional.webp.asset.json";
+import instrutorFoto from "@/assets/instrutor-novo.webp.asset.json";
 
 
 export const INSTRUTOR = {
   titulo: "Conheça seu Instrutor",
   nome: "João Emanuel",
-  foto: "/peronsa 1.png",
+  foto: instrutorFoto.url,
   bio: "Profissional da área automotiva com 16 anos de experiência no mercado, João Emanuel reúne conhecimento prático em mecânica, manutenção e diagnóstico de veículos.",
   experiencia:
     "Nesta formação, ele compartilha esse conhecimento de forma simples, direta e passo a passo, pensando especialmente em quem está começando do zero.",
