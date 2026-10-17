@@ -1,5 +1,5 @@
 import { useEffect, useState, type FormEvent } from "react";
-import { Star } from "lucide-react";
+import { CheckCircle2, Star } from "lucide-react";
 import { listReviews, submitReview } from "@/lib/reviews";
 
 type Review = { id:string; nome:string; comentario:string; estrelas:number; created_at:string };
@@ -22,7 +22,7 @@ export function ProvaSocial() {
 
   useEffect(()=>{let mounted=true; listReviews().then(r=>{if(mounted)setReviews(r)}).catch(()=>{}); return ()=>{mounted=false}},[]);
   const handleSubmit=async (e:FormEvent)=>{
-    e.preventDefault();setError("");setSending(true);
+    e.preventDefault();setError("");setSuccess(false);setSending(true);
     try {
       await submitReview({data:{nome,comentario,estrelas,website}});
       setSuccess(true);setNome("");setComentario("");setEstrelas(5);
@@ -43,13 +43,17 @@ export function ProvaSocial() {
     </div> : <p className="text-center text-sm text-muted-foreground">Ainda não há avaliações publicadas. Sua opinião pode ser a primeira!</p>}
     <form onSubmit={handleSubmit} className="surface-card mx-auto max-w-xl space-y-4 rounded-2xl p-5 sm:p-7">
       <h3 className="text-xl font-bold">Deixe sua avaliação</h3>
-      <p className="text-sm text-muted-foreground">Seu comentário será analisado antes de aparecer no site. Esta seção é independente do Google Avaliações.</p>
+      <p className="text-sm text-muted-foreground">Envie sua opinião! Ela será recebida de forma privada e só aparecerá aqui após nossa aprovação.</p>
       <label className="block text-sm font-semibold">Seu nome<input autoComplete="name" required minLength={2} maxLength={70} value={nome} onChange={e=>setNome(e.target.value)} className="mt-2 w-full rounded-xl border border-border bg-background p-3 text-foreground" placeholder="Como gostaria de aparecer" /></label>
       <div><p className="mb-2 text-sm font-semibold">Sua nota</p><div className="flex gap-2">{Array.from({length:5},(_,i)=><button key={i} type="button" onClick={()=>setEstrelas(i+1)} aria-label={(i+1)+" estrelas"} aria-pressed={estrelas===i+1}><Star className={"h-8 w-8 "+(i<estrelas?"fill-amber-400 text-amber-400":"text-muted-foreground/40")}/></button>)}</div></div>
       <label className="block text-sm font-semibold">Seu comentário<textarea required minLength={15} maxLength={1200} rows={4} value={comentario} onChange={e=>setComentario(e.target.value)} className="mt-2 w-full rounded-xl border border-border bg-background p-3 text-foreground" placeholder="Conte sua experiência com a formação" /></label>
       <div className="hidden" aria-hidden="true"><label>Site<input tabIndex={-1} autoComplete="off" value={website} onChange={e=>setWebsite(e.target.value)}/></label></div>
       {error&&<p role="alert" className="text-sm text-red-600">{error}</p>}
-      {success&&<p role="status" className="text-sm text-green-600">Avaliação recebida! Ela será analisada antes de ser publicada.</p>}
+      {success&&<div role="status" aria-live="polite" className="flex items-start gap-3 rounded-xl border border-green-500/30 bg-green-500/10 p-4 text-green-700 dark:text-green-300">
+        <CheckCircle2 className="mt-0.5 h-6 w-6 shrink-0" aria-hidden="true" />
+        <div><p className="font-bold">Comentário enviado com sucesso!</p>
+        <p className="mt-1 text-sm">Obrigado pela sua avaliação. Ela foi recebida e ficará aguardando nossa análise antes de aparecer no site.</p></div>
+      </div>}
       <button disabled={sending} type="submit" className="w-full rounded-xl bg-primary px-5 py-3 font-bold text-primary-foreground disabled:opacity-50">{sending?"Enviando...":"Enviar avaliação"}</button>
     </form>
   </div>;
