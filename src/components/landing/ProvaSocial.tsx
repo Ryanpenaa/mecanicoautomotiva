@@ -1,12 +1,15 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { Star } from "lucide-react";
 import { listReviews, submitReview } from "@/lib/reviews";
+import fotoGuilherme from "@/assets/aluno-guilherme.webp.asset.json";
+import fotoJennifer from "@/assets/aluno-jennifer.webp.asset.json";
+import fotoCarlos from "@/assets/aluno-carlos.webp.asset.json";
 
-type Review = { id:string; nome:string; comentario:string; estrelas:number; created_at:string };
+type Review = { id:string; nome:string; comentario:string; estrelas:number; created_at:string; foto?:string };
 
 const AVALIACOES_CLIENTES: Review[] = [
-  { id: "guilherme-da-paz", nome: "Guilherme da Paz", comentario: "Curso 5 estrelas, muito bom. Voltei só para comentar porque, quando comprei, estava com muito medo de ser golpe.", estrelas: 5, created_at: "" },
-  { id: "jennifer-s-luz", nome: "Jennifer S. Luz", comentario: "Recomendo muito mesmo. Realizei o curso e peguei meu certificado.", estrelas: 5, created_at: "" },
+  { id: "guilherme-da-paz", nome: "Guilherme da Paz", comentario: "Curso 5 estrelas, muito bom. Voltei só para comentar porque, quando comprei, estava com muito medo de ser golpe.", estrelas: 5, created_at: "", foto: fotoGuilherme.url },
+  { id: "jennifer-s-luz", nome: "Jennifer S. Luz", comentario: "Recomendo muito mesmo. Realizei o curso e peguei meu certificado.", estrelas: 5, created_at: "", foto: fotoJennifer.url },
   { id: "carlos-gomes", nome: "Carlos Gomes", comentario: "Revisei principalmente pelo material ilustrado e pelas apostilas. Muito bom o curso todo.", estrelas: 5, created_at: "" },
 ];
 
