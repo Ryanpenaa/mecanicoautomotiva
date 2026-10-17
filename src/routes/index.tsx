@@ -344,38 +344,31 @@ return (
         <p className="mt-3 font-display text-5xl font-extrabold text-primary">
           {PLANOS.profissional.preco}
         </p>
-        <ul className="mt-6 grid gap-2.5">
-          {PLANOS.profissional.itens.map((i) =>
-            i === "Bônus" ? (
-              <li key={i} className="my-2 rounded-xl border border-primary/40 bg-primary/5 p-4">
-                <h4 className="flex items-center gap-2 text-base font-extrabold uppercase text-primary">
-                  <Sparkles className="h-5 w-5 shrink-0" aria-hidden="true" />
-                  Bônus — {BONUS_DO_PLANO.length} inclusos
-                </h4>
-                <ul className="mt-4 grid gap-3">
-                  {BONUS_DO_PLANO.map((titulo) => (
-                    <li key={titulo} className="flex items-start gap-2 text-sm leading-relaxed">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
-                      <span>{titulo}</span>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ) : (
-              <li key={i} className="flex items-center gap-2 text-sm font-semibold">
-                <Check className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" /> {i}
-              </li>
-            ),
-          )}
+        <p className="mt-2 text-xs font-medium text-muted-foreground">Pagamento único • Acesso vitalício</p>
+        <ul className="mt-6 grid gap-3">
+          {PLANOS.profissional.itens.filter((item) => item !== "Bônus" && item !== "5 Apostilas complementares").map((item) => (
+            <li key={item} className="flex items-center gap-3 text-sm font-semibold">
+              <BadgeCheck className="h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+              <span>{item}</span>
+            </li>
+          ))}
         </ul>
-        <div className="mt-6 rounded-xl border border-primary/40 bg-surface-2 p-4 text-sm">
-          <p className="font-semibold">
-            Por apenas {PLANOS.profissional.diferenca} a mais você leva
-            certificado, materiais de apoio, guias e bônus.
-          </p>
-          <p className="mt-1 text-muted-foreground">
-            {PLANOS.profissional.recomendacao}
-          </p>
+        <div className="mt-6 rounded-2xl border border-primary/40 bg-primary/5 p-4 sm:p-5">
+          <h4 className="flex items-center gap-2 text-base font-extrabold text-primary">
+            <Sparkles className="h-5 w-5 shrink-0" aria-hidden="true" />
+            10 bônus exclusivos inclusos
+          </h4>
+          <ul className="mt-4 grid grid-cols-2 gap-x-3 gap-y-3">
+            {BONUS_DO_PLANO.map((titulo) => (
+              <li key={titulo} className="flex items-start gap-1.5 text-xs leading-snug sm:text-sm">
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                <span>{titulo}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="mt-5 rounded-xl bg-surface-2 px-4 py-3 text-center text-sm font-semibold">
+          Tudo isso por apenas {PLANOS.profissional.preco}
         </div>
         <div className="mt-6">
           <CtaButton
