@@ -162,41 +162,7 @@ function DeferredContent({ children, placeholderHeight = 280 }: { children: Reac
 
 function Index() {
 const upsell = useUpsell();
-const videoEventsRef = useRef(new Set<string>());
-const [videoReady, setVideoReady] = useState(false);
-
-// Prioritize first paint: the hero video only starts downloading after the
-// page has fully loaded (or 2.5s, whichever comes first). A lightweight
-// poster frame keeps the player visually complete meanwhile.
-useEffect(() => {
-  let timer: number | undefined;
-  const enable = () => {
-    timer = window.setTimeout(() => setVideoReady(true), 1500);
-  };
-  if (document.readyState === "complete") {
-    enable();
-  } else {
-    window.addEventListener("load", enable, { once: true });
-    timer = window.setTimeout(() => setVideoReady(true), 2500);
-  }
-  return () => {
-    window.removeEventListener("load", enable);
-    if (timer) window.clearTimeout(timer);
-  };
-}, []);
-
-const trackVideoEvent = (
-  eventName: "video_start" | "video_25" | "video_50" | "video_75" | "video_complete",
-  currentTime: number,
-  duration: number,
-) => {
-  if (videoEventsRef.current.has(eventName)) return;
-  videoEventsRef.current.add(eventName);
-  trackFunnelEvent(eventName, "platform_demo", {
-    current_time: Math.round(currentTime * 10) / 10,
-    duration: Number.isFinite(duration) ? Math.round(duration * 10) / 10 : null,
-  });
-};
+const [youtubeStarted, setYoutubeStarted] = useState(false);
 
 return (
 <main className="min-h-screen bg-background">
@@ -254,47 +220,34 @@ return (
     </div>
   </Section>
 
-  {/* 3 — NOSSO APLICATIVO */}
+  {/* 3 — NOSSO APLICATIVO: vídeo carregado somente após clique */}
   <Section eyebrow="Conheça por dentro" title="Nosso aplicativo" subtitle="Assista à demonstração da plataforma e veja como acessar suas aulas pelo celular ou computador.">
     <DeferredContent placeholderHeight={380}>
-      <div className="mx-auto max-w-[380px]">
-      <div className="relative flex justify-center">
-              <div className="relative aspect-[9/16] w-full max-w-[340px] overflow-hidden rounded-2xl border border-border bg-black shadow-xl sm:max-w-[390px]">
-                <video
-                  className="h-full w-full object-contain"
-                  controls
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="none"
-                  poster="/acesso-poster.webp"
-                  title="Veja por dentro da Formação Mecânico Automotivo"
-                  onPlay={(event) => {
-                    const video = event.currentTarget;
-                    trackVideoEvent("video_start", video.currentTime, video.duration);
-                  }}
-                  onTimeUpdate={(event) => {
-                    const video = event.currentTarget;
-                    if (!Number.isFinite(video.duration) || video.duration <= 0) return;
-                    const progress = video.currentTime / video.duration;
-                    if (progress >= 0.25) trackVideoEvent("video_25", video.currentTime, video.duration);
-                    if (progress >= 0.5) trackVideoEvent("video_50", video.currentTime, video.duration);
-                    if (progress >= 0.75) trackVideoEvent("video_75", video.currentTime, video.duration);
-                    if (progress >= 0.98) trackVideoEvent("video_complete", video.currentTime, video.duration);
-                  }}
-                  onEnded={(event) => {
-                    const video = event.currentTarget;
-                    trackVideoEvent("video_complete", video.currentTime, video.duration);
-                  }}
-                >
-                  {videoReady && <source src="/acesso-720.mp4" type="video/mp4" />}
-                  Seu navegador não suporta a reprodução deste vídeo.
-                </video>
-              </div>
-            </div>
-      
-            </div>
+      <div className="mx-auto w-full max-w-[380px]">
+        <div className="relative aspect-[9/16] overflow-hidden rounded-2xl border border-border bg-black shadow-xl">
+          {youtubeStarted ? (
+            <iframe
+              className="h-full w-full"
+              src="https://www.youtube-nocookie.com/embed/IyYGVlPUhvw?autoplay=1&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&fs=0"
+              title="Demonstração da plataforma Mecânico Automotivo"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen={false}
+            />
+          ) : (
+            <button
+              type="button"
+              onClick={() => { setYoutubeStarted(true); trackFunnelEvent("video_start", "platform_demo", { source: "youtube" }); }}
+              className="group relative flex h-full w-full items-center justify-center bg-black"
+              aria-label="Reproduzir apresentação do nosso aplicativo"
+            >
+              <img src="/acesso-poster.webp" alt="Prévia da apresentação do aplicativo" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover opacity-75" />
+              <span className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-2xl transition-transform group-hover:scale-110"><PlayCircle className="h-10 w-10" /></span>
+              <span className="absolute bottom-5 z-10 rounded-full bg-black/75 px-4 py-2 text-sm font-semibold text-white">Ver nosso aplicativo</span>
+            </button>
+          )}
+        </div>
+      </div>
     </DeferredContent>
   </Section>
 
