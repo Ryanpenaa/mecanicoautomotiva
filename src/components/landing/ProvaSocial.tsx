@@ -71,8 +71,7 @@ export function ProvaSocial() {
       {error&&<p role="alert" className="text-sm text-red-600">{error}</p>}
       {success&&<div role="status" aria-live="polite" className="flex items-start gap-3 rounded-xl border border-green-500/30 bg-green-500/10 p-4 text-green-700 dark:text-green-300">
         <CheckCircle2 className="mt-0.5 h-6 w-6 shrink-0" aria-hidden="true" />
-        <div><p className="font-bold">Obrigado por avaliar!</p>
-        <p className="mt-1 text-sm">Sua mensagem foi preenchida nesta página, mas não foi enviada nem armazenada.</p></div>
+        <div><p className="font-bold">Obrigado por avaliar!</p></div>
       </div>}
       <button type="submit" className="w-full rounded-xl bg-primary px-5 py-3 font-bold text-primary-foreground disabled:opacity-50">{"Concluir avaliação"}</button>
     </form>
