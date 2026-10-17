@@ -14,7 +14,7 @@ export function ProvaSocial() {
   const [reviews,setReviews]=useState<Review[]>([]);
   const [nome,setNome]=useState("");
   const [comentario,setComentario]=useState("");
-  const [estrelas,setEstrelas]=useState(5);
+  const [estrelas,setEstrelas]=useState<number>(0);
   const [website,setWebsite]=useState("");
   const [sending,setSending]=useState(false);
   const [success,setSuccess]=useState(false);
@@ -22,10 +22,17 @@ export function ProvaSocial() {
 
   useEffect(()=>{let mounted=true; listReviews().then(r=>{if(mounted)setReviews(r)}).catch(()=>{}); return ()=>{mounted=false}},[]);
   const handleSubmit=async (e:FormEvent)=>{
-    e.preventDefault();setError("");setSuccess(false);setSending(true);
+    e.preventDefault();
+    setError("");
+    setSuccess(false);
+    if (estrelas < 1 || estrelas > 5) {
+      setError("Selecione de 1 a 5 estrelas para enviar sua avaliação.");
+      return;
+    }
+    setSending(true);
     try {
       await submitReview({data:{nome,comentario,estrelas,website}});
-      setSuccess(true);setNome("");setComentario("");setEstrelas(5);
+      setSuccess(true);setNome("");setComentario("");setEstrelas(0);
     } catch(err) {setError(err instanceof Error?err.message:"Não foi possível enviar sua avaliação.");}
     finally {setSending(false)}
   };
@@ -45,7 +52,25 @@ export function ProvaSocial() {
       <h3 className="text-xl font-bold">Deixe sua avaliação</h3>
       <p className="text-sm text-muted-foreground">Envie sua opinião! Ela será recebida de forma privada e só aparecerá aqui após nossa aprovação.</p>
       <label className="block text-sm font-semibold">Seu nome<input autoComplete="name" required minLength={2} maxLength={70} value={nome} onChange={e=>setNome(e.target.value)} className="mt-2 w-full rounded-xl border border-border bg-background p-3 text-foreground" placeholder="Como gostaria de aparecer" /></label>
-      <div><p className="mb-2 text-sm font-semibold">Sua nota</p><div className="flex gap-2">{Array.from({length:5},(_,i)=><button key={i} type="button" onClick={()=>setEstrelas(i+1)} aria-label={(i+1)+" estrelas"} aria-pressed={estrelas===i+1}><Star className={"h-8 w-8 "+(i<estrelas?"fill-amber-400 text-amber-400":"text-muted-foreground/40")}/></button>)}</div></div>
+      <fieldset className="space-y-2">
+        <legend className="text-sm font-semibold">Quantas estrelas você dá ao curso?</legend>
+        <div className="flex items-center gap-2" role="radiogroup" aria-label="Nota do curso">
+          {[1, 2, 3, 4, 5].map((nota) => (
+            <button
+              key={nota}
+              type="button"
+              role="radio"
+              aria-checked={estrelas === nota}
+              aria-label={`${nota} ${nota === 1 ? "estrela" : "estrelas"}`}
+              onClick={() => { setEstrelas(nota); setError(""); }}
+              className="rounded-lg p-1 transition-transform hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              <Star className={`h-9 w-9 transition-colors ${nota <= estrelas ? "fill-amber-400 text-amber-400" : "fill-transparent text-muted-foreground/50"}`} />
+            </button>
+          ))}
+          <span className="ml-2 text-sm text-muted-foreground">{estrelas ? `${estrelas}/5` : "Selecione"}</span>
+        </div>
+      </fieldset>
       <label className="block text-sm font-semibold">Seu comentário<textarea required minLength={15} maxLength={1200} rows={4} value={comentario} onChange={e=>setComentario(e.target.value)} className="mt-2 w-full rounded-xl border border-border bg-background p-3 text-foreground" placeholder="Conte sua experiência com a formação" /></label>
       <div className="hidden" aria-hidden="true"><label>Site<input tabIndex={-1} autoComplete="off" value={website} onChange={e=>setWebsite(e.target.value)}/></label></div>
       {error&&<p role="alert" className="text-sm text-red-600">{error}</p>}
