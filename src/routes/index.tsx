@@ -214,7 +214,7 @@ return (
 </div>
 
       <div className="relative flex justify-center items-center">
-        <img src="/mockup-mecanico.png" alt="Formação Mecânico Automotivo 2.0: plataforma, aulas, materiais e certificado" width={1100} height={1100} fetchPriority="high" className="w-full max-w-[500px] rounded-2xl object-contain shadow-xl" />
+        <img src="/mockup-mecanico.png" alt="Formação Mecânico Automotivo 2.0: plataforma, aulas, materiais e certificado" width={1100} height={1100} fetchPriority="high" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = "/peronsa 1.png"; }} className="w-full max-w-[500px] rounded-2xl object-contain shadow-xl" />
       </div>
 
       <div className="text-center lg:col-span-2">
