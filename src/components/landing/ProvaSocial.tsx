@@ -1,13 +1,16 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { Star } from "lucide-react";
 import { listReviews, submitReview } from "@/lib/reviews";
+import fotoGuilherme from "@/assets/aluno-guilherme.webp.asset.json";
+import fotoJennifer from "@/assets/aluno-jennifer.webp.asset.json";
+import fotoCarlos from "@/assets/aluno-carlos.webp.asset.json";
 
-type Review = { id:string; nome:string; comentario:string; estrelas:number; created_at:string };
+type Review = { id:string; nome:string; comentario:string; estrelas:number; created_at:string; foto?:string };
 
 const AVALIACOES_CLIENTES: Review[] = [
-  { id: "guilherme-da-paz", nome: "Guilherme da Paz", comentario: "Curso 5 estrelas, muito bom. Voltei só para comentar porque, quando comprei, estava com muito medo de ser golpe.", estrelas: 5, created_at: "" },
-  { id: "jennifer-s-luz", nome: "Jennifer S. Luz", comentario: "Recomendo muito mesmo. Realizei o curso e peguei meu certificado.", estrelas: 5, created_at: "" },
-  { id: "carlos-gomes", nome: "Carlos Gomes", comentario: "Revisei principalmente pelo material ilustrado e pelas apostilas. Muito bom o curso todo.", estrelas: 5, created_at: "" },
+  { id: "guilherme-da-paz", nome: "Guilherme da Paz", comentario: "Curso 5 estrelas, muito bom. Voltei só para comentar porque, quando comprei, estava com muito medo de ser golpe.", estrelas: 5, created_at: "", foto: fotoGuilherme.url },
+  { id: "jennifer-s-luz", nome: "Jennifer S. Luz", comentario: "Recomendo muito mesmo. Realizei o curso e peguei meu certificado.", estrelas: 5, created_at: "", foto: fotoJennifer.url },
+  { id: "carlos-gomes", nome: "Carlos Gomes", comentario: "Revisei principalmente pelo material ilustrado e pelas apostilas. Muito bom o curso todo.", estrelas: 5, created_at: "", foto: fotoCarlos.url },
 ];
 
 export function ProvaSocial() {
@@ -34,7 +37,7 @@ export function ProvaSocial() {
     {exibidas.length>0 ? <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {exibidas.map((r)=><article key={r.id} className="surface-card rounded-2xl p-5">
         <div className="flex items-center gap-3">
-          <div aria-hidden="true" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/15 text-lg font-bold text-primary">{r.nome.charAt(0).toUpperCase()}</div>
+          {r.foto ? <img src={r.foto} alt="" loading="lazy" className="h-11 w-11 shrink-0 rounded-full object-cover" /> : <div aria-hidden="true" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/15 text-lg font-bold text-primary">{r.nome.charAt(0).toUpperCase()}</div>}
           <div><p className="font-bold">{r.nome}</p><p className="text-xs text-muted-foreground">{r.created_at ? new Date(r.created_at).toLocaleDateString("pt-BR") : "Avaliação de aluno"}</p></div>
         </div>
         <div className="my-3 flex gap-1" aria-label={r.estrelas+" de 5 estrelas"}>{Array.from({length:5},(_,i)=><Star key={i} className={"h-4 w-4 "+(i<r.estrelas?"fill-amber-400 text-amber-400":"text-muted-foreground/30")}/>)}</div>
