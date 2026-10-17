@@ -1,6 +1,5 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { CheckCircle2, Star } from "lucide-react";
-import { listReviews, submitReview } from "@/lib/reviews";
 import guilhermeFoto from "@/assets/depoimentos/guilherme.webp.asset.json";
 import jenniferFoto from "@/assets/depoimentos/jennifer.webp.asset.json";
 import carlosFoto from "@/assets/depoimentos/carlos.webp.asset.json";
@@ -14,32 +13,26 @@ const AVALIACOES_CLIENTES: Review[] = [
 ];
 
 export function ProvaSocial() {
-  const [reviews,setReviews]=useState<Review[]>([]);
   const [nome,setNome]=useState("");
   const [comentario,setComentario]=useState("");
   const [estrelas,setEstrelas]=useState<number>(0);
-  const [website,setWebsite]=useState("");
-  const [sending,setSending]=useState(false);
   const [success,setSuccess]=useState(false);
   const [error,setError]=useState("");
 
-  useEffect(()=>{let mounted=true; listReviews().then(r=>{if(mounted)setReviews(r)}).catch(()=>{}); return ()=>{mounted=false}},[]);
-  const handleSubmit=async (e:FormEvent)=>{
+  const handleSubmit=(e:FormEvent<HTMLFormElement>)=>{
     e.preventDefault();
     setError("");
-    setSuccess(false);
     if (estrelas < 1 || estrelas > 5) {
-      setError("Selecione de 1 a 5 estrelas para enviar sua avaliação.");
+      setError("Selecione de 1 a 5 estrelas para continuar.");
       return;
     }
-    setSending(true);
-    try {
-      await submitReview({data:{nome,comentario,estrelas,website}});
-      setSuccess(true);setNome("");setComentario("");setEstrelas(0);
-    } catch(err) {setError(err instanceof Error?err.message:"Não foi possível enviar sua avaliação.");}
-    finally {setSending(false)}
+    // Demonstração local: nenhuma avaliação é enviada ou armazenada.
+    setSuccess(true);
+    setNome("");
+    setComentario("");
+    setEstrelas(0);
   };
-  const exibidas = [...AVALIACOES_CLIENTES, ...reviews.filter(r => !AVALIACOES_CLIENTES.some(a => a.id === r.id))];
+  const exibidas = AVALIACOES_CLIENTES;
   return <div className="mx-auto max-w-5xl space-y-8">
     {exibidas.length>0 ? <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {exibidas.map((r)=><article key={r.id} className="surface-card rounded-2xl p-5">
@@ -53,7 +46,7 @@ export function ProvaSocial() {
     </div> : <p className="text-center text-sm text-muted-foreground">Ainda não há avaliações publicadas. Sua opinião pode ser a primeira!</p>}
     <form onSubmit={handleSubmit} className="surface-card mx-auto max-w-xl space-y-4 rounded-2xl p-5 sm:p-7">
       <h3 className="text-xl font-bold">Deixe sua avaliação</h3>
-      <p className="text-sm text-muted-foreground">Envie sua opinião! Ela será recebida de forma privada e só aparecerá aqui após nossa aprovação.</p>
+      <p className="text-sm text-muted-foreground">Compartilhe sua opinião. Este formulário é demonstrativo: os comentários não são enviados nem armazenados.</p>
       <label className="block text-sm font-semibold">Seu nome<input autoComplete="name" required minLength={2} maxLength={70} value={nome} onChange={e=>setNome(e.target.value)} className="mt-2 w-full rounded-xl border border-border bg-background p-3 text-foreground" placeholder="Como gostaria de aparecer" /></label>
       <fieldset className="space-y-2">
         <legend className="text-sm font-semibold">Quantas estrelas você dá ao curso?</legend>
@@ -75,14 +68,13 @@ export function ProvaSocial() {
         </div>
       </fieldset>
       <label className="block text-sm font-semibold">Seu comentário<textarea required minLength={15} maxLength={1200} rows={4} value={comentario} onChange={e=>setComentario(e.target.value)} className="mt-2 w-full rounded-xl border border-border bg-background p-3 text-foreground" placeholder="Conte sua experiência com a formação" /></label>
-      <div className="hidden" aria-hidden="true"><label>Site<input tabIndex={-1} autoComplete="off" value={website} onChange={e=>setWebsite(e.target.value)}/></label></div>
       {error&&<p role="alert" className="text-sm text-red-600">{error}</p>}
       {success&&<div role="status" aria-live="polite" className="flex items-start gap-3 rounded-xl border border-green-500/30 bg-green-500/10 p-4 text-green-700 dark:text-green-300">
         <CheckCircle2 className="mt-0.5 h-6 w-6 shrink-0" aria-hidden="true" />
-        <div><p className="font-bold">Comentário enviado com sucesso!</p>
-        <p className="mt-1 text-sm">Obrigado pela sua avaliação. Ela foi recebida e ficará aguardando nossa análise antes de aparecer no site.</p></div>
+        <div><p className="font-bold">Obrigado por avaliar!</p>
+        <p className="mt-1 text-sm">Sua mensagem foi preenchida nesta página, mas não foi enviada nem armazenada.</p></div>
       </div>}
-      <button disabled={sending} type="submit" className="w-full rounded-xl bg-primary px-5 py-3 font-bold text-primary-foreground disabled:opacity-50">{sending?"Enviando...":"Enviar avaliação"}</button>
+      <button type="submit" className="w-full rounded-xl bg-primary px-5 py-3 font-bold text-primary-foreground disabled:opacity-50">{"Concluir avaliação"}</button>
     </form>
   </div>;
 }
