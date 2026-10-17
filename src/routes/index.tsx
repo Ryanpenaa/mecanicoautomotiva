@@ -28,7 +28,6 @@ import {
 BONUS,
 BENEFICIOS,
 CTA_FINAL,
-DEPOIMENTOS,
 FAQ,
 GARANTIA,
 INSTRUTOR,
@@ -91,7 +90,7 @@ meta: [
 { name: "twitter:card", content: "summary_large_image" },
 ],
 links: [
-{ rel: "preload", as: "image", href: "/acesso-poster.webp", fetchPriority: "high" },
+{ rel: "preload", as: "image", href: "/mockup-mecanico.png", fetchPriority: "high" },
 ],
 }),
 component: Index,
@@ -214,40 +213,8 @@ return (
 </h1>
 </div>
 
-      <div className="relative flex justify-center">
-        <div className="relative aspect-[9/16] w-full max-w-[340px] overflow-hidden rounded-2xl border border-border bg-black shadow-xl sm:max-w-[390px]">
-          <video
-            className="h-full w-full object-contain"
-            controls
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="none"
-            poster="/acesso-poster.webp"
-            title="Veja por dentro da Formação Mecânico Automotivo"
-            onPlay={(event) => {
-              const video = event.currentTarget;
-              trackVideoEvent("video_start", video.currentTime, video.duration);
-            }}
-            onTimeUpdate={(event) => {
-              const video = event.currentTarget;
-              if (!Number.isFinite(video.duration) || video.duration <= 0) return;
-              const progress = video.currentTime / video.duration;
-              if (progress >= 0.25) trackVideoEvent("video_25", video.currentTime, video.duration);
-              if (progress >= 0.5) trackVideoEvent("video_50", video.currentTime, video.duration);
-              if (progress >= 0.75) trackVideoEvent("video_75", video.currentTime, video.duration);
-              if (progress >= 0.98) trackVideoEvent("video_complete", video.currentTime, video.duration);
-            }}
-            onEnded={(event) => {
-              const video = event.currentTarget;
-              trackVideoEvent("video_complete", video.currentTime, video.duration);
-            }}
-          >
-            {videoReady && <source src="/acesso-720.mp4" type="video/mp4" />}
-            Seu navegador não suporta a reprodução deste vídeo.
-          </video>
-        </div>
+      <div className="relative flex justify-center items-center">
+        <img src="/mockup-mecanico.png" alt="Formação Mecânico Automotivo 2.0: plataforma, aulas, materiais e certificado" width={1100} height={1100} fetchPriority="high" className="w-full max-w-[500px] rounded-2xl object-contain shadow-xl" />
       </div>
 
       <div className="text-center lg:col-span-2">
@@ -285,6 +252,50 @@ return (
         );
       })}
     </div>
+  </Section>
+
+  {/* 3 — NOSSO APLICATIVO */}
+  <Section eyebrow="Conheça por dentro" title="Nosso aplicativo" subtitle="Assista à demonstração da plataforma e veja como acessar suas aulas pelo celular ou computador.">
+    <DeferredContent placeholderHeight={380}>
+      <div className="mx-auto max-w-[380px]">
+      <div className="relative flex justify-center">
+              <div className="relative aspect-[9/16] w-full max-w-[340px] overflow-hidden rounded-2xl border border-border bg-black shadow-xl sm:max-w-[390px]">
+                <video
+                  className="h-full w-full object-contain"
+                  controls
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="none"
+                  poster="/acesso-poster.webp"
+                  title="Veja por dentro da Formação Mecânico Automotivo"
+                  onPlay={(event) => {
+                    const video = event.currentTarget;
+                    trackVideoEvent("video_start", video.currentTime, video.duration);
+                  }}
+                  onTimeUpdate={(event) => {
+                    const video = event.currentTarget;
+                    if (!Number.isFinite(video.duration) || video.duration <= 0) return;
+                    const progress = video.currentTime / video.duration;
+                    if (progress >= 0.25) trackVideoEvent("video_25", video.currentTime, video.duration);
+                    if (progress >= 0.5) trackVideoEvent("video_50", video.currentTime, video.duration);
+                    if (progress >= 0.75) trackVideoEvent("video_75", video.currentTime, video.duration);
+                    if (progress >= 0.98) trackVideoEvent("video_complete", video.currentTime, video.duration);
+                  }}
+                  onEnded={(event) => {
+                    const video = event.currentTarget;
+                    trackVideoEvent("video_complete", video.currentTime, video.duration);
+                  }}
+                >
+                  {videoReady && <source src="/acesso-720.mp4" type="video/mp4" />}
+                  Seu navegador não suporta a reprodução deste vídeo.
+                </video>
+              </div>
+            </div>
+      
+            </div>
+    </DeferredContent>
   </Section>
 
   {/* 4 — MATERIAL DE APOIO */}
@@ -439,7 +450,7 @@ return (
   <Section
     eyebrow="Prova social"
     title="O que nossos alunos estão dizendo"
-    subtitle="Mensagens reais de quem já está transformando a vida com o nosso curso Formação Profissional de Mecânico Automotivo."
+    subtitle="Avaliações enviadas por visitantes e alunos, publicadas após moderação."
   >
     <DeferredContent>
       <Suspense fallback={<div className="h-72" />}>
@@ -499,16 +510,7 @@ return (
       </div>
     </div>
 
-    {DEPOIMENTOS.length > 0 && (
-      <div className="mt-6 grid gap-4 sm:grid-cols-3">
-        {DEPOIMENTOS.map((d) => (
-          <blockquote key={d.nome} className="surface-card p-5 text-sm">
-            <p>{d.texto}</p>
-            <footer className="mt-3 font-semibold">{d.nome}</footer>
-          </blockquote>
-        ))}
-      </div>
-    )}
+
   </Section>
 
   {/* 10 — FAQ + CTA FINAL */}
