@@ -4,6 +4,12 @@ import { listReviews, submitReview } from "@/lib/reviews";
 
 type Review = { id:string; nome:string; comentario:string; estrelas:number; created_at:string };
 
+const AVALIACOES_CLIENTES: Review[] = [
+  { id: "guilherme-da-paz", nome: "Guilherme da Paz", comentario: "Curso 5 estrelas, muito bom. Voltei só para comentar porque, quando comprei, estava com muito medo de ser golpe.", estrelas: 5, created_at: "" },
+  { id: "jennifer-s-luz", nome: "Jennifer S. Luz", comentario: "Recomendo muito mesmo. Realizei o curso e peguei meu certificado.", estrelas: 5, created_at: "" },
+  { id: "carlos-gomes", nome: "Carlos Gomes", comentario: "Revisei principalmente pelo material ilustrado e pelas apostilas. Muito bom o curso todo.", estrelas: 5, created_at: "" },
+];
+
 export function ProvaSocial() {
   const [reviews,setReviews]=useState<Review[]>([]);
   const [nome,setNome]=useState("");
@@ -23,12 +29,13 @@ export function ProvaSocial() {
     } catch(err) {setError(err instanceof Error?err.message:"Não foi possível enviar sua avaliação.");}
     finally {setSending(false)}
   };
+  const exibidas = [...AVALIACOES_CLIENTES, ...reviews.filter(r => !AVALIACOES_CLIENTES.some(a => a.id === r.id))];
   return <div className="mx-auto max-w-5xl space-y-8">
-    {reviews.length>0 ? <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {reviews.map((r)=><article key={r.id} className="surface-card rounded-2xl p-5">
+    {exibidas.length>0 ? <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {exibidas.map((r)=><article key={r.id} className="surface-card rounded-2xl p-5">
         <div className="flex items-center gap-3">
           <div aria-hidden="true" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/15 text-lg font-bold text-primary">{r.nome.charAt(0).toUpperCase()}</div>
-          <div><p className="font-bold">{r.nome}</p><p className="text-xs text-muted-foreground">{new Date(r.created_at).toLocaleDateString("pt-BR")}</p></div>
+          <div><p className="font-bold">{r.nome}</p><p className="text-xs text-muted-foreground">{r.created_at ? new Date(r.created_at).toLocaleDateString("pt-BR") : "Avaliação de aluno"}</p></div>
         </div>
         <div className="my-3 flex gap-1" aria-label={r.estrelas+" de 5 estrelas"}>{Array.from({length:5},(_,i)=><Star key={i} className={"h-4 w-4 "+(i<r.estrelas?"fill-amber-400 text-amber-400":"text-muted-foreground/30")}/>)}</div>
         <p className="whitespace-pre-wrap break-words text-sm leading-relaxed">{r.comentario}</p>
