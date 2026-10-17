@@ -146,7 +146,7 @@ export const PLANOS = {
   profissional: {
     badge: "MAIS VENDIDO",
     titulo: "Plano Profissional",
-    subtitulo: "Formação completa + materiais",
+    subtitulo: "Formação completa + materiais exclusivos",
     precoAncora: "De R$147,00 por",
     preco: "R$27,90",
     itens: [
@@ -155,7 +155,6 @@ export const PLANOS = {
       "Acesso vitalício",
       "Materiais de apoio",
       "Bônus",
-      "5 Apostilas complementares",
     ],
     cta: "QUERO O PLANO PROFISSIONAL",
     url: CHECKOUT.PRO_CHECKOUT_URL,
