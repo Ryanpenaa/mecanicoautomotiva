@@ -1,5 +1,6 @@
 export type TrackingSession = {
   tracking_id: string;
+  visitor_id?: string;
   landing_ts: number;
   fbclid: string | null;
   fbp: string | null;
@@ -52,74 +53,112 @@ function getQueryValue(params: URLSearchParams, key: string) {
   return value && value.trim() ? value.trim() : null;
 }
 
+const ATTRIBUTION_WINDOW_MS = 30 * 24 * 60 * 60 * 1000;
+const VISITOR_STORAGE_KEY = STORAGE_KEY + "_visitor";
+
 function readStoredSession(): TrackingSession | null {
   if (typeof window === "undefined") return null;
-
   try {
-    const raw = window.sessionStorage.getItem(STORAGE_KEY);
+    // Migrate pre-existing tab-only sessions without losing their UTMs.
+    const raw =
+      window.localStorage.getItem(STORAGE_KEY) ??
+      window.sessionStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
-    return JSON.parse(raw) as TrackingSession;
+    const session = JSON.parse(raw) as TrackingSession;
+    if (
+      !/^trk_[a-z0-9_]+$/i.test(session.tracking_id ?? "") ||
+      !Number.isFinite(session.landing_ts) ||
+      session.landing_ts > Date.now() + 600000 ||
+      Date.now() - session.landing_ts > ATTRIBUTION_WINDOW_MS
+    ) {
+      return null;
+    }
+    window.localStorage.setItem(STORAGE_KEY, raw);
+    return session;
   } catch {
     return null;
   }
 }
 
+function readVisitorId(previous: TrackingSession | null): string {
+  let visitorId: string | null = null;
+  try {
+    visitorId = window.localStorage.getItem(VISITOR_STORAGE_KEY);
+  } catch {
+    // Storage may be disabled by the browser.
+  }
+  const candidate = visitorId ?? previous?.visitor_id ?? null;
+  if (candidate && /^vis_[a-z0-9_]+$/i.test(candidate)) return candidate;
+  const generated = "vis_" + randomPart() + "_" + randomPart();
+  try {
+    window.localStorage.setItem(VISITOR_STORAGE_KEY, generated);
+  } catch {
+    // Checkout still works without persistent storage.
+  }
+  return generated;
+}
+
 function writeStoredSession(session: TrackingSession) {
   if (typeof window === "undefined") return;
-
   try {
-    window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(session));
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
+    window.sessionStorage.removeItem(STORAGE_KEY);
   } catch {
-    // Tracking must never block checkout/navigation if storage is unavailable.
+    try {
+      window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(session));
+    } catch {
+      // Attribution should never block checkout.
+    }
   }
 }
 
 export function initializeTracking(): TrackingSession | null {
   if (typeof window === "undefined") return null;
-
   const params = new URLSearchParams(window.location.search);
   const incomingFbclid = getQueryValue(params, "fbclid");
   const previous = readStoredSession();
-
-  // A new Meta click in the same tab starts a new attribution session.
+  const visitorId = readVisitorId(previous);
+  const utmKeys = [
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_content",
+    "utm_term",
+  ] as const;
+  const isChangedCampaign = utmKeys.some((key) => {
+    const incoming = getQueryValue(params, key);
+    return incoming !== null && incoming !== previous?.[key];
+  });
   const isNewAdClick =
-    Boolean(incomingFbclid) &&
-    incomingFbclid !== previous?.fbclid;
-
-  const base = isNewAdClick ? null : previous;
+    Boolean(incomingFbclid) && incomingFbclid !== previous?.fbclid;
+  // New campaign: separate touch. Direct return: restore last touch.
+  const base = isNewAdClick || isChangedCampaign ? null : previous;
   const now = Date.now();
-
   const fbclid = incomingFbclid ?? base?.fbclid ?? null;
   const pixelFbc = readCookie("_fbc");
-  // A fresh ad click must not inherit _fbc from an earlier Meta ad.
-  // A real fbclid from the current URL may be formatted into _fbc
-  // if the Pixel has not set/updated its cookie yet.
-  const fbcForClick = pixelFbc && (!fbclid || pixelFbc.endsWith("." + fbclid))
-    ? pixelFbc
-    : fbclid && /^[A-Za-z0-9._-]{8,2048}$/.test(fbclid)
-      ? `fb.1.${base?.landing_ts ?? now}.${fbclid}`
-      : base?.fbc ?? null;
+  const fbcForClick =
+    pixelFbc && fbclid && pixelFbc.endsWith("." + fbclid)
+      ? pixelFbc
+      : fbclid && /^[A-Za-z0-9._-]{8,2048}$/.test(fbclid)
+        ? "fb.1." + (base?.landing_ts ?? now) + "." + fbclid
+        : base?.fbc ?? null;
 
   const session: TrackingSession = {
     tracking_id: base?.tracking_id ?? createTrackingId(),
+    visitor_id: visitorId,
     landing_ts: base?.landing_ts ?? now,
     fbclid,
     fbp: readCookie("_fbp") ?? base?.fbp ?? null,
     fbc: fbcForClick,
-    utm_source:
-      getQueryValue(params, "utm_source") ?? base?.utm_source ?? null,
-    utm_medium:
-      getQueryValue(params, "utm_medium") ?? base?.utm_medium ?? null,
-    utm_campaign:
-      getQueryValue(params, "utm_campaign") ?? base?.utm_campaign ?? null,
-    utm_content:
-      getQueryValue(params, "utm_content") ?? base?.utm_content ?? null,
+    utm_source: getQueryValue(params, "utm_source") ?? base?.utm_source ?? null,
+    utm_medium: getQueryValue(params, "utm_medium") ?? base?.utm_medium ?? null,
+    utm_campaign: getQueryValue(params, "utm_campaign") ?? base?.utm_campaign ?? null,
+    utm_content: getQueryValue(params, "utm_content") ?? base?.utm_content ?? null,
     utm_term: getQueryValue(params, "utm_term") ?? base?.utm_term ?? null,
     user_agent: window.navigator.userAgent,
     landing_url: base?.landing_url ?? window.location.href,
     referrer: base?.referrer ?? (document.referrer || null),
   };
-
   writeStoredSession(session);
   return session;
 }
