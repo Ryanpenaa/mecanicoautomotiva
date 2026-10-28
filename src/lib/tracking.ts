@@ -81,21 +81,35 @@ function readStoredSession(): TrackingSession | null {
 }
 
 function readVisitorId(previous: TrackingSession | null): string {
-  let visitorId: string | null = null;
   try {
-    visitorId = window.localStorage.getItem(VISITOR_STORAGE_KEY);
+    const raw = window.localStorage.getItem(VISITOR_STORAGE_KEY);
+    if (raw) {
+      const stored = JSON.parse(raw) as { id?: string; issued_at?: number };
+      if (
+        /^vis_[a-z0-9_]+$/i.test(stored.id ?? "") &&
+        Number.isFinite(stored.issued_at) &&
+        stored.issued_at! <= Date.now() + 600000 &&
+        Date.now() - stored.issued_at! <= ATTRIBUTION_WINDOW_MS
+      ) {
+        return stored.id!;
+      }
+    }
   } catch {
-    // Storage may be disabled by the browser.
+    // Legacy storage or restricted browsing: fall back to a known visit.
   }
-  const candidate = visitorId ?? previous?.visitor_id ?? null;
-  if (candidate && /^vis_[a-z0-9_]+$/i.test(candidate)) return candidate;
-  const generated = "vis_" + randomPart() + "_" + randomPart();
+  const previousId = previous?.visitor_id;
+  const id = previousId && /^vis_[a-z0-9_]+$/i.test(previousId)
+    ? previousId
+    : "vis_" + randomPart() + "_" + randomPart();
   try {
-    window.localStorage.setItem(VISITOR_STORAGE_KEY, generated);
+    window.localStorage.setItem(VISITOR_STORAGE_KEY, JSON.stringify({
+      id,
+      issued_at: previousId === id ? previous!.landing_ts : Date.now(),
+    }));
   } catch {
-    // Checkout still works without persistent storage.
+    // Do not block checkout.
   }
-  return generated;
+  return id;
 }
 
 function writeStoredSession(session: TrackingSession) {
