@@ -276,9 +276,10 @@ return (
   {/* 8 — PLANOS */}
   <Section
     id="planos"
+    className="[&_header>p]:font-semibold [&_header>p]:text-primary"
     eyebrow="Planos"
     title="Escolha como quer começar"
-    subtitle="Dois caminhos para iniciar hoje mesmo."
+    subtitle="Pagamento único"
   >
     <div className="grid gap-5 lg:grid-cols-2">
       {/* Básico */}
