@@ -46,7 +46,7 @@ export function ProvaSocial() {
     </div> : <p className="text-center text-sm text-muted-foreground">Ainda não há avaliações publicadas. Sua opinião pode ser a primeira!</p>}
     <form onSubmit={handleSubmit} className="surface-card mx-auto max-w-xl space-y-4 rounded-2xl p-5 sm:p-7">
       <h3 className="text-xl font-bold">Deixe sua avaliação</h3>
-      <p className="text-sm text-muted-foreground">Compartilhe sua opinião. Este formulário é demonstrativo: os comentários não são enviados nem armazenados.</p>
+      <p className="text-sm text-muted-foreground">Compartilhe sua opinião sobre o curso.</p>
       <label className="block text-sm font-semibold">Seu nome<input autoComplete="name" required minLength={2} maxLength={70} value={nome} onChange={e=>setNome(e.target.value)} className="mt-2 w-full rounded-xl border border-border bg-background p-3 text-foreground" placeholder="Como gostaria de aparecer" /></label>
       <fieldset className="space-y-2">
         <legend className="text-sm font-semibold">Quantas estrelas você dá ao curso?</legend>
