@@ -209,12 +209,12 @@ return (
       {BENEFICIOS.map((b) => {
         const Icon = ICONS[b.icone] ?? Wrench;
         return (
-          <article key={b.titulo} className="surface-card min-w-0 p-3 sm:p-5">
-            <div className="gradient-primary mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl">
+          <article key={b.titulo} className="surface-card flex min-w-0 flex-col items-center p-3 text-center sm:p-5">
+            <div className="gradient-primary mb-3 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl sm:mb-4">
               <Icon className="h-5 w-5 text-primary-foreground" />
             </div>
-            <h3 className="text-lg font-bold">{b.titulo}</h3>
-            <p className="mt-1.5 text-sm text-muted-foreground">{b.texto}</p>
+            <h3 className="text-base font-bold leading-snug sm:text-lg">{b.titulo}</h3>
+            <p className="mt-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{b.texto}</p>
           </article>
         );
       })}
