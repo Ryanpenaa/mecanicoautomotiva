@@ -205,11 +205,11 @@ return (
     eyebrow="O que você recebe"
     title="Tudo o que você precisa para começar a entender mecânica automotiva"
   >
-    <div className="grid grid-cols-2 gap-3 sm:gap-4">
+    <div className="grid w-full grid-cols-2 gap-2.5 sm:gap-4" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))" }}>
       {BENEFICIOS.map((b) => {
         const Icon = ICONS[b.icone] ?? Wrench;
         return (
-          <article key={b.titulo} className="surface-card p-5">
+          <article key={b.titulo} className="surface-card min-w-0 p-3 sm:p-5">
             <div className="gradient-primary mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl">
               <Icon className="h-5 w-5 text-primary-foreground" />
             </div>
