@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-labelledby="title">
+<title id="title">Selo de garantia de 7 dias</title>
+<defs>
+<linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8e520d"/><stop offset=".19" stop-color="#ffdf6d"/><stop offset=".4" stop-color="#c88214"/><stop offset=".61" stop-color="#ffed93"/><stop offset=".82" stop-color="#b36d0b"/><stop offset="1" stop-color="#ffce48"/></linearGradient>
+<radialGradient id="navy"><stop stop-color="#17355b"/><stop offset="1" stop-color="#071326"/></radialGradient>
+<filter id="shadow" x="-25%" y="-25%" width="150%" height="150%"><feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#071326" flood-opacity=".28"/></filter>
+<path id="toparc" d="M 77,200 A 123,123 0 0,1 323,200"/>
+<path id="bottomarc" d="M 67,200 A 133,133 0 0,0 333,200"/>
+</defs>
+<g filter="url(#shadow)">
+<path id="edge" fill="url(#gold)" stroke="#8f5a10" stroke-width="3" d="M200.00,12.00 L222.71,27.49 L248.66,18.41 L266.59,39.24 L294.00,37.19 L305.92,61.96 L332.94,67.06 L338.04,94.08 L362.81,106.00 L360.76,133.41 L381.59,151.34 L372.51,177.29 L388.00,200.00 L372.51,222.71 L381.59,248.66 L360.76,266.59 L362.81,294.00 L338.04,305.92 L332.94,332.94 L305.92,338.04 L294.00,362.81 L266.59,360.76 L248.66,381.59 L222.71,372.51 L200.00,388.00 L177.29,372.51 L151.34,381.59 L133.41,360.76 L106.00,362.81 L94.08,338.04 L67.06,332.94 L61.96,305.92 L37.19,294.00 L39.24,266.59 L18.41,248.66 L27.49,222.71 L12.00,200.00 L27.49,177.29 L18.41,151.34 L39.24,133.41 L37.19,106.00 L61.96,94.08 L67.06,67.06 L94.08,61.96 L106.00,37.19 L133.41,39.24 L151.34,18.41 L177.29,27.49 Z"/>
+<circle cx="200" cy="200" r="165" fill="url(#gold)" stroke="#fff1a3" stroke-width="3"/>
+<circle cx="200" cy="200" r="141" fill="#07162b" stroke="#9c651c" stroke-width="3"/>
+<circle cx="200" cy="200" r="133" fill="url(#gold)" stroke="#ffec8e" stroke-width="2"/>
+<circle cx="200" cy="200" r="108" fill="url(#navy)" stroke="#8d5b11" stroke-width="5"/>
+<circle cx="200" cy="200" r="102" fill="none" stroke="#fce58a" stroke-width="1.5" opacity=".8"/>
+<text font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="31" letter-spacing="2.5" fill="#081b32" text-anchor="middle"><textPath href="#toparc" startOffset="50%">GARANTIA</textPath></text>
+<text font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="29" letter-spacing="2.4" fill="#081b32" text-anchor="middle"><textPath href="#bottomarc" startOffset="50%">GARANTIA</textPath></text>
+<text x="200" y="239" font-family="Arial,Helvetica,sans-serif" font-size="158" font-weight="900" text-anchor="middle" fill="url(#gold)" stroke="#ffe991" stroke-width="1.2">7</text>
+<text x="200" y="295" font-family="Arial,Helvetica,sans-serif" font-size="54" font-weight="900" text-anchor="middle" fill="url(#gold)" letter-spacing="1">DIAS</text>
+<g fill="#091a31" font-size="22" text-anchor="middle"><text x="58" y="206">★</text><text x="342" y="206">★</text></g>
+</g></svg>
