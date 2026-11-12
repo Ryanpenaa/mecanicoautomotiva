@@ -417,12 +417,20 @@ return (
   {/* 9 — GARANTIA + AUTORIDADE */}
   <Section className="bg-surface/40" eyebrow="Confiança" title="Garantia e instrutor">
     <div className="grid gap-5 lg:grid-cols-2">
-      <div className="surface-card p-6">
-        <ShieldCheck className="h-10 w-10 text-primary" />
-        <h3 className="mt-4 text-2xl font-bold uppercase">
+      <div className="surface-card flex flex-col items-center justify-center p-5 text-center sm:p-6">
+        <img
+          src="/selo-garantia-7-dias.svg"
+          alt="Selo dourado de garantia de 7 dias"
+          width={180}
+          height={180}
+          loading="lazy"
+          decoding="async"
+          className="mb-3 h-32 w-32 object-contain drop-shadow-lg sm:h-40 sm:w-40"
+        />
+        <h3 className="text-xl font-extrabold uppercase sm:text-2xl">
           {GARANTIA.titulo}
         </h3>
-        <p className="mt-2 text-sm text-muted-foreground">{GARANTIA.texto}</p>
+        <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">{GARANTIA.texto}</p>
       </div>
 
       <div className="surface-card p-6">
