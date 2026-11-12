@@ -205,7 +205,7 @@ return (
     eyebrow="O que você recebe"
     title="Tudo o que você precisa para começar a entender mecânica automotiva"
   >
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-2 gap-3 sm:gap-4">
       {BENEFICIOS.map((b) => {
         const Icon = ICONS[b.icone] ?? Wrench;
         return (
