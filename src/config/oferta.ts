@@ -28,9 +28,9 @@ export const PRODUTO = {
   nome: "Formação Mecânico Automotivo",
   totalAulas: "80+",
   headline:
-    "Torne-se um Mecânico de carros: do zero ao avançado",
+    "Aprenda Mecânica Automotiva do Zero com Mais de 80 Videoaulas Práticas",
   subheadline:
-    "Curso 100% online com mais de 80 videoaulas práticas para você aprender COM TEORIA E PRATICA JUNTOS",
+    "Aprenda sobre motores, freios, suspensão, injeção eletrônica e diagnóstico automotivo, mesmo sem experiência. Estude pelo celular, no seu ritmo, com acesso vitalício.",
   ctaPrincipal: "QUERO COMEÇAR AGORA",
   microtexto: "Acesso imediato • Compra segura • Garantia de 7 dias",
 };
