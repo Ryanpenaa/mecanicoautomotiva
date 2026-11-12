@@ -46,22 +46,22 @@ export const BENEFICIOS = [
   {
     icone: "video",
     titulo: "80+ videoaulas práticas",
-    texto: "Aprenda os principais conteúdos da mecânica automotiva.",
+    texto: "Aprenda sobre motores, freios, suspensão e diagnóstico com aulas em vídeo.",
   },
   {
     icone: "wrench",
     titulo: "Do zero ao avançado",
-    texto: "Comece mesmo sem experiência anterior na área.",
+    texto: "Comece sem experiência e avance passo a passo, no seu ritmo.",
   },
   {
     icone: "list",
     titulo: "Materiais de apoio",
-    texto: "Apostila, guias e checklists para acompanhar seus estudos.",
+    texto: "Conte com apostilas, guias e checklists para reforçar o aprendizado.",
   },
   {
     icone: "infinity",
     titulo: "Acesso vitalício",
-    texto: "Estude pelo celular ou computador e reveja as aulas quando quiser.",
+    texto: "Assista pelo celular ou computador e reveja as aulas sempre que precisar.",
   },
 ];
 
