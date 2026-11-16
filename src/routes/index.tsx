@@ -53,7 +53,6 @@ ChevronLeft,
 ChevronRight,
 Pause,
 Play,
-ChevronRight,
 Clock,
 Gauge,
 Infinity as InfinityIcon,
@@ -202,6 +201,9 @@ function DemonstracaoMateriais() {
     setReproduzindo(false);
   };
 
+  const paginaAtual = PAGINAS_DEMO[pagina] ?? PAGINAS_DEMO[0];
+  if (!paginaAtual) return null;
+
   return (
     <div className="mx-auto max-w-4xl overflow-hidden rounded-3xl border border-border bg-white shadow-xl">
       <div className="border-b border-border bg-slate-950 px-4 py-4 text-center text-white sm:px-6">
@@ -214,8 +216,8 @@ function DemonstracaoMateriais() {
           <div className="absolute inset-0 translate-x-2 translate-y-2 rounded-xl bg-slate-300 shadow-md" aria-hidden="true" />
           <img
             key={pagina}
-            src={PAGINAS_DEMO[pagina].imagem}
-            alt={`Página de demonstração: ${PAGINAS_DEMO[pagina].titulo}`}
+            src={paginaAtual.imagem}
+            alt={`Página de demonstração: ${paginaAtual.titulo}`}
             width={1024}
             height={1536}
             decoding="async"
@@ -227,7 +229,7 @@ function DemonstracaoMateriais() {
         <span className="absolute bottom-3 right-3 rounded-full bg-slate-900/85 px-3 py-1 text-xs font-bold text-white">{pagina + 1} / {total}</span>
       </div>
       <div className="flex flex-col items-center gap-3 px-4 py-4 sm:px-6">
-        <p aria-live="polite" className="text-center text-sm font-bold text-slate-900 sm:text-base">{PAGINAS_DEMO[pagina].titulo}</p>
+        <p aria-live="polite" className="text-center text-sm font-bold text-slate-900 sm:text-base">{paginaAtual.titulo}</p>
         <div className="flex w-full items-center justify-center gap-1.5" aria-label="Progresso da demonstração">
           {PAGINAS_DEMO.map((item, indice) => (
             <button
