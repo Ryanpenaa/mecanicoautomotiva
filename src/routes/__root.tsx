@@ -108,7 +108,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     scripts: [
       {
         type: "text/javascript",
-        children: `window.addEventListener('load',function(){var l=document.querySelector('link[data-font-swap]');if(l){l.media='all';}});`,
+        children: `(function(){function swap(){var l=document.querySelector('link[data-font-swap]');if(!l)return;if(l.sheet){l.media='all';}else{l.addEventListener('load',function(){l.media='all';},{once:true});}}swap();document.addEventListener('DOMContentLoaded',swap,{once:true});window.addEventListener('load',swap,{once:true});})();`,
       },
       {
         type: "text/javascript",

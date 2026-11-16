@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import mockupMecanico from "@/assets/mockup-mecanico.webp.asset.json";
+import mockupMecanico from "@/assets/mockup-mecanico-fast.avif.asset.json";
 import demo1 from "@/assets/opt/m1.webp";
 import demo2 from "@/assets/opt/m2.webp";
 import demo3 from "@/assets/opt/m3.webp";
@@ -220,6 +220,8 @@ function DemonstracaoMateriais() {
             alt={`Página de demonstração: ${paginaAtual.titulo}`}
             width={1024}
             height={1536}
+            loading="lazy"
+            fetchPriority="low"
             decoding="async"
             className="relative block aspect-[2/3] w-full rounded-xl border border-slate-200 bg-white object-contain shadow-lg motion-safe:animate-in motion-safe:fade-in motion-safe:duration-500"
           />
@@ -272,7 +274,7 @@ return (
 </div>
 
       <div className="relative flex justify-center items-center">
-        <img src={mockupMecanico.url} alt="Formação Mecânico Automotivo 2.0: plataforma, aulas, materiais e certificado" width={1256} height={1256} fetchPriority="high" className="w-full max-w-[500px] rounded-2xl object-contain shadow-xl" />
+        <img src={mockupMecanico.url} alt="Formação Mecânico Automotivo 2.0: plataforma, aulas, materiais e certificado" width={1254} height={1254} loading="eager" decoding="async" fetchPriority="high" className="w-full max-w-[500px] rounded-2xl object-contain shadow-xl" />
       </div>
 
       <div className="text-center lg:col-span-2">

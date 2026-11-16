@@ -10,3 +10,6 @@
 <!-- LOVABLE:END -->
 
 - Keep illustrative purchase notices in a browser-only timer component with an explicit illustrative label; generated examples must not be presented as verified sales.
+
+- Serve the hero through its optimized CDN asset with matching preload and eager high priority; defer below-fold images so they do not compete with first paint.
+- Activate nonblocking font stylesheets when their own load finishes, rather than waiting for all page media; this avoids a late font swap.
