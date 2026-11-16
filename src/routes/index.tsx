@@ -1,5 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import mockupMecanico from "@/assets/mockup-mecanico.webp.asset.json";
+import demo1 from "@/assets/opt/m1.webp";
+import demo2 from "@/assets/opt/m2.webp";
+import demo3 from "@/assets/opt/m3.webp";
+import demo4 from "@/assets/opt/m4.webp";
+import demo5 from "@/assets/opt/m5.webp";
+import demo6 from "@/assets/opt/m6.webp";
+import demo7 from "@/assets/opt/m7.webp";
+import demo8 from "@/assets/opt/m8.webp";
+import demo9 from "@/assets/opt/m9.webp";
 import {
 Accordion,
 AccordionContent,
@@ -40,6 +49,10 @@ PROFISSIONAL,
 import {
 BadgeCheck,
 Check,
+ChevronLeft,
+ChevronRight,
+Pause,
+Play,
 ChevronRight,
 Clock,
 Gauge,
@@ -161,6 +174,82 @@ function DeferredContent({ children, placeholderHeight = 280 }: { children: Reac
   return <div ref={ref} style={!visible ? { minHeight: placeholderHeight } : undefined}>{visible ? children : null}</div>;
 }
 
+const PAGINAS_DEMO = [
+  { imagem: demo1, titulo: "Sistema de freios" },
+  { imagem: demo2, titulo: "Sistema de arrefecimento" },
+  { imagem: demo3, titulo: "Revisão preventiva e óleo" },
+  { imagem: demo4, titulo: "Checklist de revisão" },
+  { imagem: demo5, titulo: "Diagnóstico de defeitos" },
+  { imagem: demo6, titulo: "Ferramentas do mecânico" },
+  { imagem: demo7, titulo: "Preços de serviços" },
+  { imagem: demo8, titulo: "Códigos de erro OBD2" },
+  { imagem: demo9, titulo: "Injeção eletrônica" },
+];
+
+function DemonstracaoMateriais() {
+  const [pagina, setPagina] = useState(0);
+  const [reproduzindo, setReproduzindo] = useState(true);
+  const total = PAGINAS_DEMO.length;
+
+  useEffect(() => {
+    if (!reproduzindo) return;
+    const timer = window.setInterval(() => setPagina((atual) => (atual + 1) % total), 3500);
+    return () => window.clearInterval(timer);
+  }, [reproduzindo, total]);
+
+  const mudarPagina = (direcao: number) => {
+    setPagina((atual) => (atual + direcao + total) % total);
+    setReproduzindo(false);
+  };
+
+  return (
+    <div className="mx-auto max-w-4xl overflow-hidden rounded-3xl border border-border bg-white shadow-xl">
+      <div className="border-b border-border bg-slate-950 px-4 py-4 text-center text-white sm:px-6">
+        <p className="text-xs font-bold uppercase tracking-[0.2em] text-yellow-300">Prévia real dos materiais</p>
+        <h3 className="mt-1 text-xl font-extrabold sm:text-2xl">Folheie o conteúdo por dentro</h3>
+        <p className="mt-1 text-sm text-slate-300">Veja exemplos de apostilas, guias e checklists da formação.</p>
+      </div>
+      <div className="relative flex min-h-[350px] items-center justify-center bg-slate-100 px-7 py-5 sm:min-h-[500px] sm:px-12">
+        <div className="relative w-full max-w-[340px]">
+          <div className="absolute inset-0 translate-x-2 translate-y-2 rounded-xl bg-slate-300 shadow-md" aria-hidden="true" />
+          <img
+            key={pagina}
+            src={PAGINAS_DEMO[pagina].imagem}
+            alt={`Página de demonstração: ${PAGINAS_DEMO[pagina].titulo}`}
+            width={1024}
+            height={1536}
+            decoding="async"
+            className="relative block aspect-[2/3] w-full rounded-xl border border-slate-200 bg-white object-contain shadow-lg motion-safe:animate-in motion-safe:fade-in motion-safe:duration-500"
+          />
+        </div>
+        <button type="button" onClick={() => mudarPagina(-1)} aria-label="Página anterior" className="absolute left-2 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-white/95 text-slate-900 shadow-md transition hover:scale-105 sm:left-5"><ChevronLeft className="h-6 w-6" /></button>
+        <button type="button" onClick={() => mudarPagina(1)} aria-label="Próxima página" className="absolute right-2 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-white/95 text-slate-900 shadow-md transition hover:scale-105 sm:right-5"><ChevronRight className="h-6 w-6" /></button>
+        <span className="absolute bottom-3 right-3 rounded-full bg-slate-900/85 px-3 py-1 text-xs font-bold text-white">{pagina + 1} / {total}</span>
+      </div>
+      <div className="flex flex-col items-center gap-3 px-4 py-4 sm:px-6">
+        <p aria-live="polite" className="text-center text-sm font-bold text-slate-900 sm:text-base">{PAGINAS_DEMO[pagina].titulo}</p>
+        <div className="flex w-full items-center justify-center gap-1.5" aria-label="Progresso da demonstração">
+          {PAGINAS_DEMO.map((item, indice) => (
+            <button
+              key={item.titulo}
+              type="button"
+              aria-label={`Ver página ${indice + 1}: ${item.titulo}`}
+              aria-current={indice === pagina ? "step" : undefined}
+              onClick={() => { setPagina(indice); setReproduzindo(false); }}
+              className={`h-2 rounded-full transition-all ${indice === pagina ? "w-7 bg-primary" : "w-2 bg-slate-300 hover:bg-slate-400"}`}
+            />
+          ))}
+        </div>
+        <button type="button" onClick={() => setReproduzindo((ativo) => !ativo)} className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm hover:bg-slate-50">
+          {reproduzindo ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+          {reproduzindo ? "Pausar apresentação" : "Reproduzir apresentação"}
+        </button>
+        <p className="text-center text-xs text-slate-500">Prévia ilustrativa de páginas selecionadas; os materiais completos variam conforme o plano escolhido.</p>
+      </div>
+    </div>
+  );
+}
+
 function Index() {
 const upsell = useUpsell();
 const [youtubeStarted, setYoutubeStarted] = useState(false);
@@ -219,6 +308,13 @@ return (
         );
       })}
     </div>
+  </Section>
+
+  {/* 3 — DEMONSTRAÇÃO AUTOMÁTICA COM PÁGINAS REAIS DO MATERIAL */}
+  <Section eyebrow="Veja antes de começar" title="Conheça os materiais por dentro, página por página" subtitle="Uma prévia visual do conteúdo da formação, com exemplos reais que você pode explorar.">
+    <DeferredContent placeholderHeight={480}>
+      <DemonstracaoMateriais />
+    </DeferredContent>
   </Section>
 
   {/* 3 — NOSSO APLICATIVO: vídeo carregado somente após clique */}
