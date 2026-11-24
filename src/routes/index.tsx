@@ -19,7 +19,7 @@ import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "rea
 import { Section, CtaButton } from "@/components/landing/ui-bits";
 import { UpsellModal, useUpsell } from "@/components/landing/UpsellModal";
 import { trackInitiateCheckout, trackSelectPlan, trackViewPlans } from "@/lib/meta-pixel";
-import { buildVegaCheckoutUrl, trackFunnelEvent } from "@/lib/tracking";
+import { buildVegaCheckoutUrl } from "@/lib/tracking";
 
 const BonusCarousel = lazy(() =>
 import("@/components/landing/BonusCarousel").then((m) => ({ default: m.BonusCarousel })),
@@ -256,7 +256,6 @@ function DemonstracaoMateriais() {
 
 function Index() {
 const upsell = useUpsell();
-const [youtubeStarted, setYoutubeStarted] = useState(false);
 
 return (
 <main className="min-h-screen bg-background">
@@ -318,37 +317,6 @@ return (
   <Section eyebrow="Veja antes de começar" title="Conheça os materiais por dentro, página por página" subtitle="Uma prévia visual do conteúdo da formação, com exemplos reais que você pode explorar.">
     <DeferredContent placeholderHeight={480}>
       <DemonstracaoMateriais />
-    </DeferredContent>
-  </Section>
-
-  {/* 3 — NOSSO APLICATIVO: vídeo carregado somente após clique */}
-  <Section eyebrow="Conheça por dentro" title="Nosso aplicativo" subtitle="Assista à demonstração da plataforma e veja como acessar suas aulas pelo celular ou computador.">
-    <DeferredContent placeholderHeight={380}>
-      <div className="mx-auto w-full max-w-[380px]">
-        <div className="relative aspect-[9/16] overflow-hidden rounded-2xl border border-border bg-black shadow-xl">
-          {youtubeStarted ? (
-            <iframe
-              className="h-full w-full"
-              src="https://www.youtube-nocookie.com/embed/IyYGVlPUhvw?autoplay=1&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&fs=0"
-              title="Demonstração da plataforma Mecânico Automotivo"
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen={false}
-            />
-          ) : (
-            <button
-              type="button"
-              onClick={() => { setYoutubeStarted(true); trackFunnelEvent("video_start", "platform_demo", { source: "youtube" }); }}
-              className="group relative flex h-full w-full items-center justify-center bg-black"
-              aria-label="Reproduzir apresentação do nosso aplicativo"
-            >
-              <img src="/acesso-poster.webp" alt="Prévia da apresentação do aplicativo" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover opacity-75" />
-              <span className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-2xl transition-transform group-hover:scale-110"><PlayCircle className="h-10 w-10" /></span>
-              <span className="absolute bottom-5 z-10 rounded-full bg-black/75 px-4 py-2 text-sm font-semibold text-white">Ver nosso aplicativo</span>
-            </button>
-          )}
-        </div>
-      </div>
     </DeferredContent>
   </Section>
 
