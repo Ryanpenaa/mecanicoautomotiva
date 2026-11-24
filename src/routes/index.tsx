@@ -24,9 +24,6 @@ import { buildVegaCheckoutUrl } from "@/lib/tracking";
 const BonusCarousel = lazy(() =>
 import("@/components/landing/BonusCarousel").then((m) => ({ default: m.BonusCarousel })),
 );
-const MaterialApoio = lazy(() =>
-import("@/components/landing/MaterialApoio").then((m) => ({ default: m.MaterialApoio })),
-);
 const ProvaSocial = lazy(() =>
 import("@/components/landing/ProvaSocial").then((m) => ({ default: m.ProvaSocial })),
 );
@@ -319,20 +316,6 @@ return (
       <DemonstracaoMateriais />
     </DeferredContent>
   </Section>
-
-  {/* 4 — MATERIAL DE APOIO */}
-  <Section
-    eyebrow="Material de apoio"
-    title="Material de apoio"
-    subtitle="Guias, manuais e checklists ilustrados para consultar sempre que precisar."
-  >
-    <DeferredContent>
-      <Suspense fallback={<div className="h-72" />}>
-        <MaterialApoio />
-      </Suspense>
-    </DeferredContent>
-  </Section>
-
 
   {/* 5.1 — CARROSSEL DE BÔNUS */}
   <DeferredContent>
