@@ -206,7 +206,6 @@ function DemonstracaoMateriais() {
       <div className="border-b border-border bg-slate-950 px-4 py-4 text-center text-white sm:px-6">
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-yellow-300">Prévia real dos materiais</p>
         <h3 className="mt-1 text-xl font-extrabold sm:text-2xl">Folheie o conteúdo por dentro</h3>
-        <p className="mt-1 text-sm text-slate-300">Veja exemplos de apostilas, guias e checklists da formação.</p>
       </div>
       <div className="relative flex min-h-[350px] items-center justify-center bg-slate-100 px-7 py-5 sm:min-h-[500px] sm:px-12">
         <div className="relative w-full max-w-[340px]">
